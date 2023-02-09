@@ -1,15 +1,26 @@
-const ical = require('node-ical');
+const axios = require('axios');
+const ics = require('ics');
 
-const events = ical.sync.parseFile.fromURL('https://learn.dcollege.net/webapps/calendar/calendarFeed/c2d84bf6673c402cb557f2a84ddabd87/learn.ics');
+async function downloadAndPrintICalendar(url) {
+  const response = await axios.get(url);
+  const data = response.data;
+  console.log(data)
+  ics.parseICS(data, (err, data) => {
+    if (err) {
+      console.error(err);
+    } else {
+      data.events.forEach(event => {
+        console.log('Event:');
+        console.log('Start:', event.start);
+        console.log('End:', event.end);
+        console.log('Summary:', event.summary);
+        console.log('Description:', event.description);
+        console.log('Location:', event.location);
+        console.log('');
+      });
+    }
+  });
+}
 
-console.log(events);
-
-// you can also use the async lib to download and parse iCal from the web
-const webEvents = await ical.async.fromURL('https://learn.dcollege.net/webapps/calendar/calendarFeed/c2d84bf6673c402cb557f2a84ddabd87/learn.ics');
-// also you can pass options to axios.get() (optional though!)
-const headerWebEvents = await ical.async.fromURL(
-    'http://lanyrd.com/topics/nodejs/nodejs.ics',
-    { headers: { 'User-Agent': 'API-Example / 1.0' } }
-);
-
-console.log(webEvents)
+const url = 'https://learn.dcollege.net/webapps/calendar/calendarFeed/c2d84bf6673c402cb557f2a84ddabd87/learn.ics';
+downloadAndPrintICalendar(url);
