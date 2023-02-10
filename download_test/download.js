@@ -9,9 +9,10 @@
 //      data into a usable format for the frontend design
 
 // Required imports
-const axios = require('axios');
-const ical = require('ical');
-const fs = require('fs');
+const axios = require('axios')
+const ical = require('ical')
+const fs = require('fs')
+const { Parser } = require('@json2csv/plainjs')
 
 // Purpose:
 //  A function that takes in a .ics url, downloads it parses the information
@@ -21,12 +22,12 @@ const fs = require('fs');
 // Last edited:
 //  February 9th
 //  Daniel Philips
-async function downloadAndPrintICalendar(url, saveAsJSON) {
+async function downloadAndPrintICalendar(url, saveAsJSON, makeReadable) {
   console.log('--- Downloading Calendar ---')
   // Downloads the .ics data from the url
-  const response = await axios.get(url);
+  const response = await axios.get(url)
   // Save the page data from the url as 'data'
-  const data = response.data;
+  const data = response.data
   // Convert the page data from the ics format into JSON
   const asJSON = ical.parseICS(data)
   // Convert the JSON object into a string while keeping formatting
@@ -37,12 +38,22 @@ async function downloadAndPrintICalendar(url, saveAsJSON) {
     // Print formatted information
     console.log(asString)
     // Create a WriteStream object with the target file 'Calendar.json'
-    var writeStream = fs.createWriteStream("Calendar.json")
+    const writeStream = fs.createWriteStream("Calendar.json")
     // Write the formatted json information to 'Calendar.json'
     writeStream.write(asString)
   }
+  if(makeReadable){
+    readableOutput(asJSON)
+  }
 }
 
+async function readableOutput(json){
+    const parser = new Parser({delimiter: '},'})
+    const csv = parser.parse(json)
+    console.log(csv)
+    const writeStream = fs.createWriteStream("Readable.csv")
+    writeStream.write(csv)
+}
 // Tester
-const url = 'https://learn.dcollege.net/webapps/calendar/calendarFeed/c2d84bf6673c402cb557f2a84ddabd87/learn.ics';
-downloadAndPrintICalendar(url,true);
+const url = 'https://learn.dcollege.net/webapps/calendar/calendarFeed/c2d84bf6673c402cb557f2a84ddabd87/learn.ics'
+downloadAndPrintICalendar(url,true, true)
