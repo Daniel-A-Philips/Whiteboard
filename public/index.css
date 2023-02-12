@@ -16,12 +16,69 @@ body, html {
 
 /* side bar */
 #side-bar {
-	background-color: green;
 	position: absolute;
 	top: 5vh;
 	left: 0;
 	width: 17vw;
 	height: calc(100vh - 5vh);
+}
+
+#long-term-calendar {
+	margin: 0 auto;
+	width: max-content;
+}
+#long-term-calendar > h4 {
+	text-align: center;
+	margin-bottom: 0;
+}
+
+#long-term-calendar table {
+	border-collapse: collapse;
+}
+
+#long-term-calendar tr:hover {
+	cursor: pointer;
+	background-color: lightgrey;
+}
+#long-term-calendar tr:hover .ltc-month {
+	background-color: white;
+}
+
+#long-term-calendar td:not(.ltc-weeknum) {
+	padding: 0 5px;
+	text-align: center;
+}
+.ltc-weeknum {
+	padding-right: 10px;
+	text-align: right;
+	font-weight: bold;
+}
+
+.ltc-lowprio {
+	border-radius: 50%;
+	background-color: lightgreen;
+}
+.ltc-medprio {
+	border-radius: 50%;
+	background-color: yellow;
+}
+.ltc-highprio {
+	border-radius: 50%;
+	background-color: tomato;
+}
+
+#class-filters {
+	width: max-content;
+	margin: 0 auto;
+}
+
+#class-filters h4 {
+	text-align: center;
+	margin-bottom: 0;
+}
+
+#class-filters > div {
+	width: max-content;
 }
 
 /* calendar */
