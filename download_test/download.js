@@ -47,12 +47,52 @@ async function downloadAndPrintICalendar(url, saveAsJSON, makeReadable) {
   }
 }
 
+// Given some array it will split the array into smaller arrays of some specified size
+function chunkArrayInGroups(arr, size) {
+  let newArr = [];
+  for (let i = 0; i < arr.length; i += size) {
+      newArr.push(arr.slice(i, i + size));
+  }
+  console.log(newArr)
+  return newArr;
+}
+
 async function readableOutput(json){
     const parser = new Parser({delimiter: '},'})
     const csv = parser.parse(json)
     console.log(csv)
     const writeStream = fs.createWriteStream("Readable.csv")
-    writeStream.write(csv)
+
+    // writeStream.write(csv)
+
+    //defines the header for the target csv file 
+    const keys = ['type', 'params', 'dtstamp', 'start', 'end', 'summary', 'uid', 'description']
+    //ignores first json object and puts the assignments into an array
+    var relevant_json = []
+    for(var i in json){
+        relevant_json.push(i)
+    }
+    relevant_json.shift()
+    // creates body array for csv file 
+    content = []
+    // Getting the actual properties (type, params, dtstamp, ...) for each assignment then putting them in some array
+    for(element in relevant_json){
+        for(key in keys){
+            content.push((json[relevant_json[element]][keys[key]]))
+        }
+    }
+    let csvData = 'type, params, dtstamp, start, end, summary, uid, description\n'
+    // splits content into smaller arrays of size 8. 
+    new_content = chunkArrayInGroups(content,keys.length)
+    // takes the content and formats contents of inner-array so that they're 
+    // separated by a comma and a new line is placed between each array
+    csvData += new_content.map(function(d){
+      return d.join()
+    }).join('\n')
+    console.log(csvData)
+    writeStream.write(csvData)
+
+
 }
 // Tester
 const url = 'https://learn.dcollege.net/webapps/calendar/calendarFeed/c2d84bf6673c402cb557f2a84ddabd87/learn.ics'
