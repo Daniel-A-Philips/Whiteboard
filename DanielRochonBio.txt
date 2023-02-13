@@ -1,0 +1,1 @@
+My name is Daniel Rochon and I am a first year computer science student. I have some experience programming in python but very little in javascript. This is my first major project and my first exposure to creating a web application. 
