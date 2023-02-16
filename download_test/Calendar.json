@@ -1,5 +1,5 @@
 {
-	"63989.425229575645": {
+	"69061.08223832978": {
 		"type": "VTIMEZONE",
 		"params": [],
 		"tzid": "America/New_York",
@@ -7,7 +7,7 @@
 		"tzurl": "https://www.tzurl.org/zoneinfo/America/New_York",
 		"LIC-LOCATION": "America/New_York",
 		"PROLEPTIC-TZNAME": "LMT",
-		"2274.155675743916": {
+		"67046.51770654229": {
 			"type": "STANDARD",
 			"params": [],
 			"tzname": "EST",
@@ -15,7 +15,7 @@
 			"tzoffsetto": "-0500",
 			"start": "1883-11-18T17:03:58.000Z"
 		},
-		"38930.68529842445": {
+		"25323.089920345887": {
 			"type": "DAYLIGHT",
 			"params": [],
 			"tzname": "EDT",
@@ -24,7 +24,7 @@
 			"start": "1918-03-31T07:00:00.000Z",
 			"rrule": "RRULE:FREQ=YEARLY;UNTIL=19200328T070000Z;BYMONTH=3;BYDAY=-1SU"
 		},
-		"64141.044127009314": {
+		"93835.91540538274": {
 			"type": "STANDARD",
 			"params": [],
 			"tzname": "EST",
@@ -33,7 +33,7 @@
 			"start": "1918-10-27T07:00:00.000Z",
 			"rrule": "RRULE:FREQ=YEARLY;UNTIL=19201031T060000Z;BYMONTH=10;BYDAY=-1SU"
 		},
-		"81864.63220195704": {
+		"5511.5669484880445": {
 			"type": "DAYLIGHT",
 			"params": [],
 			"tzname": "EDT",
@@ -42,7 +42,7 @@
 			"start": "1921-04-24T07:00:00.000Z",
 			"rrule": "RRULE:FREQ=YEARLY;UNTIL=19410427T070000Z;BYMONTH=4;BYDAY=-1SU"
 		},
-		"76125.32038491518": {
+		"72746.37539506928": {
 			"type": "STANDARD",
 			"params": [],
 			"tzname": "EST",
@@ -51,7 +51,7 @@
 			"start": "1921-09-25T07:00:00.000Z",
 			"rrule": "RRULE:FREQ=YEARLY;UNTIL=19410928T060000Z;BYMONTH=9;BYDAY=-1SU"
 		},
-		"48840.89745972067": {
+		"6432.147524920495": {
 			"type": "DAYLIGHT",
 			"params": [],
 			"tzname": "EWT",
@@ -59,7 +59,7 @@
 			"tzoffsetto": "-0400",
 			"start": "1942-02-09T07:00:00.000Z"
 		},
-		"33376.63312427817": {
+		"34025.180215876884": {
 			"type": "DAYLIGHT",
 			"params": [],
 			"tzname": "EPT",
@@ -67,7 +67,7 @@
 			"tzoffsetto": "-0400",
 			"start": "1945-08-14T23:00:00.000Z"
 		},
-		"14234.80566756099": {
+		"97275.4447916816": {
 			"type": "STANDARD",
 			"params": [],
 			"tzname": "EST",
@@ -75,7 +75,7 @@
 			"tzoffsetto": "-0500",
 			"start": "1945-09-30T07:00:00.000Z"
 		},
-		"84870.09593610968": {
+		"96546.82097978551": {
 			"type": "DAYLIGHT",
 			"params": [],
 			"tzname": "EDT",
@@ -84,7 +84,7 @@
 			"start": "1946-04-28T07:00:00.000Z",
 			"rrule": "RRULE:FREQ=YEARLY;UNTIL=19730429T070000Z;BYMONTH=4;BYDAY=-1SU"
 		},
-		"48102.32548346882": {
+		"51998.75287715084": {
 			"type": "STANDARD",
 			"params": [],
 			"tzname": "EST",
@@ -93,7 +93,7 @@
 			"start": "1946-09-29T07:00:00.000Z",
 			"rrule": "RRULE:FREQ=YEARLY;UNTIL=19540926T060000Z;BYMONTH=9;BYDAY=-1SU"
 		},
-		"36957.1922805694": {
+		"80321.33279672413": {
 			"type": "STANDARD",
 			"params": [],
 			"tzname": "EST",
@@ -102,7 +102,7 @@
 			"start": "1955-10-30T07:00:00.000Z",
 			"rrule": "RRULE:FREQ=YEARLY;UNTIL=20061029T060000Z;BYMONTH=10;BYDAY=-1SU"
 		},
-		"98102.96141600325": {
+		"10610.918126503122": {
 			"type": "DAYLIGHT",
 			"params": [],
 			"tzname": "EDT",
@@ -111,7 +111,7 @@
 			"start": "1974-01-06T07:00:00.000Z",
 			"rdate": "19750223T020000"
 		},
-		"64540.21933055048": {
+		"2523.276990421497": {
 			"type": "DAYLIGHT",
 			"params": [],
 			"tzname": "EDT",
@@ -120,7 +120,7 @@
 			"start": "1976-04-25T07:00:00.000Z",
 			"rrule": "RRULE:FREQ=YEARLY;UNTIL=19860427T070000Z;BYMONTH=4;BYDAY=-1SU"
 		},
-		"69133.74582773546": {
+		"32593.15854740037": {
 			"type": "DAYLIGHT",
 			"params": [],
 			"tzname": "EDT",
@@ -129,7 +129,7 @@
 			"start": "1987-04-05T07:00:00.000Z",
 			"rrule": "RRULE:FREQ=YEARLY;UNTIL=20060402T070000Z;BYMONTH=4;BYDAY=1SU"
 		},
-		"53258.96281677285": {
+		"98924.12015381422": {
 			"type": "DAYLIGHT",
 			"params": [],
 			"tzname": "EDT",
@@ -138,7 +138,7 @@
 			"start": "2007-03-11T07:00:00.000Z",
 			"rrule": "RRULE:FREQ=YEARLY;BYMONTH=3;BYDAY=2SU"
 		},
-		"12803.031150942434": {
+		"21005.840391556685": {
 			"type": "STANDARD",
 			"params": [],
 			"tzname": "EST",
@@ -151,7 +151,7 @@
 	"_blackboard.platform.gradebook2.GradableItem-_2868714_1": {
 		"type": "VEVENT",
 		"params": [],
-		"dtstamp": "2023-02-09T17:13:00.000Z",
+		"dtstamp": "2023-02-14T14:14:42.000Z",
 		"start": "2023-01-12T04:59:00.000Z",
 		"end": "2023-01-12T04:59:00.000Z",
 		"summary": "Introduction on Disc Brd",
@@ -161,7 +161,7 @@
 	"_blackboard.platform.gradebook2.GradableItem-_2879630_1": {
 		"type": "VEVENT",
 		"params": [],
-		"dtstamp": "2023-02-09T17:13:00.000Z",
+		"dtstamp": "2023-02-14T14:14:42.000Z",
 		"start": "2023-01-10T21:00:00.000Z",
 		"end": "2023-01-10T21:00:00.000Z",
 		"summary": "AttLect1",
@@ -171,7 +171,7 @@
 	"_blackboard.platform.gradebook2.GradableItem-_2868716_1": {
 		"type": "VEVENT",
 		"params": [],
-		"dtstamp": "2023-02-09T17:13:00.000Z",
+		"dtstamp": "2023-02-14T14:14:42.000Z",
 		"start": "2023-01-14T04:59:00.000Z",
 		"end": "2023-01-14T04:59:00.000Z",
 		"summary": "AttLab1",
@@ -181,7 +181,7 @@
 	"_blackboard.platform.gradebook2.GradableItem-_2890015_1": {
 		"type": "VEVENT",
 		"params": [],
-		"dtstamp": "2023-02-09T17:13:00.000Z",
+		"dtstamp": "2023-02-14T14:14:42.000Z",
 		"start": "2023-01-17T04:59:00.000Z",
 		"end": "2023-01-17T04:59:00.000Z",
 		"summary": "Lab 1 Experience Report (ind)",
@@ -191,7 +191,7 @@
 	"_blackboard.platform.gradebook2.GradableItem-_2868717_1": {
 		"type": "VEVENT",
 		"params": [],
-		"dtstamp": "2023-02-09T17:13:00.000Z",
+		"dtstamp": "2023-02-14T14:14:42.000Z",
 		"start": "2023-01-17T04:59:00.000Z",
 		"end": "2023-01-17T04:59:00.000Z",
 		"summary": "Homework Reading Week 1",
@@ -201,7 +201,7 @@
 	"_blackboard.platform.gradebook2.GradableItem-_2868718_1": {
 		"type": "VEVENT",
 		"params": [],
-		"dtstamp": "2023-02-09T17:13:00.000Z",
+		"dtstamp": "2023-02-14T14:14:42.000Z",
 		"start": "2023-01-17T04:59:00.000Z",
 		"end": "2023-01-17T04:59:00.000Z",
 		"summary": "Reflection 1",
@@ -211,7 +211,7 @@
 	"_blackboard.platform.gradebook2.GradableItem-_2868766_1": {
 		"type": "VEVENT",
 		"params": [],
-		"dtstamp": "2023-02-09T17:13:00.000Z",
+		"dtstamp": "2023-02-14T14:14:42.000Z",
 		"start": "2023-01-18T04:59:00.000Z",
 		"end": "2023-01-18T04:59:00.000Z",
 		"summary": "Week 2 Attendance Question",
@@ -221,7 +221,7 @@
 	"_blackboard.platform.gradebook2.GradableItem-_2868720_1": {
 		"type": "VEVENT",
 		"params": [],
-		"dtstamp": "2023-02-09T17:13:00.000Z",
+		"dtstamp": "2023-02-14T14:14:42.000Z",
 		"start": "2023-01-20T22:00:00.000Z",
 		"end": "2023-01-20T22:00:00.000Z",
 		"summary": "AttLab2",
@@ -231,7 +231,7 @@
 	"_blackboard.platform.gradebook2.GradableItem-_2868721_1": {
 		"type": "VEVENT",
 		"params": [],
-		"dtstamp": "2023-02-09T17:13:00.000Z",
+		"dtstamp": "2023-02-14T14:14:42.000Z",
 		"start": "2023-01-24T04:59:00.000Z",
 		"end": "2023-01-24T04:59:00.000Z",
 		"summary": "Turn in Team Profile Here",
@@ -241,7 +241,7 @@
 	"_blackboard.platform.gradebook2.GradableItem-_2868722_1": {
 		"type": "VEVENT",
 		"params": [],
-		"dtstamp": "2023-02-09T17:13:00.000Z",
+		"dtstamp": "2023-02-14T14:14:42.000Z",
 		"start": "2023-01-24T04:59:00.000Z",
 		"end": "2023-01-24T04:59:00.000Z",
 		"summary": "Reflection 2",
@@ -251,7 +251,7 @@
 	"_blackboard.platform.gradebook2.GradableItem-_2868724_1": {
 		"type": "VEVENT",
 		"params": [],
-		"dtstamp": "2023-02-09T17:13:00.000Z",
+		"dtstamp": "2023-02-14T14:14:42.000Z",
 		"start": "2023-01-24T22:00:00.000Z",
 		"end": "2023-01-24T22:00:00.000Z",
 		"summary": "Attendance Wk 3",
@@ -261,7 +261,7 @@
 	"_blackboard.platform.gradebook2.GradableItem-_2868726_1": {
 		"type": "VEVENT",
 		"params": [],
-		"dtstamp": "2023-02-09T17:13:00.000Z",
+		"dtstamp": "2023-02-14T14:14:42.000Z",
 		"start": "2023-01-28T00:00:00.000Z",
 		"end": "2023-01-28T00:00:00.000Z",
 		"summary": "AttLab3",
@@ -271,7 +271,7 @@
 	"_blackboard.platform.gradebook2.GradableItem-_2920151_1": {
 		"type": "VEVENT",
 		"params": [],
-		"dtstamp": "2023-02-09T17:13:00.000Z",
+		"dtstamp": "2023-02-14T14:14:42.000Z",
 		"start": "2023-01-31T04:59:00.000Z",
 		"end": "2023-01-31T04:59:00.000Z",
 		"summary": "Lab3",
@@ -281,7 +281,7 @@
 	"_blackboard.platform.gradebook2.GradableItem-_2868728_1": {
 		"type": "VEVENT",
 		"params": [],
-		"dtstamp": "2023-02-09T17:13:00.000Z",
+		"dtstamp": "2023-02-14T14:14:42.000Z",
 		"start": "2023-01-31T04:59:00.000Z",
 		"end": "2023-01-31T04:59:00.000Z",
 		"summary": "Reflection 3",
@@ -291,7 +291,7 @@
 	"_blackboard.platform.gradebook2.GradableItem-_2868729_1": {
 		"type": "VEVENT",
 		"params": [],
-		"dtstamp": "2023-02-09T17:13:00.000Z",
+		"dtstamp": "2023-02-14T14:14:42.000Z",
 		"start": "2023-01-31T04:59:00.000Z",
 		"end": "2023-01-31T04:59:00.000Z",
 		"summary": "Week 3 Homework Quiz",
@@ -301,7 +301,7 @@
 	"_blackboard.platform.gradebook2.GradableItem-_2868730_1": {
 		"type": "VEVENT",
 		"params": [],
-		"dtstamp": "2023-02-09T17:13:00.000Z",
+		"dtstamp": "2023-02-14T14:14:42.000Z",
 		"start": "2023-02-01T04:59:00.000Z",
 		"end": "2023-02-01T04:59:00.000Z",
 		"summary": "AttLect4",
@@ -311,7 +311,7 @@
 	"_blackboard.platform.gradebook2.GradableItem-_2868731_1": {
 		"type": "VEVENT",
 		"params": [],
-		"dtstamp": "2023-02-09T17:13:00.000Z",
+		"dtstamp": "2023-02-14T14:14:42.000Z",
 		"start": "2023-02-03T22:00:00.000Z",
 		"end": "2023-02-03T22:00:00.000Z",
 		"summary": "AttLab4",
@@ -321,7 +321,7 @@
 	"_blackboard.platform.gradebook2.GradableItem-_2868732_1": {
 		"type": "VEVENT",
 		"params": [],
-		"dtstamp": "2023-02-09T17:13:00.000Z",
+		"dtstamp": "2023-02-14T14:14:42.000Z",
 		"start": "2023-02-07T04:59:00.000Z",
 		"end": "2023-02-07T04:59:00.000Z",
 		"summary": "Lab 4 - User Stories",
@@ -331,7 +331,7 @@
 	"_blackboard.platform.gradebook2.GradableItem-_2868733_1": {
 		"type": "VEVENT",
 		"params": [],
-		"dtstamp": "2023-02-09T17:13:00.000Z",
+		"dtstamp": "2023-02-14T14:14:42.000Z",
 		"start": "2023-02-07T04:59:00.000Z",
 		"end": "2023-02-07T04:59:00.000Z",
 		"summary": "Homework 4",
@@ -341,7 +341,7 @@
 	"_blackboard.platform.gradebook2.GradableItem-_2868734_1": {
 		"type": "VEVENT",
 		"params": [],
-		"dtstamp": "2023-02-09T17:13:00.000Z",
+		"dtstamp": "2023-02-14T14:14:42.000Z",
 		"start": "2023-02-07T04:59:00.000Z",
 		"end": "2023-02-07T04:59:00.000Z",
 		"summary": "Reflection 4",
@@ -351,7 +351,7 @@
 	"_blackboard.platform.gradebook2.GradableItem-_2868736_1": {
 		"type": "VEVENT",
 		"params": [],
-		"dtstamp": "2023-02-09T17:13:00.000Z",
+		"dtstamp": "2023-02-14T14:14:42.000Z",
 		"start": "2023-02-10T22:00:00.000Z",
 		"end": "2023-02-10T22:00:00.000Z",
 		"summary": "AttLab5",
@@ -361,7 +361,7 @@
 	"_blackboard.platform.gradebook2.GradableItem-_2868737_1": {
 		"type": "VEVENT",
 		"params": [],
-		"dtstamp": "2023-02-09T17:13:00.000Z",
+		"dtstamp": "2023-02-14T14:14:42.000Z",
 		"start": "2023-02-14T04:59:00.000Z",
 		"end": "2023-02-14T04:59:00.000Z",
 		"summary": "Week 5 Lab",
@@ -371,7 +371,7 @@
 	"_blackboard.platform.gradebook2.GradableItem-_2868738_1": {
 		"type": "VEVENT",
 		"params": [],
-		"dtstamp": "2023-02-09T17:13:00.000Z",
+		"dtstamp": "2023-02-14T14:14:42.000Z",
 		"start": "2023-02-14T04:59:00.000Z",
 		"end": "2023-02-14T04:59:00.000Z",
 		"summary": "CLI and GIT Assignment",
@@ -381,7 +381,7 @@
 	"_blackboard.platform.gradebook2.GradableItem-_2868739_1": {
 		"type": "VEVENT",
 		"params": [],
-		"dtstamp": "2023-02-09T17:13:00.000Z",
+		"dtstamp": "2023-02-14T14:14:42.000Z",
 		"start": "2023-02-14T04:59:00.000Z",
 		"end": "2023-02-14T04:59:00.000Z",
 		"summary": "Reflection 5",
@@ -391,7 +391,7 @@
 	"_blackboard.platform.gradebook2.GradableItem-_2868740_1": {
 		"type": "VEVENT",
 		"params": [],
-		"dtstamp": "2023-02-09T17:13:00.000Z",
+		"dtstamp": "2023-02-14T14:14:42.000Z",
 		"start": "2023-02-14T04:59:00.000Z",
 		"end": "2023-02-14T04:59:00.000Z",
 		"summary": "Mid Term Self Evaluation",
@@ -401,7 +401,7 @@
 	"_blackboard.platform.gradebook2.GradableItem-_2868741_1": {
 		"type": "VEVENT",
 		"params": [],
-		"dtstamp": "2023-02-09T17:13:00.000Z",
+		"dtstamp": "2023-02-14T14:14:42.000Z",
 		"start": "2023-02-14T22:00:00.000Z",
 		"end": "2023-02-14T22:00:00.000Z",
 		"summary": "AttLect6",
@@ -411,7 +411,7 @@
 	"_blackboard.platform.gradebook2.GradableItem-_2868742_1": {
 		"type": "VEVENT",
 		"params": [],
-		"dtstamp": "2023-02-09T17:13:00.000Z",
+		"dtstamp": "2023-02-14T14:14:42.000Z",
 		"start": "2023-02-14T23:00:00.000Z",
 		"end": "2023-02-14T23:00:00.000Z",
 		"summary": "Q2",
@@ -421,7 +421,7 @@
 	"_blackboard.platform.gradebook2.GradableItem-_2868743_1": {
 		"type": "VEVENT",
 		"params": [],
-		"dtstamp": "2023-02-09T17:13:00.000Z",
+		"dtstamp": "2023-02-14T14:14:42.000Z",
 		"start": "2023-02-17T22:00:00.000Z",
 		"end": "2023-02-17T22:00:00.000Z",
 		"summary": "AttLab6",
@@ -431,7 +431,7 @@
 	"_blackboard.platform.gradebook2.GradableItem-_2868744_1": {
 		"type": "VEVENT",
 		"params": [],
-		"dtstamp": "2023-02-09T17:13:00.000Z",
+		"dtstamp": "2023-02-14T14:14:42.000Z",
 		"start": "2023-02-21T04:59:00.000Z",
 		"end": "2023-02-21T04:59:00.000Z",
 		"summary": "Lab 6",
@@ -441,7 +441,7 @@
 	"_blackboard.platform.gradebook2.GradableItem-_2868745_1": {
 		"type": "VEVENT",
 		"params": [],
-		"dtstamp": "2023-02-09T17:13:00.000Z",
+		"dtstamp": "2023-02-14T14:14:42.000Z",
 		"start": "2023-02-21T04:59:00.000Z",
 		"end": "2023-02-21T04:59:00.000Z",
 		"summary": "Week 6 Homework",
@@ -451,7 +451,7 @@
 	"_blackboard.platform.gradebook2.GradableItem-_2868746_1": {
 		"type": "VEVENT",
 		"params": [],
-		"dtstamp": "2023-02-09T17:13:00.000Z",
+		"dtstamp": "2023-02-14T14:14:42.000Z",
 		"start": "2023-02-21T04:59:00.000Z",
 		"end": "2023-02-21T04:59:00.000Z",
 		"summary": "Week 6 Reflection",
@@ -461,7 +461,7 @@
 	"_blackboard.platform.gradebook2.GradableItem-_2868747_1": {
 		"type": "VEVENT",
 		"params": [],
-		"dtstamp": "2023-02-09T17:13:00.000Z",
+		"dtstamp": "2023-02-14T14:14:42.000Z",
 		"start": "2023-02-21T22:00:00.000Z",
 		"end": "2023-02-21T22:00:00.000Z",
 		"summary": "AttLect7",
@@ -471,7 +471,7 @@
 	"_blackboard.platform.gradebook2.GradableItem-_2868748_1": {
 		"type": "VEVENT",
 		"params": [],
-		"dtstamp": "2023-02-09T17:13:00.000Z",
+		"dtstamp": "2023-02-14T14:14:42.000Z",
 		"start": "2023-02-24T22:00:00.000Z",
 		"end": "2023-02-24T22:00:00.000Z",
 		"summary": "AttLab7",
@@ -481,7 +481,7 @@
 	"_blackboard.platform.gradebook2.GradableItem-_2868749_1": {
 		"type": "VEVENT",
 		"params": [],
-		"dtstamp": "2023-02-09T17:13:00.000Z",
+		"dtstamp": "2023-02-14T14:14:42.000Z",
 		"start": "2023-02-28T04:59:00.000Z",
 		"end": "2023-02-28T04:59:00.000Z",
 		"summary": "Week 7 Lab",
@@ -491,7 +491,7 @@
 	"_blackboard.platform.gradebook2.GradableItem-_2868750_1": {
 		"type": "VEVENT",
 		"params": [],
-		"dtstamp": "2023-02-09T17:13:00.000Z",
+		"dtstamp": "2023-02-14T14:14:42.000Z",
 		"start": "2023-02-28T04:59:00.000Z",
 		"end": "2023-02-28T04:59:00.000Z",
 		"summary": "Week7HW",
@@ -501,7 +501,7 @@
 	"_blackboard.platform.gradebook2.GradableItem-_2868751_1": {
 		"type": "VEVENT",
 		"params": [],
-		"dtstamp": "2023-02-09T17:13:00.000Z",
+		"dtstamp": "2023-02-14T14:14:42.000Z",
 		"start": "2023-02-28T04:59:00.000Z",
 		"end": "2023-02-28T04:59:00.000Z",
 		"summary": "Reflection 7",
@@ -511,7 +511,7 @@
 	"_blackboard.platform.gradebook2.GradableItem-_2868752_1": {
 		"type": "VEVENT",
 		"params": [],
-		"dtstamp": "2023-02-09T17:13:00.000Z",
+		"dtstamp": "2023-02-14T14:14:42.000Z",
 		"start": "2023-02-28T22:00:00.000Z",
 		"end": "2023-02-28T22:00:00.000Z",
 		"summary": "AttLect8",
@@ -521,7 +521,7 @@
 	"_blackboard.platform.gradebook2.GradableItem-_2868753_1": {
 		"type": "VEVENT",
 		"params": [],
-		"dtstamp": "2023-02-09T17:13:00.000Z",
+		"dtstamp": "2023-02-14T14:14:42.000Z",
 		"start": "2023-03-03T22:00:00.000Z",
 		"end": "2023-03-03T22:00:00.000Z",
 		"summary": "AttLab8",
@@ -531,7 +531,7 @@
 	"_blackboard.platform.gradebook2.GradableItem-_2868754_1": {
 		"type": "VEVENT",
 		"params": [],
-		"dtstamp": "2023-02-09T17:13:00.000Z",
+		"dtstamp": "2023-02-14T14:14:42.000Z",
 		"start": "2023-03-07T04:59:00.000Z",
 		"end": "2023-03-07T04:59:00.000Z",
 		"summary": "Lab 8",
@@ -541,7 +541,7 @@
 	"_blackboard.platform.gradebook2.GradableItem-_2868755_1": {
 		"type": "VEVENT",
 		"params": [],
-		"dtstamp": "2023-02-09T17:13:00.000Z",
+		"dtstamp": "2023-02-14T14:14:42.000Z",
 		"start": "2023-03-07T04:59:00.000Z",
 		"end": "2023-03-07T04:59:00.000Z",
 		"summary": "Using Feedback",
@@ -551,7 +551,7 @@
 	"_blackboard.platform.gradebook2.GradableItem-_2868756_1": {
 		"type": "VEVENT",
 		"params": [],
-		"dtstamp": "2023-02-09T17:13:00.000Z",
+		"dtstamp": "2023-02-14T14:14:42.000Z",
 		"start": "2023-03-07T04:59:00.000Z",
 		"end": "2023-03-07T04:59:00.000Z",
 		"summary": "Reflection 8",
@@ -561,7 +561,7 @@
 	"_blackboard.platform.gradebook2.GradableItem-_2868757_1": {
 		"type": "VEVENT",
 		"params": [],
-		"dtstamp": "2023-02-09T17:13:00.000Z",
+		"dtstamp": "2023-02-14T14:14:42.000Z",
 		"start": "2023-03-07T22:00:00.000Z",
 		"end": "2023-03-07T22:00:00.000Z",
 		"summary": "AttLect9",
@@ -571,7 +571,7 @@
 	"_blackboard.platform.gradebook2.GradableItem-_2868758_1": {
 		"type": "VEVENT",
 		"params": [],
-		"dtstamp": "2023-02-09T17:13:00.000Z",
+		"dtstamp": "2023-02-14T14:14:42.000Z",
 		"start": "2023-03-07T22:00:00.000Z",
 		"end": "2023-03-07T22:00:00.000Z",
 		"summary": "Q3",
@@ -581,7 +581,7 @@
 	"_blackboard.platform.gradebook2.GradableItem-_2868759_1": {
 		"type": "VEVENT",
 		"params": [],
-		"dtstamp": "2023-02-09T17:13:00.000Z",
+		"dtstamp": "2023-02-14T14:14:42.000Z",
 		"start": "2023-03-11T04:59:00.000Z",
 		"end": "2023-03-11T04:59:00.000Z",
 		"summary": "AttLab9",
@@ -591,7 +591,7 @@
 	"_blackboard.platform.gradebook2.GradableItem-_2868760_1": {
 		"type": "VEVENT",
 		"params": [],
-		"dtstamp": "2023-02-09T17:13:00.000Z",
+		"dtstamp": "2023-02-14T14:14:42.000Z",
 		"start": "2023-03-14T03:59:00.000Z",
 		"end": "2023-03-14T03:59:00.000Z",
 		"summary": "Week 9 Lab",
@@ -601,7 +601,7 @@
 	"_blackboard.platform.gradebook2.GradableItem-_2868761_1": {
 		"type": "VEVENT",
 		"params": [],
-		"dtstamp": "2023-02-09T17:13:00.000Z",
+		"dtstamp": "2023-02-14T14:14:42.000Z",
 		"start": "2023-03-14T03:59:00.000Z",
 		"end": "2023-03-14T03:59:00.000Z",
 		"summary": "Presentation Outline",
@@ -611,7 +611,7 @@
 	"_blackboard.platform.gradebook2.GradableItem-_2868762_1": {
 		"type": "VEVENT",
 		"params": [],
-		"dtstamp": "2023-02-09T17:13:00.000Z",
+		"dtstamp": "2023-02-14T14:14:42.000Z",
 		"start": "2023-03-14T03:59:00.000Z",
 		"end": "2023-03-14T03:59:00.000Z",
 		"summary": "Reflection 9",
@@ -621,7 +621,7 @@
 	"_blackboard.platform.gradebook2.GradableItem-_2868764_1": {
 		"type": "VEVENT",
 		"params": [],
-		"dtstamp": "2023-02-09T17:13:00.000Z",
+		"dtstamp": "2023-02-14T14:14:42.000Z",
 		"start": "2023-03-15T03:59:00.000Z",
 		"end": "2023-03-15T03:59:00.000Z",
 		"summary": "AttLect10",
@@ -631,7 +631,7 @@
 	"_blackboard.platform.gradebook2.GradableItem-_2868767_1": {
 		"type": "VEVENT",
 		"params": [],
-		"dtstamp": "2023-02-09T17:13:00.000Z",
+		"dtstamp": "2023-02-14T14:14:42.000Z",
 		"start": "2023-03-21T03:59:00.000Z",
 		"end": "2023-03-21T03:59:00.000Z",
 		"summary": "Final Self Evaluation",
@@ -641,7 +641,7 @@
 	"_blackboard.platform.gradebook2.GradableItem-_2868768_1": {
 		"type": "VEVENT",
 		"params": [],
-		"dtstamp": "2023-02-09T17:13:00.000Z",
+		"dtstamp": "2023-02-14T14:14:42.000Z",
 		"start": "2023-03-21T03:59:00.000Z",
 		"end": "2023-03-21T03:59:00.000Z",
 		"summary": "FinalPres",
@@ -651,7 +651,7 @@
 	"_blackboard.platform.gradebook2.GradableItem-_2868770_1": {
 		"type": "VEVENT",
 		"params": [],
-		"dtstamp": "2023-02-09T17:13:00.000Z",
+		"dtstamp": "2023-02-14T14:14:42.000Z",
 		"start": "2023-03-21T03:59:00.000Z",
 		"end": "2023-03-21T03:59:00.000Z",
 		"summary": "Final Presentations",
@@ -661,7 +661,7 @@
 	"_blackboard.platform.gradebook2.GradableItem-_2868772_1": {
 		"type": "VEVENT",
 		"params": [],
-		"dtstamp": "2023-02-09T17:13:00.000Z",
+		"dtstamp": "2023-02-14T14:14:42.000Z",
 		"start": "2023-03-21T03:59:00.000Z",
 		"end": "2023-03-21T03:59:00.000Z",
 		"summary": "Feedback and Surveys",
@@ -671,7 +671,7 @@
 	"_blackboard.platform.gradebook2.GradableItem-_2898596_1": {
 		"type": "VEVENT",
 		"params": [],
-		"dtstamp": "2023-02-09T17:13:00.000Z",
+		"dtstamp": "2023-02-14T14:14:42.000Z",
 		"start": "2023-01-30T04:30:00.000Z",
 		"end": "2023-01-30T04:30:00.000Z",
 		"summary": "Week 3 Quiz",
@@ -681,7 +681,7 @@
 	"_blackboard.platform.gradebook2.GradableItem-_2901292_1": {
 		"type": "VEVENT",
 		"params": [],
-		"dtstamp": "2023-02-09T17:13:00.000Z",
+		"dtstamp": "2023-02-14T14:14:42.000Z",
 		"start": "2023-02-06T04:59:00.000Z",
 		"end": "2023-02-06T04:59:00.000Z",
 		"summary": "Resume Re-Submits - Due Sunday, 2/5 at Midnight",
@@ -690,7 +690,7 @@
 	"_blackboard.platform.gradebook2.GradableItem-_2916772_1": {
 		"type": "VEVENT",
 		"params": [],
-		"dtstamp": "2023-02-09T17:13:00.000Z",
+		"dtstamp": "2023-02-14T14:14:42.000Z",
 		"start": "2023-01-30T04:59:00.000Z",
 		"end": "2023-01-30T04:59:00.000Z",
 		"summary": "Resume Rough Draft due Sunday, January 29th at Midnight",
@@ -699,7 +699,7 @@
 	"_blackboard.platform.gradebook2.GradableItem-_2885668_1": {
 		"type": "VEVENT",
 		"params": [],
-		"dtstamp": "2023-02-09T17:13:00.000Z",
+		"dtstamp": "2023-02-14T14:14:42.000Z",
 		"start": "2023-01-16T04:59:00.000Z",
 		"end": "2023-01-16T04:59:00.000Z",
 		"summary": "Discussion Board #1 Pick Your Thing",
@@ -708,7 +708,7 @@
 	"_blackboard.platform.gradebook2.GradableItem-_2885672_1": {
 		"type": "VEVENT",
 		"params": [],
-		"dtstamp": "2023-02-09T17:13:00.000Z",
+		"dtstamp": "2023-02-14T14:14:42.000Z",
 		"start": "2023-01-25T04:59:00.000Z",
 		"end": "2023-01-25T04:59:00.000Z",
 		"summary": "Discussion Board#2 Developing a historical consciousness due 1/24",
@@ -717,7 +717,7 @@
 	"_blackboard.platform.gradebook2.GradableItem-_2886179_1": {
 		"type": "VEVENT",
 		"params": [],
-		"dtstamp": "2023-02-09T17:13:00.000Z",
+		"dtstamp": "2023-02-14T14:14:42.000Z",
 		"start": "2023-02-02T04:59:00.000Z",
 		"end": "2023-02-02T04:59:00.000Z",
 		"summary": "Literature Review Rough Draft",
@@ -726,7 +726,7 @@
 	"_blackboard.platform.gradebook2.GradableItem-_2886180_1": {
 		"type": "VEVENT",
 		"params": [],
-		"dtstamp": "2023-02-09T17:13:00.000Z",
+		"dtstamp": "2023-02-14T14:14:42.000Z",
 		"start": "2023-02-08T04:59:00.000Z",
 		"end": "2023-02-08T04:59:00.000Z",
 		"summary": "Literature Review Final Version",
@@ -735,7 +735,7 @@
 	"_blackboard.platform.gradebook2.GradableItem-_2886181_1": {
 		"type": "VEVENT",
 		"params": [],
-		"dtstamp": "2023-02-09T17:13:00.000Z",
+		"dtstamp": "2023-02-14T14:14:42.000Z",
 		"start": "2023-01-25T04:59:00.000Z",
 		"end": "2023-01-25T04:59:00.000Z",
 		"summary": "Submit Project Pitch Rough Draft",
@@ -744,7 +744,7 @@
 	"_blackboard.platform.gradebook2.GradableItem-_2907855_1": {
 		"type": "VEVENT",
 		"params": [],
-		"dtstamp": "2023-02-09T17:13:00.000Z",
+		"dtstamp": "2023-02-14T14:14:42.000Z",
 		"start": "2023-02-01T04:59:00.000Z",
 		"end": "2023-02-01T04:59:00.000Z",
 		"summary": "Discussion Board #3 We Are What We Keep--due Jan 31",
@@ -753,7 +753,7 @@
 	"_blackboard.platform.gradebook2.GradableItem-_2919295_1": {
 		"type": "VEVENT",
 		"params": [],
-		"dtstamp": "2023-02-09T17:13:00.000Z",
+		"dtstamp": "2023-02-14T14:14:42.000Z",
 		"start": "2023-02-08T04:59:00.000Z",
 		"end": "2023-02-08T04:59:00.000Z",
 		"summary": "Discussion Board #4--Did the objects that surrounded you have a bearing on your life?",
@@ -762,16 +762,34 @@
 	"_blackboard.platform.gradebook2.GradableItem-_2922555_1": {
 		"type": "VEVENT",
 		"params": [],
-		"dtstamp": "2023-02-09T17:13:00.000Z",
+		"dtstamp": "2023-02-14T14:14:42.000Z",
 		"start": "2023-02-15T04:59:00.000Z",
 		"end": "2023-02-15T04:59:00.000Z",
 		"summary": "Discussion Board #5",
 		"uid": "_blackboard.platform.gradebook2.GradableItem-_2922555_1"
 	},
+	"_blackboard.platform.gradebook2.GradableItem-_2927014_1": {
+		"type": "VEVENT",
+		"params": [],
+		"dtstamp": "2023-02-14T14:14:42.000Z",
+		"start": "2023-02-22T04:59:00.000Z",
+		"end": "2023-02-22T04:59:00.000Z",
+		"summary": "Discussion Board #6",
+		"uid": "_blackboard.platform.gradebook2.GradableItem-_2927014_1"
+	},
+	"_blackboard.platform.gradebook2.GradableItem-_2927015_1": {
+		"type": "VEVENT",
+		"params": [],
+		"dtstamp": "2023-02-14T14:14:42.000Z",
+		"start": "2023-02-28T04:59:00.000Z",
+		"end": "2023-02-28T04:59:00.000Z",
+		"summary": "Academic Paper Rough Draft",
+		"uid": "_blackboard.platform.gradebook2.GradableItem-_2927015_1"
+	},
 	"_blackboard.platform.gradebook2.GradableItem-_2898859_1": {
 		"type": "VEVENT",
 		"params": [],
-		"dtstamp": "2023-02-09T17:13:00.000Z",
+		"dtstamp": "2023-02-14T14:14:42.000Z",
 		"start": "2023-01-19T04:59:00.000Z",
 		"end": "2023-01-19T04:59:00.000Z",
 		"summary": "HW 1: Area as a Limit",
@@ -780,7 +798,7 @@
 	"_blackboard.platform.gradebook2.GradableItem-_2898865_1": {
 		"type": "VEVENT",
 		"params": [],
-		"dtstamp": "2023-02-09T17:13:00.000Z",
+		"dtstamp": "2023-02-14T14:14:42.000Z",
 		"start": "2023-01-19T04:59:00.000Z",
 		"end": "2023-01-19T04:59:00.000Z",
 		"summary": "HW 2: The Definite Integral",
@@ -789,7 +807,7 @@
 	"_blackboard.platform.gradebook2.GradableItem-_2898902_1": {
 		"type": "VEVENT",
 		"params": [],
-		"dtstamp": "2023-02-09T17:13:00.000Z",
+		"dtstamp": "2023-02-14T14:14:42.000Z",
 		"start": "2023-01-26T04:59:00.000Z",
 		"end": "2023-01-26T04:59:00.000Z",
 		"summary": "HW 3: Indefinite Integrals",
@@ -798,7 +816,7 @@
 	"_blackboard.platform.gradebook2.GradableItem-_2898915_1": {
 		"type": "VEVENT",
 		"params": [],
-		"dtstamp": "2023-02-09T17:13:00.000Z",
+		"dtstamp": "2023-02-14T14:14:42.000Z",
 		"start": "2023-01-26T04:59:00.000Z",
 		"end": "2023-01-26T04:59:00.000Z",
 		"summary": "HW 4: The Fundamental Theorem of Calculus",
@@ -807,7 +825,7 @@
 	"_blackboard.platform.gradebook2.GradableItem-_2898925_1": {
 		"type": "VEVENT",
 		"params": [],
-		"dtstamp": "2023-02-09T17:13:00.000Z",
+		"dtstamp": "2023-02-14T14:14:42.000Z",
 		"start": "2023-02-02T04:59:00.000Z",
 		"end": "2023-02-02T04:59:00.000Z",
 		"summary": "HW 5: Substitution, Indefinite Integrals",
@@ -816,7 +834,7 @@
 	"_blackboard.platform.gradebook2.GradableItem-_2898932_1": {
 		"type": "VEVENT",
 		"params": [],
-		"dtstamp": "2023-02-09T17:13:00.000Z",
+		"dtstamp": "2023-02-14T14:14:42.000Z",
 		"start": "2023-02-02T04:59:00.000Z",
 		"end": "2023-02-02T04:59:00.000Z",
 		"summary": "HW 6: Substitution, Definite Integrals",
@@ -825,7 +843,7 @@
 	"_blackboard.platform.gradebook2.GradableItem-_2898941_1": {
 		"type": "VEVENT",
 		"params": [],
-		"dtstamp": "2023-02-09T17:13:00.000Z",
+		"dtstamp": "2023-02-14T14:14:42.000Z",
 		"start": "2023-02-09T04:59:00.000Z",
 		"end": "2023-02-09T04:59:00.000Z",
 		"summary": "HW 7: Area Between Curves",
@@ -834,7 +852,7 @@
 	"_blackboard.platform.gradebook2.GradableItem-_2898946_1": {
 		"type": "VEVENT",
 		"params": [],
-		"dtstamp": "2023-02-09T17:13:00.000Z",
+		"dtstamp": "2023-02-14T14:14:42.000Z",
 		"start": "2023-02-09T04:59:00.000Z",
 		"end": "2023-02-09T04:59:00.000Z",
 		"summary": "HW 8: Volumes",
@@ -843,7 +861,7 @@
 	"_blackboard.platform.gradebook2.GradableItem-_2898952_1": {
 		"type": "VEVENT",
 		"params": [],
-		"dtstamp": "2023-02-09T17:13:00.000Z",
+		"dtstamp": "2023-02-14T14:14:42.000Z",
 		"start": "2023-02-16T04:59:00.000Z",
 		"end": "2023-02-16T04:59:00.000Z",
 		"summary": "HW 9: Arc Length",
@@ -852,10 +870,19 @@
 	"_blackboard.platform.gradebook2.GradableItem-_2898963_1": {
 		"type": "VEVENT",
 		"params": [],
-		"dtstamp": "2023-02-09T17:13:00.000Z",
+		"dtstamp": "2023-02-14T14:14:42.000Z",
 		"start": "2023-02-16T04:59:00.000Z",
 		"end": "2023-02-16T04:59:00.000Z",
 		"summary": "HW 10: Work",
 		"uid": "_blackboard.platform.gradebook2.GradableItem-_2898963_1"
+	},
+	"_blackboard.platform.gradebook2.GradableItem-_2898968_1": {
+		"type": "VEVENT",
+		"params": [],
+		"dtstamp": "2023-02-14T14:14:42.000Z",
+		"start": "2023-02-23T04:59:00.000Z",
+		"end": "2023-02-23T04:59:00.000Z",
+		"summary": "HW 11: Integration by Parts",
+		"uid": "_blackboard.platform.gradebook2.GradableItem-_2898968_1"
 	}
 }
