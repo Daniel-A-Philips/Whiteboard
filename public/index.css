@@ -238,10 +238,29 @@ body, html {
 
 /* due dates */
 #due-dates {
-	background-color: purple;
 	position: absolute;
 	bottom: 0;
 	left: 17vw;
 	height: 13vw;
 	width: calc(100vw - 17vw);
+}
+
+#due-dates-grid {
+	display: grid;
+	height: 100%;
+	grid-template-columns: 3em 10px repeat(7, 1fr);
+	overflow-y: scroll;
+}
+
+.due-dates-col {
+	height: 100%;
+	border-right: 1px solid #dadce0;
+	grid-column: span 1;
+}
+
+.due-date-entry {
+	margin-bottom: 3px;
+}
+.due-date-time {
+	color: slategray;
 }
