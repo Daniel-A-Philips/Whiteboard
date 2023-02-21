@@ -79,7 +79,6 @@ body, html {
 	left: 17vw;
 	width: calc(100vw - 17vw);
 	height: calc(100vh - 30vh);
-	overflow-y: scroll;
 	border-bottom: 3px solid #dadce0;
 }
 /* je578 Edits */
@@ -117,6 +116,8 @@ body {
 	display: grid;
 	grid-template-columns: 3em 10px repeat(7, 1fr);
 	grid-template-rows: repeat(24, 3em);
+	overflow: scroll;
+	height: calc(94vh - 30vh);
 }
 
 .calendar_time {
