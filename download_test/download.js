@@ -68,22 +68,22 @@ async function readableOutput(json){
     //defines the header for the target csv file 
     const keys = ['type', 'params', 'dtstamp', 'start', 'end', 'summary', 'uid', 'description']
     //ignores first json object and puts the assignments into an array
-    var relevant_json = []
-    for(var i in json){
+    let relevant_json = []
+    for(const i in json){
         relevant_json.push(i)
     }
     relevant_json.shift()
     // creates body array for csv file 
-    content = []
+    let content = []
     // Getting the actual properties (type, params, dtstamp, ...) for each assignment then putting them in some array
     for(element in relevant_json){
-        for(key in keys){
+        for(const key in keys){
             content.push((json[relevant_json[element]][keys[key]]))
         }
     }
     let csvData = 'type, params, dtstamp, start, end, summary, uid, description\n'
     // splits content into smaller arrays of size 8. 
-    new_content = chunkArrayInGroups(content,keys.length)
+    const new_content = chunkArrayInGroups(content,keys.length)
     // takes the content and formats contents of inner-array so that they're 
     // separated by a comma and a new line is placed between each array
     csvData += new_content.map(function(d){
