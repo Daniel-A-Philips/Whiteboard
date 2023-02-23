@@ -13,6 +13,7 @@ const axios = require('axios')
 const ical = require('ical')
 const fs = require('fs')
 const { Parser } = require('@json2csv/plainjs')
+const express = require('express')
 
 // Purpose:
 //  A function that takes in a .ics url, downloads it parses the information
@@ -22,7 +23,7 @@ const { Parser } = require('@json2csv/plainjs')
 // Last edited:
 //  February 9th
 //  Daniel Philips
-async function downloadAndPrintICalendar(url, saveAsJSON, makeReadable) {
+async function downloadAndPrintICalendar(url, saveAsJSON, makeReadable, returnable, printInfo) {
   console.log('--- Downloading Calendar ---')
   // Downloads the .ics data from the url
   const response = await axios.get(url)
@@ -36,7 +37,9 @@ async function downloadAndPrintICalendar(url, saveAsJSON, makeReadable) {
     // Inform the user that the data is being saved
     console.log('Saving Data')
     // Print formatted information
-    console.log(asString)
+    if(printInfo){
+      console.log(asString)
+    }
     // Create a WriteStream object with the target file 'Calendar.json'
     const writeStream = fs.createWriteStream("Calendar.json")
     // Write the formatted json information to 'Calendar.json'
@@ -45,6 +48,7 @@ async function downloadAndPrintICalendar(url, saveAsJSON, makeReadable) {
   if(makeReadable){
     readableOutput(asJSON)
   }
+  return asString
 }
 
 // Given some array it will split the array into smaller arrays of some specified size
@@ -60,7 +64,7 @@ function chunkArrayInGroups(arr, size) {
 async function readableOutput(json){
     const parser = new Parser({delimiter: '},'})
     const csv = parser.parse(json)
-    console.log(csv)
+    //console.log(csv)
     const writeStream = fs.createWriteStream("Readable.csv")
 
     // writeStream.write(csv)
@@ -89,11 +93,23 @@ async function readableOutput(json){
     csvData += new_content.map(function(d){
       return d.join()
     }).join('\n')
-    console.log(csvData)
+    //console.log(csvData)
     writeStream.write(csvData)
-
-
 }
+
 // Tester
 const url = 'https://learn.dcollege.net/webapps/calendar/calendarFeed/c2d84bf6673c402cb557f2a84ddabd87/learn.ics'
-downloadAndPrintICalendar(url,true, true)
+downloadAndPrintICalendar(url,true, true, false,false)
+
+const app = express()
+app.get('/calendar-info', (req,res) => {
+  console.log('calendar-info')
+  const calendarJSON = downloadAndPrintICalendar(url,true, true, true,false)
+  console.log(calendarJSON)
+  res.send(JSON.stringify(calendarJSON))
+  res.send('test')
+  
+})
+
+
+app.listen('2000')
