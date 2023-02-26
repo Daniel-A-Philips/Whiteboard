@@ -107,16 +107,16 @@ const url = 'https://learn.dcollege.net/webapps/calendar/calendarFeed/c2d84bf667
 
 const app = express()
 
-async function calendar_info(){
+async function blackboard_calendar(){
   const calendarJSON = await downloadAndPrintICalendar(url,false, false, true,false)
-  app.get('/calendar-info', (req,res) => {
-    console.log('calendar-info')
+  app.get('/blackboard-calendar', (req,res) => {
+    console.log('blackboard-calendar')
     console.log(calendarJSON)
     res.send(calendarJSON)
     //res.json({test:'a'})
   })
 }
 
-calendar_info()
+blackboard_calendar()
 
 app.listen('2000')
