@@ -38,7 +38,8 @@ async function downloadAndPrintICalendar(url, saveAsJSON, makeReadable, returnab
     console.log('Saving Data')
     // Print formatted information
     if(printInfo){
-      console.log(asString)
+      //console.log(asString)
+      console.log('')
     }
     // Create a WriteStream object with the target file 'Calendar.json'
     const writeStream = fs.createWriteStream("Calendar.json")
@@ -48,7 +49,9 @@ async function downloadAndPrintICalendar(url, saveAsJSON, makeReadable, returnab
   if(makeReadable){
     readableOutput(asJSON)
   }
-  return asString
+  if(returnable){
+    return asJSON
+  }
 }
 
 // Given some array it will split the array into smaller arrays of some specified size
@@ -99,17 +102,21 @@ async function readableOutput(json){
 
 // Tester
 const url = 'https://learn.dcollege.net/webapps/calendar/calendarFeed/c2d84bf6673c402cb557f2a84ddabd87/learn.ics'
-downloadAndPrintICalendar(url,true, true, false,false)
+
+//downloadAndPrintICalendar(url,true, true, false,false)
 
 const app = express()
-app.get('/calendar-info', (req,res) => {
-  console.log('calendar-info')
-  const calendarJSON = downloadAndPrintICalendar(url,true, true, true,false)
-  console.log(calendarJSON)
-  res.send(JSON.stringify(calendarJSON))
-  res.send('test')
-  
-})
 
+async function calendar_info(){
+  const calendarJSON = await downloadAndPrintICalendar(url,false, false, true,false)
+  app.get('/calendar-info', (req,res) => {
+    console.log('calendar-info')
+    console.log(calendarJSON)
+    res.send(calendarJSON)
+    //res.json({test:'a'})
+  })
+}
+
+calendar_info()
 
 app.listen('2000')
