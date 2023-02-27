@@ -63,7 +63,11 @@ function chunkArrayInGroups(arr, size) {
   console.log(newArr)
   return newArr;
 }
-
+// Purpose: 
+//  Takes json and converts it to csv
+// Last edited: 
+//  February 13th 
+//  Daniel Rochon
 async function readableOutput(json){
     const parser = new Parser({delimiter: '},'})
     const csv = parser.parse(json)
@@ -99,6 +103,92 @@ async function readableOutput(json){
     //console.log(csvData)
     writeStream.write(csvData)
 }
+// Purpose:
+//  Takes copied and pasted user input, and gets CRN's out of it. 
+// Last Edited:
+//  February 27th
+//  Daniel Rochon 
+async function getCRN(pasted_input){
+  lines = pasted_input.split('\n')
+  console.log(lines)
+  let user_crn = []
+  lines.map(line => {
+    if(line.includes('WI 22-23')){
+      user_crn.push(line.substring(0,6))
+    }
+  })
+  console.log(user_crn)
+}
+// can be cut after review
+getCRN(`Skip to main content
+Drexel University
+Institution Page
+Daniel Rochon
+Activity Stream
+Courses
+Calendar
+Messages
+Grades
+Tools
+Sign Out
+Privacy
+Terms
+Calendar
+
+Feb 2023
+Previous Week
+SSSMMMTTTWWWTTTFFFSSS
+26
+27281234
+0 scheduled items3 or more scheduled items1 scheduled item1 scheduled item0 scheduled items1 scheduled item0 scheduled itemsNext Week
+February 26, 2023
+12 AM	
+1 AM	
+2 AM	
+3 AM	
+4 AM	
+5 AM	
+6 AM	
+7 AM	
+8 AM	
+9 AM	
+10 AM	
+11 AM	
+12 PM	
+1 PM	
+2 PM	
+3 PM	
+4 PM	
+5 PM	
+6 PM	
+7 PM	
+8 PM	
+9 PM	
+10 PM	
+11 PM	
+1:06 PM
+Calendar Settings
+Select the calendars you want to display:
+
+Calendars
+Clear All
+Select All
+My Personal Calendar
+20194.202225: EXAM-080-001 - WI 22-23
+20200.202225: CHEM-103-A - WI 22-23
+21169.202225: CI-102-060 - WI 22-23
+21175.202225: CI-102-A - WI 22-23
+21575.202225: MATH-200-A - WI 22-23
+21915.202225: CHEM-103-065 - WI 22-23
+22041.202225: CS-171-064 - WI 22-23
+22044.202225: CS-171-B - WI 22-23
+22639.202225: MATH-200-007 - WI 22-23
+22853.202225: COOP-101-017 - WI 22-23
+24185.202225: ENGL-102-006 - WI 22-23
+25850.202225: CHEM-103-005 - WI 22-23
+SCI_CCI-Self-Srvc-Advsng_mjg88: Advising for CCI
+Institution
+×`)
 
 // Tester
 const url = 'https://learn.dcollege.net/webapps/calendar/calendarFeed/c2d84bf6673c402cb557f2a84ddabd87/learn.ics'
