@@ -117,7 +117,7 @@ async function getCourseInfo(pasted_input){
   let course_num = []
   let course_sec = []
   lines.map(line => {
-    if(line.includes('WI 22-23')){
+    if(line.includes('.') && line.includes(': ') && line.includes(' - ')){
       user_crn.push(line.substring(0,5))
       info.push(line.split(' ')[1])
     }
