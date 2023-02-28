@@ -14,6 +14,7 @@ const ical = require('ical')
 const fs = require('fs')
 const { Parser } = require('@json2csv/plainjs')
 const express = require('express')
+const { getCipherInfo } = require('crypto')
 
 // Purpose:
 //  A function that takes in a .ics url, downloads it parses the information
@@ -104,23 +105,41 @@ async function readableOutput(json){
     writeStream.write(csvData)
 }
 // Purpose:
-//  Takes copied and pasted user input, and gets CRN's out of it. 
+//  Takes copied and pasted user input, and gets CRN's, course names, course numbers, and course sections out of it. 
 // Last Edited:
-//  February 27th
+//  February 28th
 //  Daniel Rochon 
-async function getCRN(pasted_input){
-  lines = pasted_input.split('\n')
-  console.log(lines)
+async function getCourseInfo(pasted_input){
+  let lines = pasted_input.split('\n')
   let user_crn = []
+  let info = []
+  let course_name = []
+  let course_num = []
+  let course_sec = []
   lines.map(line => {
     if(line.includes('WI 22-23')){
-      user_crn.push(line.substring(0,6))
+      user_crn.push(line.substring(0,5))
+      info.push(line.split(' ')[1])
     }
   })
-  console.log(user_crn)
+  for(let k = 0; k < user_crn.length; k++){
+    for(let i = 0; i < 3; i++){
+      if (i == 0){
+        course_name.push(info[k].split('-')[i])
+      }
+      else if (i == 1){
+        course_num.push(info[k].split('-')[i])
+      }
+      else{
+        course_sec.push(info[k].split('-')[i])
+      }
+    }
+  }
+
+  console.log([user_crn, course_name, course_num, course_sec])
 }
 // can be cut after review
-getCRN(`Skip to main content
+getCourseInfo(`Skip to main content
 Drexel University
 Institution Page
 Daniel Rochon
