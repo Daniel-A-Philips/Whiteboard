@@ -135,8 +135,9 @@ async function getCourseInfo(pasted_input){
       }
     }
   }
-
+  //cut after review 
   console.log([user_crn, course_name, course_num, course_sec])
+  return([user_crn, course_name, course_num, course_sec])
 }
 // can be cut after review
 getCourseInfo(`Skip to main content
