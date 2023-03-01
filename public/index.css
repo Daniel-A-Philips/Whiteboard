@@ -116,7 +116,7 @@ body {
 	display: grid;
 	grid-template-columns: 3em 10px repeat(7, 1fr);
 	grid-template-rows: repeat(24, 3em);
-	overflow: scroll;
+	overflow-y: scroll;
 	height: calc(94vh - 30vh);
 }
 

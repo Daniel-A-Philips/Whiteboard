@@ -8,12 +8,13 @@ function applyDataToPage(data) {
 	applyDataToAssignments(data)
 }
 
+
 function applyDataToCalendar(data) {
-	for (key of Object.keys(data)) {
-		if (!key.startsWith("_blackboard.platform.gradebook2.GradableItem")) {
-			continue
-		}
-	}
+  for (key of Object.keys(data)) {
+    if (!key.startsWith("_blackboard.platform.gradebook2.GradableItem")) {
+      continue;
+    }
+  }
 }
 
 function applyDataToSidebar(data) {
@@ -31,3 +32,17 @@ function applyDataToAssignments(data) {
 		}
 	}
 }
+
+  
+  
+
+
+  
+  
+  
+  
+  
+  
+  
+
+  
