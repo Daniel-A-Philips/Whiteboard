@@ -1,5 +1,16 @@
+var currentWeekStart = startOfCurrentWeek()
+
 function dateFromBBString(str) {
 	return new Date(Date.parse(str))
+}
+
+function startOfCurrentWeek() {
+	// TODO, currently hardcoded
+	return new Date("Mon Feb 27 2023")
+}
+function inWeek(weekStart, date) {
+	let startEpoch = weekStart.getTime(), dateEpoch = date.getTime()
+	return startEpoch <= dateEpoch && startEpoch + (1000 * 3600 * 24 * 7) >= dateEpoch
 }
 
 function applyDataToPage(data) {
@@ -29,5 +40,22 @@ function applyDataToAssignments(data) {
 		if (!key.startsWith("_blackboard.platform.gradebook2.GradableItem")) {
 			continue
 		}
+		let dueDate = dateFromBBString(data[key].end)
+		if (!inWeek(currentWeekStart, dueDate)) {
+			continue
+		}
+		let col
+		if (dueDate.getDay() == 0) {
+			col = document.getElementById("due-dates-grid").children[6]
+		} else {
+			col = document.getElementById("due-dates-grid").children[dueDate.getDay() - 1]
+		}
+		let time
+		if (dueDate.getHours() == 23 && dueDate.getMinutes() >= 50) {
+			time = "EOD"
+		} else {
+			time = (dueDate.getHours() % 12) + (dueDate.getHours() > 12 ? "pm" : "am")
+		}
+		col.innerHTML += '<div class="due-date-entry calendar_calendar1"><span class="due-date-time">' + time + '</span> ' + data[key].summary + '</div>'
 	}
 }
