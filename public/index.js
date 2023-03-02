@@ -10,11 +10,11 @@ function applyDataToPage(data) {
 
 
 function applyDataToCalendar(data) {
-  for (key of Object.keys(data)) {
-    if (!key.startsWith("_blackboard.platform.gradebook2.GradableItem")) {
-      continue;
-    }
-  }
+	for (key of Object.keys(data)) {
+		if (!key.startsWith("_blackboard.platform.gradebook2.GradableItem")) {
+			continue;
+		}
+	}
 }
 
 function applyDataToSidebar(data) {
@@ -55,29 +55,3 @@ function updateCalendar() {
 	  }
 	}
   }
-  //runs every 7 days
-  document.addEventListener("DOMContentLoaded", function() {
-	updateCalendar();
-	setInterval(updateCalendar, 7 * 24 * 60 * 60 * 1000);
-  });
-  
-  
-
-
-
-
-
-
-  
-  
-
-
-  
-  
-  
-  
-  
-  
-  
-
-  
