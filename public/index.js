@@ -29,11 +29,21 @@ function applyDataToCalendar(data) {
 }
 
 function applyDataToSidebar(data) {
-	for (key of Object.keys(data)) {
-		if (!key.startsWith("_blackboard.platform.gradebook2.GradableItem")) {
-			continue
+	let beginningOfTerm = new Date("Sun Jan 8 2023") // temporarily hard coded
+	let currDate = new Date(beginningOfTerm)
+	let html = ""
+	for (let i = 0; i < 11; i++) {
+		html += '<tr><td class="ltc-weeknum">' + (i == 10 ? "F" : i + 1) + "</td>"
+		for (let j = 0; j < 7; j++) {
+			currDate.setDate(currDate.getDate() + 1)
+			html += "<td>" + currDate.getDate() + "</td>"
 		}
+		if (i == 0 || currDate.getDate() <= 7) {
+			html += '<td class="ltc-month">' + ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"][currDate.getMonth()] + '</td>'
+		}
+		html += "</tr>"
 	}
+	document.getElementById("ltc-table").innerHTML = html
 }
 
 function applyDataToAssignments(data) {
