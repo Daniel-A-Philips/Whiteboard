@@ -15,6 +15,7 @@ const fs = require('fs')
 const { Parser } = require('@json2csv/plainjs')
 const express = require('express')
 const { getCipherInfo } = require('crypto')
+const { async } = require('node-ical')
 
 // Purpose:
 //  A function that takes in a .ics url, downloads it parses the information
@@ -136,16 +137,27 @@ function getCourseInfo(pasted_input){
     }
   }
   //cut after review 
-  return([user_crn, course_name, course_num, course_sec])
+  return [user_crn, course_name, course_num, course_sec]
 }
-// can be cut after review
-fs.readFile('testInput.txt', 'utf8',(err, data) => {
-  if(err){
-    console.error(err)
-    return
+
+// Purpose:
+//  A function that parses the test data
+// Inputs:
+//  NONE
+// Last edited:
+//  March 2nd 2023
+//  Daniel Philips
+// Created by Daniel Rochon
+async function get_test_data(){
+  try{
+    const data = await fs.promises.readFile("testInput.txt","utf-8")
+    console.log(getCourseInfo(data))
+    return getCourseInfo(data)
+  } catch (err) {
+    console.log(err)
+    return err
   }
-  console.log(getCourseInfo(data))
-})
+}
 
 // Tester
 const url = 'https://learn.dcollege.net/webapps/calendar/calendarFeed/c2d84bf6673c402cb557f2a84ddabd87/learn.ics'
@@ -154,6 +166,14 @@ const url = 'https://learn.dcollege.net/webapps/calendar/calendarFeed/c2d84bf667
 
 const app = express()
 
+
+// Purpose:
+//  A function that runs and downloads the blackboard calendar
+// Inputs:
+//  NONE
+// Last edited:
+//  March 2nd 2023
+//  Daniel Philips
 async function blackboard_calendar(){
   const calendarJSON = await downloadAndPrintICalendar(url,false, false, true,false)
   app.get('/blackboard-calendar', (req,res) => {
@@ -164,6 +184,29 @@ async function blackboard_calendar(){
   })
 }
 
-blackboard_calendar()
+async function downloadFromCRN(crn_array){
+  console.log(crn_array)
+  crn_array.forEach(downloadCourseInformation)
+}
 
-app.listen('2000')
+async function downloadCourseInformation(crn){
+  const response = await axios.get(`https://termmasterschedule.drexel.edu/webtms_du/courseList/${crn};jsessionid=B1621180AEA0C330AF0D348797063685`)
+  // Save the page data from the url as 'data'
+  const data = response.data
+  fs.writeFile(`./tmtest${current_crn}.html`,data, err => {
+    if (err) {
+      console.error(err)
+    }
+  })
+}
+
+blackboard_calendar()
+get_test_data().then( data => {
+  console.log('get_test_data():')
+  console.log(data)
+  let test_data = []
+  downloadFromCRN(test_data)
+  app.listen('2000')
+})
+
+
