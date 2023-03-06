@@ -14,8 +14,12 @@ const ical = require('ical')
 const fs = require('fs')
 const { Parser } = require('@json2csv/plainjs')
 const express = require('express')
-const { getCipherInfo } = require('crypto')
+const cheerio = require('cheerio')
 const { async } = require('node-ical')
+const { request } = require('http')
+const { rejects } = require('assert')
+const jsdom = require("jsdom")
+
 
 // Purpose:
 //  A function that takes in a .ics url, downloads it parses the information
@@ -151,7 +155,6 @@ function getCourseInfo(pasted_input){
 async function get_test_data(){
   try{
     const data = await fs.promises.readFile("testInput.txt","utf-8")
-    console.log(getCourseInfo(data))
     return getCourseInfo(data)
   } catch (err) {
     console.log(err)
@@ -176,7 +179,7 @@ const app = express()
 //  Daniel Philips
 async function blackboard_calendar(){
   const calendarJSON = await downloadAndPrintICalendar(url,false, false, true,false)
-  app.get('/blackboard-calendar', (req,res) => {
+  app.get('/blackboard-calendar/', (req,res) => {
     console.log('blackboard-calendar')
     console.log(calendarJSON)
     res.send(calendarJSON)
@@ -190,23 +193,86 @@ async function downloadFromCRN(crn_array){
 }
 
 async function downloadCourseInformation(crn){
-  const response = await axios.get(`https://termmasterschedule.drexel.edu/webtms_du/courseList/${crn};jsessionid=B1621180AEA0C330AF0D348797063685`)
+  const url = `https://termmasterschedule.drexel.edu/webtms_du/courseList/${crn}`
+  const response = await axios.get(url)
+  console.log(url)
   // Save the page data from the url as 'data'
   const data = response.data
-  fs.writeFile(`./tmtest${current_crn}.html`,data, err => {
+  fs.writeFile(`./tmtest${crn}.html`,data, err => {
     if (err) {
       console.error(err)
     }
   })
 }
 
+// Purpose:
+//  A helper function that returns true when the desired line is passed through
+// Inputs:
+//  line : A string of a line of HTML
+// Output:
+//  Returns true if the desired text is within the line, otherwise returns false
+// Last edited:
+//  March 6th 2023
+//  Daniel Philips
+function filterHTML(line){
+  if(line.includes('class=\"term\"')){
+    return true
+  }
+  else return false
+}
+
+// Purpose:
+//  A function that grabs and parses the body of the TMS homepage,
+//  Finding the term numbers and hyperlinks
+// Inputs:
+//  NONE
+// Output:
+//  Returns a parsed list of terms in the following format
+//    [
+//    [Quarter Title (eg Spring Semester 21-22),
+//     Hyperlink (eg /webtms_du/collegesSubjects/202141;jsessionid=A54F835C01E448B62F3C93D8B2ECAAC0?collCode=)
+//     ]
+//    ]
+// Last edited:
+//  March 6th 2023
+//  Daniel Philips
+async function getTermIDS(){
+  console.log('Starting getTermIDS')
+  let terms_raw = []
+  var url = 'http://termmasterschedule.drexel.edu'
+  // Download the hompeage of TMS and get the body, splitting to an array
+  const bodyAsArray = (await axios.get(url)).data.split('\n')
+  // Filter out all lines that don't contain a term link
+  terms_raw = bodyAsArray.filter(filterHTML)
+  var terms = []
+  terms_raw.forEach( raw => {
+    var temp = raw.split('>').slice(2,4)
+    // Clean up HTML Code to make readable
+    temp[0] = temp[0].substring('&nbsp;&nbsp;<a href="'.length)
+    temp[0] = temp[0].substring(0,temp[0].length - 2)
+    temp[1] = temp[1].substring(0,temp[1].indexOf('<'))
+
+    // Switch the order of the link and the title
+    var temp1 = temp[0]
+    temp[0] = temp[1]
+    temp[1] = temp1
+    terms.push(temp)
+  })
+  return terms
+}
+
 blackboard_calendar()
 get_test_data().then( data => {
   console.log('get_test_data():')
   console.log(data)
-  let test_data = []
-  downloadFromCRN(test_data)
-  app.listen('2000')
+  console.log('data[2]')
+  console.log(data[1])
+  test_data = data[1]
+  //downloadFromCRN(test_data)
+  getTermIDS().then( output => {
+    console.log(output)
+  })
+  app.listen(2000)
 })
 
 
