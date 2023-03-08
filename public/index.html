@@ -2,11 +2,14 @@
 <html>
 <head>
 	<link href="index.css" rel="stylesheet" type="text/css" />
-	<script src="index.js"></script>
-	
 </head>
 <body>
-
+	<section id="ctrl-a-input-window">
+		<h2>Enter Class Schedule</h2>
+		<p>Please open BlackBoard, go to the Calendar page, click the gear icon in the top right corner, then select all (ctrl+A or cmd+A) and copy (ctrl+C or cmd+C), and then paste (ctrl+V or cmd+V) below.</p>
+		<textarea id="ctrl-a-input-textarea"></textarea>
+		<button id="ctrl-a-input-submit">Submit</button>
+	</section>
 	<section id="side-bar">
 		<div id="long-term-calendar">
 			<h4>Winter Term</h4>
@@ -110,5 +113,7 @@
 			<div class="due-dates-col" style="grid-column:9"></div>
 		</div>
 	</section>
+	
+	<script src="index.js"></script>
 </body>
 </html>
