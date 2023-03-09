@@ -14,8 +14,9 @@ const ical = require('ical')
 const fs = require('fs')
 const { Parser } = require('@json2csv/plainjs')
 const express = require('express')
+const { parse } = require('path')
 
-
+let JSON_TO_SEND= '{'
 // Purpose:
 //  A function that takes in a .ics url, downloads it parses the information
 // Inputs:
@@ -175,6 +176,7 @@ const app = express()
 //  March 2nd 2023
 //  Daniel Philips
 async function blackboard_calendar(){
+  console.log('Running blackboard_calendar')
   const calendarJSON = await downloadAndPrintICalendar(url,false, false, true,false)
   app.get('/blackboard-calendar/', (req,res) => {
     console.log('blackboard-calendar')
@@ -184,8 +186,20 @@ async function blackboard_calendar(){
   })
 }
 
-blackboard_calendar()
+async function write_get_classes(){
+  console.log('Running write_get_classes')
+  app.get('/get-classes/',(req,res) => {
+    JSON_TO_SEND = JSON_TO_SEND.slice(0,JSON_TO_SEND.length-1) + '}'
+    res.send(JSON_TO_SEND)
+  })
+}
 
+async function helper(a,b,c){
+  return await TMS_Parser(a,b,c)
+}
+
+blackboard_calendar()
+var call = ''
 get_test_data().then( data => {
   console.log('get_test_data():')
   console.log(data)
@@ -193,13 +207,23 @@ get_test_data().then( data => {
   console.log(data[1])
   test_data = data[1]
   for(var i = 0; i < data[1].length; i++){
-    var call = new TMS_Parser(data[0][i],data[1][i],data[4])
+    var call = helper(data[0][i],data[1][i],data[4])
   }
-  app.listen(2000)
-})
+}).then(write_get_classes)
+
+
+
+app.listen(2000)
+
 
 //////////////////////////////////////////////////////////////////////////////////////////
-function fetcher(jsessionid,crn,quarter){
+
+function sendAllClasses(class_jsons){
+  var toSend = '{\n' + class_jsons + '}'
+}
+
+
+async function fetcher(jsessionid,crn,quarter){
   fetch("https://termmasterschedule.drexel.edu/webtms_du/searchCourses", {
   "headers": {
     "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7",
@@ -225,7 +249,9 @@ function fetcher(jsessionid,crn,quarter){
 	return response.text();
 }).then(function (html) {
 	// This is the HTML from our response as a text string
-	console.log(crn,':',TMS_HTML_CLASS_PARSER(html,crn));
+var data = TMS_HTML_CLASS_PARSER(html,crn)
+console.log(data)
+  return class_to_json(data[1][2],data[0][0],data[0][1],data[1][3],crn,data[1][0])
 }).catch(function (err) {
 	// There was an error
 	console.warn('Something went wrong.', err);
@@ -236,11 +262,15 @@ function TMS_HTML_CLASS_PARSER(html, crn){
   html = html.split('\n')
   var i = 0
   var times = []
+  var info4 = []
   html.forEach(line => {
     if(line.includes('table-day-time') ){
       times[0] = html[i+3].split('>')[1].split('<')[0]
       times[1] = html[i+4].split('>')[1].split('<')[0]
-      return times
+      return
+    }
+    if(line.includes('<td align=\"left\" valign=\"top\">') || line.includes('<td align=\"left\" valign=\"center\">')){
+      info4.push(line.split('>')[1].split('<')[0])
     }
     i++
   })
@@ -248,16 +278,16 @@ function TMS_HTML_CLASS_PARSER(html, crn){
     console.err('Warning: No Times and Dates Found in the following HTML!')
     console.log(html)
   }
-  return times
+  return [times,info4]
 }
 //////////////////////////////////////////////////////////////////////////////////////////
 
-function TMS_Parser(crn, school, quarterNumber){
+async function TMS_Parser(crn, school, quarterNumber){
   //console.log(`crn: ${crn}, school: ${school}, quarterNumber: ${quarterNumber}`)
   getTermIDS().then( output => {
     output.forEach( quarterInfo =>{
       if(quarterInfo[1].includes(quarterNumber)){
-        fetcher(quarterInfo[1].split(';')[1].split('=')[1].split('?')[0],crn,quarterInfo[0].replace(' ','+'))
+        return fetcher(quarterInfo[1].split(';')[1].split('=')[1].split('?')[0],crn,quarterInfo[0].replace(' ','+'))
       }
     })
   })
@@ -266,13 +296,32 @@ function TMS_Parser(crn, school, quarterNumber){
 
 //////////////////////////////////////////////////////////////////////////////////////////
 
+function class_to_json(name, days, times, instructor, crn,type){
+  var parsed_times = []
+  var daylist = ['M','T','W','R','F']
+  try{
+    days = days.split('')
+  } catch(error){
+    console.error('No Class Information or Error with class information')
+    return ''
+  }
+  days.forEach(day => {
+    parsed_times.push(daylist.indexOf(day))
+  })
+  let text = `\"${name} - ${type}\": {\n\"days\": \"${parsed_times}\",\n\"time\": \"${times}\",\n\"instructor\": \"${instructor}\",\n\"crn\": \"${crn}\"},` 
+  console.log(text)
+  JSON_TO_SEND = JSON_TO_SEND.concat(text)
+  return text
+}
+
+//////////////////////////////////////////////////////////////////////////////////////////
 function filterHTML(line){
   if(line.includes('class=\"term\"')){
     return true
   }
   else return false
 }
-  
+
   // Purpose:
   //  A function that grabs and parses the body of the TMS homepage,
   //  Finding the term numbers and hyperlinks
