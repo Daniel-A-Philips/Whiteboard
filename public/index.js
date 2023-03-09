@@ -5,6 +5,8 @@ document.getElementById("ctrl-a-input-submit").onclick = () => {
 	let req = new XMLHttpRequest()
 	req.open("PUT", "http://localhost:2000/put-classes")
 	req.send(document.getElementById("ctrl-a-input-textarea").value)
+	document.getElementById("ctrl-a-input-window").remove()
+	updateCalendar()
 	setTimeout(applyDataToPage, 1000) // wait 1 second to make sure data is properly handled by server
 }
 
@@ -35,7 +37,7 @@ function applyDataToPage() {
 	// req.open("GET", "http://localhost:2000/get-classes", false)
 	// req.send()
 	// if (req.status != 200) {
-	// 	throw Exception("could not get /get-blackboard-calendar")
+	// 	throw Exception("could not get /get-classes")
 	// }
 	// let classes = JSON.parse(req.responseText)
 
