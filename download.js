@@ -17,6 +17,7 @@ const express = require('express')
 const { parse } = require('path')
 
 let JSON_TO_SEND= '{'
+
 // Purpose:
 //  A function that takes in a .ics url, downloads it parses the information
 // Inputs:
