@@ -1,0 +1,30 @@
+fetch("https://termmasterschedule.drexel.edu/webtms_du/searchCourses", {
+  "headers": {
+    "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7",
+    "accept-language": "en-GB,en-US;q=0.9,en;q=0.8",
+    "cache-control": "max-age=0",
+    "content-type": "application/x-www-form-urlencoded",
+    "sec-ch-ua": "\"Chromium\";v=\"110\", \"Not A(Brand\";v=\"24\", \"Google Chrome\";v=\"110\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": "\"macOS\"",
+    "sec-fetch-dest": "document",
+    "sec-fetch-mode": "navigate",
+    "sec-fetch-site": "same-origin",
+    "sec-fetch-user": "?1",
+    "upgrade-insecure-requests": "1",
+    "cookie": "JSESSIONID=5DC6061A4335B7749F2B720BDB4EC572; nmstat=9945ca32-b50b-46e7-49ff-efb7cb14d8c2; __qca=P0-1034030140-1663551930290; _ga_CZV0Y1WRHC=GS1.1.1664813594.2.0.1664813594.0.0.0; _tt_enable_cookie=1; _ttp=c736788b-799a-4af6-aa32-d7f86662f599; _hjSessionUser_864760=eyJpZCI6Ijc2MGJjMTJjLTkwNmYtNTY0Zi1iZWJiLTJjMGZjNjZlNGZiMSIsImNyZWF0ZWQiOjE2NjczMjcwMTgxMzEsImV4aXN0aW5nIjpmYWxzZX0=; _ga_4819PJ6HEN=GS1.1.1667327018.1.1.1667328377.0.0.0; _ga_0HYE8YG0M6=GS1.1.1667327018.1.1.1667328377.0.0.0; _hjSessionUser_1459581=eyJpZCI6ImE3M2Y3NWRiLWM4YjgtNTM2Yi1iNGJmLWM0Y2Q0ZDMxZDQ5NyIsImNyZWF0ZWQiOjE2NjczMjcyNTUxODYsImV4aXN0aW5nIjp0cnVlfQ==; _hjSessionUser_855069=eyJpZCI6IjVkOGJlYjcxLWU0Y2YtNTQyNi05ZWVkLWEwN2Q2NzE3MmZlMiIsImNyZWF0ZWQiOjE2NjM1NTE5MzAzMjAsImV4aXN0aW5nIjp0cnVlfQ==; _ga_FW9F4MBGFT=GS1.1.1669832624.1.0.1669832624.0.0.0; _ga_NMQ7G9RCBP=GS1.1.1669832624.1.0.1669832624.0.0.0; _ga_PQ370BZJFT=GS1.1.1675736214.5.0.1675736235.0.0.0; _gcl_au=1.1.96399806.1676390314; _ga_6VXTC1Y945=GS1.1.1676419147.2.1.1676419369.0.0.0; sc_is_visitor_unique=rx7676330.1677014066.20AC392C3C6C4FFAF63AE8824B3E4CD9.1.1.1.1.1.1.1.1.1-10834203.1676855188.1.1.1.1.1.1.1.1.1-6868626.1676854931.2.2.2.2.2.2.2.2.2; IDMSESSID=F9FDE62834F5136AC1C8677B87CB1EBE3750A4AC8B9C3C10E131818BF97942AA4C60E4EF9C61A28D026F9BC8727432FE; _uetvid=be8234a037bc11edbb8af3ab82e91766; iv=69aa3904-360b-44e7-a623-773cd32a0191; _clck=ewvudy|1|f9p|0; _ga=GA1.2.410723813.1660586547; _ga_H9NXSPBKEB=GS1.1.1678216944.1.0.1678216944.0.0.0; _ga_6KJ1PNLE19=GS1.1.1678216922.110.1.1678216944.38.0.0; _ga_2PPGKTTDCQ=GS1.1.1678216922.15.1.1678216944.0.0.0",
+    "Referer": "https://termmasterschedule.drexel.edu/webtms_du/",
+    "Referrer-Policy": "strict-origin-when-cross-origin"
+  },
+  "body": "term.termDesc=Winter+Quarter+22-23&crseTitle=&crseNumb=&crn=20194&campus.desc=Any",
+  "method": "POST"
+}).then(function (response) {
+	// The API call was successful!
+	return response.text();
+}).then(function (html) {
+	// This is the HTML from our response as a text string
+	console.log(html);
+}).catch(function (err) {
+	// There was an error
+	console.warn('Something went wrong.', err);
+});

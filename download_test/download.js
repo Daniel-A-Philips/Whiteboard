@@ -116,9 +116,11 @@ function getCourseInfo(pasted_input){
   let course_name = []
   let course_num = []
   let course_sec = []
+  let quarter_number = -1
   lines.map(line => {
     if(line.includes('.') && line.includes(': ') && line.includes(' - ')){
       user_crn.push(line.substring(0,5))
+      quarter_number = line.substring(6,12)
       info.push(line.split(' ')[1])
     }
   })
@@ -136,7 +138,7 @@ function getCourseInfo(pasted_input){
     }
   }
   //cut after review 
-  return [user_crn, course_name, course_num, course_sec]
+  return [user_crn, course_name, course_num, course_sec, quarter_number]
 }
 
 // Purpose:
@@ -182,92 +184,130 @@ async function blackboard_calendar(){
   })
 }
 
-async function downloadFromCRN(crn_array){
-  console.log(crn_array)
-  crn_array.forEach(downloadCourseInformation)
+blackboard_calendar()
+
+get_test_data().then( data => {
+  console.log('get_test_data():')
+  console.log(data)
+  console.log('data[1]')
+  console.log(data[1])
+  test_data = data[1]
+  for(var i = 0; i < data[1].length; i++){
+    var call = new TMS_Parser(data[0][i],data[1][i],data[4])
+  }
+  app.listen(2000)
+})
+
+//////////////////////////////////////////////////////////////////////////////////////////
+function fetcher(jsessionid,crn,quarter){
+  fetch("https://termmasterschedule.drexel.edu/webtms_du/searchCourses", {
+  "headers": {
+    "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7",
+    "accept-language": "en-GB,en-US;q=0.9,en;q=0.8",
+    "cache-control": "max-age=0",
+    "content-type": "application/x-www-form-urlencoded",
+    "sec-ch-ua": "\"Chromium\";v=\"110\", \"Not A(Brand\";v=\"24\", \"Google Chrome\";v=\"110\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": "\"macOS\"",
+    "sec-fetch-dest": "document",
+    "sec-fetch-mode": "navigate",
+    "sec-fetch-site": "same-origin",
+    "sec-fetch-user": "?1",
+    "upgrade-insecure-requests": "1",
+    "cookie": `JSESSIONID=${jsessionid}; nmstat=9945ca32-b50b-46e7-49ff-efb7cb14d8c2; __qca=P0-1034030140-1663551930290; _ga_CZV0Y1WRHC=GS1.1.1664813594.2.0.1664813594.0.0.0; _tt_enable_cookie=1; _ttp=c736788b-799a-4af6-aa32-d7f86662f599; _hjSessionUser_864760=eyJpZCI6Ijc2MGJjMTJjLTkwNmYtNTY0Zi1iZWJiLTJjMGZjNjZlNGZiMSIsImNyZWF0ZWQiOjE2NjczMjcwMTgxMzEsImV4aXN0aW5nIjpmYWxzZX0=; _ga_4819PJ6HEN=GS1.1.1667327018.1.1.1667328377.0.0.0; _ga_0HYE8YG0M6=GS1.1.1667327018.1.1.1667328377.0.0.0; _hjSessionUser_1459581=eyJpZCI6ImE3M2Y3NWRiLWM4YjgtNTM2Yi1iNGJmLWM0Y2Q0ZDMxZDQ5NyIsImNyZWF0ZWQiOjE2NjczMjcyNTUxODYsImV4aXN0aW5nIjp0cnVlfQ==; _hjSessionUser_855069=eyJpZCI6IjVkOGJlYjcxLWU0Y2YtNTQyNi05ZWVkLWEwN2Q2NzE3MmZlMiIsImNyZWF0ZWQiOjE2NjM1NTE5MzAzMjAsImV4aXN0aW5nIjp0cnVlfQ==; _ga_FW9F4MBGFT=GS1.1.1669832624.1.0.1669832624.0.0.0; _ga_NMQ7G9RCBP=GS1.1.1669832624.1.0.1669832624.0.0.0; _ga_PQ370BZJFT=GS1.1.1675736214.5.0.1675736235.0.0.0; _gcl_au=1.1.96399806.1676390314; _ga_6VXTC1Y945=GS1.1.1676419147.2.1.1676419369.0.0.0; sc_is_visitor_unique=rx7676330.1677014066.20AC392C3C6C4FFAF63AE8824B3E4CD9.1.1.1.1.1.1.1.1.1-10834203.1676855188.1.1.1.1.1.1.1.1.1-6868626.1676854931.2.2.2.2.2.2.2.2.2; IDMSESSID=F9FDE62834F5136AC1C8677B87CB1EBE3750A4AC8B9C3C10E131818BF97942AA4C60E4EF9C61A28D026F9BC8727432FE; _uetvid=be8234a037bc11edbb8af3ab82e91766; iv=69aa3904-360b-44e7-a623-773cd32a0191; _clck=ewvudy|1|f9p|0; _ga=GA1.2.410723813.1660586547; _ga_H9NXSPBKEB=GS1.1.1678216944.1.0.1678216944.0.0.0; _ga_6KJ1PNLE19=GS1.1.1678216922.110.1.1678216944.38.0.0; _ga_2PPGKTTDCQ=GS1.1.1678216922.15.1.1678216944.0.0.0`,
+    "Referer": "https://termmasterschedule.drexel.edu/webtms_du/",
+    "Referrer-Policy": "strict-origin-when-cross-origin"
+  },
+  "body": `term.termDesc=${quarter}&crseTitle=&crseNumb=&crn=${crn}&campus.desc=Any`,
+  "method": "POST"
+}).then(function (response) {
+	// The API call was successful!
+	return response.text();
+}).then(function (html) {
+	// This is the HTML from our response as a text string
+	console.log(crn,':',TMS_HTML_CLASS_PARSER(html,crn));
+}).catch(function (err) {
+	// There was an error
+	console.warn('Something went wrong.', err);
+});
 }
 
-async function downloadCourseInformation(crn){
-  const url = `https://termmasterschedule.drexel.edu/webtms_du/courseList/${crn}`
-  const response = await axios.get(url)
-  console.log(url)
-  // Save the page data from the url as 'data'
-  const data = response.data
-  fs.writeFile(`./tmtest${crn}.html`,data, err => {
-    if (err) {
-      console.error(err)
+function TMS_HTML_CLASS_PARSER(html, crn){
+  html = html.split('\n')
+  var i = 0
+  var times = []
+  html.forEach(line => {
+    if(line.includes('table-day-time') ){
+      times[0] = html[i+3].split('>')[1].split('<')[0]
+      times[1] = html[i+4].split('>')[1].split('<')[0]
+      return times
     }
+    i++
   })
+  if(times == []){
+    console.err('Warning: No Times and Dates Found in the following HTML!')
+    console.log(html)
+  }
+  return times
+}
+//////////////////////////////////////////////////////////////////////////////////////////
+
+function TMS_Parser(crn, school, quarterNumber){
+  //console.log(`crn: ${crn}, school: ${school}, quarterNumber: ${quarterNumber}`)
+  getTermIDS().then( output => {
+    output.forEach( quarterInfo =>{
+      if(quarterInfo[1].includes(quarterNumber)){
+        fetcher(quarterInfo[1].split(';')[1].split('=')[1].split('?')[0],crn,quarterInfo[0].replace(' ','+'))
+      }
+    })
+  })
+
 }
 
-// Purpose:
-//  A helper function that returns true when the desired line is passed through
-// Inputs:
-//  line : A string of a line of HTML
-// Output:
-//  Returns true if the desired text is within the line, otherwise returns false
-// Last edited:
-//  March 6th 2023
-//  Daniel Philips
+//////////////////////////////////////////////////////////////////////////////////////////
+
 function filterHTML(line){
   if(line.includes('class=\"term\"')){
     return true
   }
   else return false
 }
-
-// Purpose:
-//  A function that grabs and parses the body of the TMS homepage,
-//  Finding the term numbers and hyperlinks
-// Inputs:
-//  NONE
-// Output:
-//  Returns a parsed list of terms in the following format
-//    [
-//    [Quarter Title (eg Spring Semester 21-22),
-//     Hyperlink (eg /webtms_du/collegesSubjects/202141;jsessionid=A54F835C01E448B62F3C93D8B2ECAAC0?collCode=)
-//     ]
-//    ]
-// Last edited:
-//  March 6th 2023
-//  Daniel Philips
-async function getTermIDS(){
-  console.log('Starting getTermIDS')
-  let terms_raw = []
-  var url = 'http://termmasterschedule.drexel.edu'
-  // Download the hompeage of TMS and get the body, splitting to an array
-  const bodyAsArray = (await axios.get(url)).data.split('\n')
-  // Filter out all lines that don't contain a term link
-  terms_raw = bodyAsArray.filter(filterHTML)
-  var terms = []
-  terms_raw.forEach( raw => {
-    var temp = raw.split('>').slice(2,4)
-    // Clean up HTML Code to make readable
-    temp[0] = temp[0].substring('&nbsp;&nbsp;<a href="'.length)
-    temp[0] = temp[0].substring(0,temp[0].length - 2)
-    temp[1] = temp[1].substring(0,temp[1].indexOf('<'))
-
-    // Switch the order of the link and the title
-    var temp1 = temp[0]
-    temp[0] = temp[1]
-    temp[1] = temp1
-    terms.push(temp)
-  })
-  return terms
-}
-
-blackboard_calendar()
-get_test_data().then( data => {
-  console.log('get_test_data():')
-  console.log(data)
-  console.log('data[2]')
-  console.log(data[1])
-  test_data = data[1]
-  //downloadFromCRN(test_data)
-  getTermIDS().then( output => {
-    console.log(output)
-  })
-  app.listen(2000)
-})
-
-
+  
+  // Purpose:
+  //  A function that grabs and parses the body of the TMS homepage,
+  //  Finding the term numbers and hyperlinks
+  // Inputs:
+  //  NONE
+  // Output:
+  //  Returns a parsed list of terms in the following format
+  //    [
+  //    [Quarter Title (eg Spring Semester 21-22),
+  //     Hyperlink (eg /webtms_du/collegesSubjects/202141;jsessionid=A54F835C01E448B62F3C93D8B2ECAAC0?collCode=)
+  //     ]
+  //    ]
+  // Last edited:
+  //  March 6th 2023
+  //  Daniel Philips
+  async function getTermIDS(){
+    let terms_raw = []
+    var url = 'http://termmasterschedule.drexel.edu'
+    // Download the hompeage of TMS and get the body, splitting to an array
+    const bodyAsArray = (await axios.get(url)).data.split('\n')
+    // Filter out all lines that don't contain a term link
+    terms_raw = bodyAsArray.filter(filterHTML)
+    var terms = []
+    terms_raw.forEach( raw => {
+      var temp = raw.split('>').slice(2,4)
+      // Clean up HTML Code to make readable
+      temp[0] = temp[0].substring('&nbsp;&nbsp;<a href="'.length)
+      temp[0] = temp[0].substring(0,temp[0].length - 2)
+      temp[1] = temp[1].substring(0,temp[1].indexOf('<'))
+  
+      // Switch the order of the link and the title
+      var temp1 = temp[0]
+      temp[0] = temp[1]
+      temp[1] = temp1
+      terms.push(temp)
+    })
+    return terms
+  }
