@@ -52,7 +52,7 @@ function applyDataToPage() {
 
 
 function applyDataToCalendar(assignments, classes) {
-	for (key of Object.keys(assignments)) {
+	for (key of Object.keys(classes)) {
 		if (!key.startsWith("_blackboard.platform.gradebook2.GradableItem")) {
 			continue;
 		}
@@ -106,7 +106,7 @@ function applyDataToAssignments(assignments, classes) {
 //add auto dates to the calendar instead of manuel input
 
 function updateCalendar() {
-	const daysOfWeek = ['Sun', 'Mon', 'Tues', 'Wed', 'Thurs', 'Fri', 'Sat'];
+	const daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 	const today = new Date();
 	const todayIndex = today.getDay();
   
