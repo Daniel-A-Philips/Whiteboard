@@ -194,6 +194,12 @@ body {
 	background-color: #b3e1f7;
 	border-color: #81cdf2;
 }
+.class {
+	background-color: #b3e1f7;
+	border-color: #81cdf2;
+	margin: 3px;
+	position: sticky;
+}
 
 .event1 {
 	grid-column: 3;
