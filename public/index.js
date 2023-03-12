@@ -52,12 +52,51 @@ function applyDataToPage() {
 
 
 function applyDataToCalendar(assignments, classes) {
-	for (key of Object.keys(classes)) {
-		if (!key.startsWith("_blackboard.platform.gradebook2.GradableItem")) {
-			continue;
-		}
+		// Get the calendar columns
+	const col0 = document.querySelector('.calendar_col[style="grid-column:3"]');
+	const col1 = document.querySelector('.calendar_col[style="grid-column:4"]');
+	const col2 = document.querySelector('.calendar_col[style="grid-column:5"]');
+	const col3 = document.querySelector('.calendar_col[style="grid-column:6"]');
+	const col4 = document.querySelector('.calendar_col[style="grid-column:7"]');
+	const col5 = document.querySelector('.calendar_col.calendar_weekend[style="grid-column:8"]');
+	const col6 = document.querySelector('.calendar_col.calendar_weekend[style="grid-column:9"]');
+
+	for (let className in classes) {
+	  const classInfo = classes[className];
+
+	  classInfo.days.forEach(day => {
+	    let column;
+	    if (day === 0) {
+	      column = col0;
+	    } else if (day === 1) {
+	      column = col1;
+	    } else if (day === 2) {
+	      column = col2;
+	    } else if (day === 3) {
+	      column = col3;
+	    } else if (day === 4) {
+	      column = col4;
+	    } else if (day === 5) {
+	      column = col5;
+	    } else if (day === 6) {
+	      column = col6;
+	    }
+
+	    // Create the HTML element for the class and append it to the appropriate column
+	    if (column) {
+	      const classElement = document.createElement('div');
+	      classElement.classList.add('class');
+	      classElement.innerHTML = className + '<br>' + classInfo.instructor;
+
+
+	      column.appendChild(classElement);
+	    }
+	  });
+
 	}
+
 }
+
 
 function applyDataToSidebar(assignments, classes) {
 	let beginningOfTerm = new Date("Sun Jan 8 2023") // temporarily hard coded
