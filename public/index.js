@@ -5,8 +5,9 @@ document.getElementById("ctrl-a-input-submit").onclick = () => {
 	let req = new XMLHttpRequest()
 
 	req.open("PUT", "http://localhost:2000/put-classes")
-	req.setRequestHeader('user-blackboard-copied',JSON.stringify(document.getElementById("ctrl-a-input-textarea").value))
-	req.setRequestHeader('user-blackboard-calendar-link',JSON.stringify(document.getElementById("calendar-link-input").value))
+	console.log(document.getElementById("ctrl-a-input-textarea").value)
+	req.setRequestHeader('user-blackboard-copied',JSON.stringify(encodeURIComponent(document.getElementById("ctrl-a-input-textarea").value)))
+	req.setRequestHeader('user-blackboard-calendar-link',JSON.stringify(encodeURIComponent(document.getElementById("calendar-link-input").value)))
 	req.send(document.getElementById("ctrl-a-input-textarea").value)
 	document.getElementById("ctrl-a-input-window").remove()
 	updateCalendar()

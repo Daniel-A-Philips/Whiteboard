@@ -18,7 +18,7 @@ const { parse } = require('path')
 
 let JSON_TO_SEND= '{'
 var testData = ''
-
+let TMS_Link = ''
 
 // Purpose:
 //  A function that takes in a .ics url, downloads it parses the information
@@ -116,7 +116,7 @@ async function readableOutput(json){
 function getCourseInfo(pasted_input){
   //console.log(pasted_input)
   pasted_input = pasted_input.toString()
-  let lines = (pasted_input.split('\"')[1]).toString().split('\\n')
+  let lines = pasted_input.split('\n')
   let user_crn = []
   let info = []
   let course_name = []
@@ -166,7 +166,9 @@ async function get_test_data(data){
 
 const app = express()
 
-['html','js','css'].forEach(fileType => {
+const fileTypes = ['html','js','css']
+
+fileTypes.forEach(fileType => {
   app.get(`/index.${fileType}`, (req, res) => {
     res.sendFile(__dirname + `/public/index.${fileType}`)
   })
@@ -174,15 +176,17 @@ const app = express()
 
 // Program to be run when data is sent from the frontend to the backend
 app.put('/put-classes', (req,res) =>{
-  var headers = req.headers['user-blackboard-copied']
-  get_test_data(headers).then( foo => {
+  let class_info = decodeURIComponent(req.headers['user-blackboard-copied'])
+  TMS_Link = decodeURIComponent(req.headers['user-blackboard-calendar-link']).toString().replaceAll('"','')
+  console.log(TMS_Link)
+  blackboard_calendar(TMS_Link)
+  get_test_data(class_info).then( foo => {
     testData = foo
     console.log(testData)
     for(var i = 0; i < testData[1].length; i++){
       var call = helper(testData[0][i],testData[1][i],testData[4])
     }
   }).then(write_get_classes)
-  //testData = get_test_data(headers)
   
 })
 
@@ -193,10 +197,9 @@ app.put('/put-classes', (req,res) =>{
 // Last edited:
 //  March 2nd 2023
 //  Daniel Philips
-async function blackboard_calendar(){
+async function blackboard_calendar(tmsurl){
   console.log('Running blackboard_calendar')
-  var url = ''
-  const calendarJSON = await downloadAndPrintICalendar(url,false, false, true,false)
+  const calendarJSON = await downloadAndPrintICalendar(tmsurl,false, false, true,false)
   app.get('/blackboard-calendar/', (req,res) => {
     console.log('blackboard-calendar')
     console.log(calendarJSON)
@@ -216,7 +219,6 @@ async function helper(a,b,c){
   return await TMS_Parser(a,b,c)
 }
 
-blackboard_calendar()
 
 app.listen(2000)
 
