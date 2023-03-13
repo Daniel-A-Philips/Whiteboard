@@ -17,6 +17,9 @@ const express = require('express')
 const { parse } = require('path')
 
 let JSON_TO_SEND= '{'
+var testData = ''
+
+
 // Purpose:
 //  A function that takes in a .ics url, downloads it parses the information
 // Inputs:
@@ -111,7 +114,9 @@ async function readableOutput(json){
 //  February 28th
 //  Daniel Rochon 
 function getCourseInfo(pasted_input){
-  let lines = pasted_input.split('\n')
+  //console.log(pasted_input)
+  pasted_input = pasted_input.toString()
+  let lines = (pasted_input.split('\"')[1]).toString().split('\\n')
   let user_crn = []
   let info = []
   let course_name = []
@@ -150,9 +155,8 @@ function getCourseInfo(pasted_input){
 //  March 2nd 2023
 //  Daniel Philips
 // Created by Daniel Rochon
-async function get_test_data(){
+async function get_test_data(data){
   try{
-    const data = await fs.promises.readFile("testInput.txt","utf-8")
     return getCourseInfo(data)
   } catch (err) {
     console.log(err)
@@ -160,13 +164,27 @@ async function get_test_data(){
   }
 }
 
-// Tester
-const url = 'https://learn.dcollege.net/webapps/calendar/calendarFeed/c2d84bf6673c402cb557f2a84ddabd87/learn.ics'
-
-//downloadAndPrintICalendar(url,true, true, false,false)
-
 const app = express()
 
+['html','js','css'].forEach(fileType => {
+  app.get(`/index.${fileType}`, (req, res) => {
+    res.sendFile(__dirname + `/public/index.${fileType}`)
+  })
+})
+
+// Program to be run when data is sent from the frontend to the backend
+app.put('/put-classes', (req,res) =>{
+  var headers = req.headers['user-blackboard-copied']
+  get_test_data(headers).then( foo => {
+    testData = foo
+    console.log(testData)
+    for(var i = 0; i < testData[1].length; i++){
+      var call = helper(testData[0][i],testData[1][i],testData[4])
+    }
+  }).then(write_get_classes)
+  //testData = get_test_data(headers)
+  
+})
 
 // Purpose:
 //  A function that runs and downloads the blackboard calendar
@@ -177,12 +195,12 @@ const app = express()
 //  Daniel Philips
 async function blackboard_calendar(){
   console.log('Running blackboard_calendar')
+  var url = ''
   const calendarJSON = await downloadAndPrintICalendar(url,false, false, true,false)
   app.get('/blackboard-calendar/', (req,res) => {
     console.log('blackboard-calendar')
     console.log(calendarJSON)
     res.send(calendarJSON)
-    //res.json({test:'a'})
   })
 }
 
@@ -199,19 +217,6 @@ async function helper(a,b,c){
 }
 
 blackboard_calendar()
-var call = ''
-get_test_data().then( data => {
-  console.log('get_test_data():')
-  console.log(data)
-  console.log('data[1]')
-  console.log(data[1])
-  test_data = data[1]
-  for(var i = 0; i < data[1].length; i++){
-    var call = helper(data[0][i],data[1][i],data[4])
-  }
-}).then(write_get_classes)
-
-
 
 app.listen(2000)
 
