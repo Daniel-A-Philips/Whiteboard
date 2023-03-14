@@ -200,7 +200,7 @@ app.put('/put-classes', (req,res) =>{
 async function blackboard_calendar(tmsurl){
   console.log('Running blackboard_calendar')
   const calendarJSON = await downloadAndPrintICalendar(tmsurl,false, false, true,false)
-  app.get('/blackboard-calendar/', (req,res) => {
+  app.get('/get-blackboard-calendar', (req,res) => {
     console.log('blackboard-calendar')
     console.log(calendarJSON)
     res.send(calendarJSON)
@@ -209,7 +209,7 @@ async function blackboard_calendar(tmsurl){
 
 async function write_get_classes(){
   console.log('Running write_get_classes')
-  app.get('/get-classes/',(req,res) => {
+  app.get('/get-classes',(req,res) => {
     JSON_TO_SEND = JSON_TO_SEND.slice(0,JSON_TO_SEND.length-1) + '}'
     res.send(JSON_TO_SEND)
   })
