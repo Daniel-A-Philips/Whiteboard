@@ -102,6 +102,7 @@ function applyDataToAssignments(assignments, classes) {
 			time = (dueDate.getHours() % 12) + (dueDate.getHours() > 12 ? "pm" : "am")
 		}
 		col.innerHTML += '<div class="due-date-entry calendar_calendar1"><span class="due-date-time">' + time + '</span> ' + assignments[key].summary + '</div>'
+		console.log('added assignment')
 	}
 }
 

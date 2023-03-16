@@ -17,7 +17,6 @@ const express = require('express')
 const { parse } = require('path')
 
 let JSON_TO_SEND= '{'
-var testData = ''
 let TMS_Link = ''
 
 // Purpose:
@@ -165,12 +164,15 @@ async function get_test_data(data){
 }
 
 const app = express()
-
 const fileTypes = ['html','js','css']
-
 fileTypes.forEach(fileType => {
   app.get(`/index.${fileType}`, (req, res) => {
-    res.sendFile(__dirname + `/public/index.${fileType}`)
+    try{
+      res.sendFile(__dirname + `/public/index.${fileType}`)
+      console.log(`sent index.${fileType}`)
+    }catch(err){
+      console.log(err)
+    }
   })
 })
 
@@ -181,10 +183,9 @@ app.put('/put-classes', (req,res) =>{
   console.log(TMS_Link)
   blackboard_calendar(TMS_Link)
   get_test_data(class_info).then( foo => {
-    testData = foo
-    console.log(testData)
-    for(var i = 0; i < testData[1].length; i++){
-      var call = helper(testData[0][i],testData[1][i],testData[4])
+    console.log(foo)
+    for(var i = 0; i < foo[1].length; i++){
+      var call = helper(foo[0][i],foo[1][i],foo[4])
     }
   }).then(write_get_classes)
   
