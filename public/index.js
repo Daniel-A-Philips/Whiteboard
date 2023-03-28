@@ -20,7 +20,7 @@ function dateFromBBString(str) {
 
 function startOfCurrentWeek() {
 	// TODO, currently hardcoded
-	return new Date("Mon Feb 27 2023")
+	return new Date("Mon Mar 13 2023")
 }
 function inWeek(weekStart, date) {
 	let startEpoch = weekStart.getTime(), dateEpoch = date.getTime()
@@ -38,6 +38,7 @@ function applyDataToPage() {
 	 	throw Exception("could not get /get-blackboard-calendar")
 	}
 	let assignments = JSON.parse(req.responseText)
+	console.log('Assignments')
 	console.log(assignments)
 	req.open("GET", "http://localhost:2000/get-classes", false)
 	req.send()
@@ -45,8 +46,8 @@ function applyDataToPage() {
 		throw Exception("could not get /get-classes")
 	}
 	let classes = JSON.parse(req.responseText)
+	console.log('Classes')
 	console.log(classes)
-
 	// hardcoded, remove when server hooked up
 	applyDataToCalendar(assignments, classes)
 	applyDataToSidebar(assignments, classes)

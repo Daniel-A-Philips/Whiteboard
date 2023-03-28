@@ -241,14 +241,13 @@ async function fetcher(jsessionid,crn,quarter){
   "method": "POST"  }).then(function (response) {
 	// The API call was successful!
 	return response.text();
-}).then(function (html) {
+  }).then(function (html) {
 	// This is the HTML from our response as a text string
-var data = TMS_HTML_CLASS_PARSER(html,crn)
-console.log(data)
+  let data = TMS_HTML_CLASS_PARSER(html,crn)
+  console.log(data)
   return class_to_json(data[1][2],data[0][0],data[0][1],data[1][3],crn,data[1][0])
-}).catch(function (err) {
-	// There was an error
-	console.warn('Something went wrong.', err);
+  }).catch(function (err) {
+	  console.warn('Error: \n', err);
 });
 }
 
@@ -256,10 +255,10 @@ function TMS_HTML_CLASS_PARSER(html, crn){
   //Split the given HTML into individual lines for parsing
   html = html.split('\n')
 
-  var line_num = 0
-  var times = []
+  let line_num = 0
+  let times = []
   // Represents the 4 other pieces of information that need to be held
-  var info4 = []
+  let info4 = []
   html.forEach(line => {
     if(line.includes('table-day-time') ){
       times[0] = html[line_num+3].split('>')[1].split('<')[0]
