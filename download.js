@@ -232,6 +232,7 @@ function sendAllClasses(class_jsons){
 
 
 async function fetcher(jsessionid,crn,quarter){
+  console.log('quarter:',quarter)
   let headers = require('./TMS_Headers.json')['headers']
   headers['cookie'] = headers['cookie'].replace('${jsessionid}',jsessionid)
   console.log(headers)
@@ -239,6 +240,7 @@ async function fetcher(jsessionid,crn,quarter){
   headers,
   "body": `term.termDesc=${quarter}&crseTitle=&crseNumb=&crn=${crn}&campus.desc=Any`,
   "method": "POST"  }).then(function (response) {
+  console.log(`term.termDesc=${quarter}&crseTitle=&crseNumb=&crn=${crn}&campus.desc=Any`,)
 	// The API call was successful!
 	return response.text();
   }).then(function (html) {
