@@ -14,7 +14,6 @@ const ical = require('ical')
 const fs = require('fs')
 const { Parser } = require('@json2csv/plainjs')
 const express = require('express')
-const { parse } = require('path')
 
 let JSON_TO_SEND= '{'
 let TMS_Link = ''
@@ -280,7 +279,7 @@ function TMS_HTML_CLASS_PARSER(html, crn){
 }
 //////////////////////////////////////////////////////////////////////////////////////////
 
-async function TMS_Parser(crn, school, quarterNumber){
+async function TMS_Parser(crn, quarterNumber){
   getTermIDS().then( output => {
     output.forEach( quarterInfo =>{
       if(quarterInfo[1].includes(quarterNumber)){
