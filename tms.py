@@ -42,15 +42,11 @@ class tms:
 
     def download_class(self, crn, quarter):
         headers = json.loads(open('./TMS_Headers.json','r').read())['headers']
-        # Replaces the holder for the session ID with the users ID
         tms_homepage = self.download_homepage()
         jsessionid = tms_homepage[0][1].split(';')[1][tms_homepage[0][1].split(';')[1].index('=')+1:tms_homepage[0][1].split(';')[1].index('?')]
+        # Replaces the holder for the session ID with the users ID
         headers['cookie'] = headers['cookie'].replace('INSERT_SESSION_ID',jsessionid)
         response = requests.post('https://termmasterschedule.drexel.edu/webtms_du/searchCourses', 
                                 headers = headers, 
                                 data=f'term.termDesc={quarter}&crseTitle=&crseNumb=&crn={crn}&campus.desc=Any')
         return self.class_page_parser(response.content.decode())
-
-a = tms()
-b = a.download_class(crn='33849',quarter='Spring+Quarter 22-23')
-print(b)
