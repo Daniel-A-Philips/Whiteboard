@@ -3,7 +3,7 @@ var currentWeekStart = startOfCurrentWeek()
 // collect user's calendar data from blackboard - done on page load
 document.getElementById("ctrl-a-input-submit").onclick = () => {
 	let req = new XMLHttpRequest()
-
+	console.log('clicked')
 	req.open("PUT", "http://localhost:2000/put-classes")
 	console.log(document.getElementById("ctrl-a-input-textarea").value)
 	req.setRequestHeader('user-blackboard-copied',JSON.stringify(encodeURIComponent(document.getElementById("ctrl-a-input-textarea").value)))
@@ -11,7 +11,7 @@ document.getElementById("ctrl-a-input-submit").onclick = () => {
 	req.send(document.getElementById("ctrl-a-input-textarea").value)
 	document.getElementById("ctrl-a-input-window").remove()
 	updateCalendar()
-	setTimeout(applyDataToPage, 1000) // wait 1 second to make sure data is properly handled by server
+	setTimeout(applyDataToPage, 4000) // wait 1 second to make sure data is properly handled by server
 }
 
 function dateFromBBString(str) {
@@ -20,7 +20,7 @@ function dateFromBBString(str) {
 
 function startOfCurrentWeek() {
 	// TODO, currently hardcoded
-	return new Date("Mon Feb 27 2023")
+	return new Date("April 3, 2023")
 }
 function inWeek(weekStart, date) {
 	let startEpoch = weekStart.getTime(), dateEpoch = date.getTime()
@@ -63,7 +63,7 @@ function applyDataToCalendar(assignments, classes) {
 }
 
 function applyDataToSidebar(assignments, classes) {
-	let beginningOfTerm = new Date("Sun Jan 8 2023") // temporarily hard coded
+	let beginningOfTerm = new Date("April 3, 2023") // temporarily hard coded
 	let currDate = new Date(beginningOfTerm)
 	let html = ""
 	for (let i = 0; i < 11; i++) {
@@ -81,13 +81,11 @@ function applyDataToSidebar(assignments, classes) {
 }
 
 function applyDataToAssignments(assignments, classes) {
-	for (key of Object.keys(assignments)) {
-		if (!key.startsWith("_blackboard.platform.gradebook2.GradableItem")) {
-			continue
-		}
-		let dueDate = dateFromBBString(assignments[key].end)
+	assignments.forEach(assignment => {
+		let dueDate = dateFromBBString(assignment[1])
 		if (!inWeek(currentWeekStart, dueDate)) {
-			continue
+			console.log('not in week')
+			return
 		}
 		let col
 		if (dueDate.getDay() == 0) {
@@ -101,9 +99,9 @@ function applyDataToAssignments(assignments, classes) {
 		} else {
 			time = (dueDate.getHours() % 12) + (dueDate.getHours() > 12 ? "pm" : "am")
 		}
-		col.innerHTML += '<div class="due-date-entry calendar_calendar1"><span class="due-date-time">' + time + '</span> ' + assignments[key].summary + '</div>'
+		col.innerHTML += '<div class="due-date-entry calendar_calendar1"><span class="due-date-time">' + time + '</span> ' + assignment[0] + '</div>'
 		console.log('added assignment')
-	}
+	});
 }
 
 

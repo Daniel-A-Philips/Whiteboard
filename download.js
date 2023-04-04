@@ -182,7 +182,6 @@ app.put('/put-classes', (req,res) =>{
   console.log(TMS_Link)
   blackboard_calendar(TMS_Link)
   get_test_data(class_info).then( foo => {
-    console.log(foo)
     for(var i = 0; i < foo[1].length; i++){
       var call = helper(foo[0][i],foo[1][i],foo[4])
     }
@@ -202,7 +201,6 @@ async function blackboard_calendar(tmsurl){
   const calendarJSON = await downloadAndPrintICalendar(tmsurl,false, false, true,false)
   app.get('/get-blackboard-calendar', (req,res) => {
     console.log('blackboard-calendar')
-    console.log(calendarJSON)
     res.send(calendarJSON)
   })
 }
@@ -234,7 +232,6 @@ async function fetcher(jsessionid,crn,quarter){
   console.log('quarter:',quarter)
   let headers = require('./TMS_Headers.json')['headers']
   headers['cookie'] = headers['cookie'].replace('${jsessionid}',jsessionid)
-  console.log(headers)
   fetch("https://termmasterschedule.drexel.edu/webtms_du/searchCourses", {  
   headers,
   "body": `term.termDesc=${quarter}&crseTitle=&crseNumb=&crn=${crn}&campus.desc=Any`,
@@ -283,7 +280,9 @@ function TMS_HTML_CLASS_PARSER(html, crn){
 async function TMS_Parser(crn, quarterNumber){
   getTermIDS().then( output => {
     output.forEach( quarterInfo =>{
+      console.log('quarterInfo:', quarterInfo)
       if(quarterInfo[1].includes(quarterNumber)){
+        console.log(quarterInfo[0].replace(' ','+'))
         return fetcher(quarterInfo[1].split(';')[1].split('=')[1].split('?')[0],crn,quarterInfo[0].replace(' ','+'))
       }
     })
@@ -306,7 +305,6 @@ function class_to_json(name, days, times, instructor, crn,type){
     parsed_times.push(daylist.indexOf(day))
   })
   let text = `\"${name} - ${type}\": {\n\"days\": \"${parsed_times}\",\n\"time\": \"${times}\",\n\"instructor\": \"${instructor}\",\n\"crn\": \"${crn}\"},` 
-  console.log(text)
   JSON_TO_SEND = JSON_TO_SEND.concat(text)
   return text
 }
