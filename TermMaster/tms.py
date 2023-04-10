@@ -1,12 +1,13 @@
 import json
 import requests
 from icecream import ic
+
 class tms:
     
     def __init__(self):
         self.terms = []
-        self.download_homepage()
-        self.headers = json.loads(open('./TMS_Headers.json','r').read())['headers']
+        self.download_homepage()        
+        self.headers = json.loads(open('./TermMaster/TMS_Headers.json','r').read())['headers']
 
 
     def get_terms_from_body(self, body):

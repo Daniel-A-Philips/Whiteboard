@@ -1,16 +1,23 @@
-from Blackboard.blackboard_calendar import blackboard_calendar
-from TermMaster.tms import tms
-from Parser.parse import input_parser, output_parser
-from flask import Flask, request, render_template_string, render_template, jsonify
+import sys
+import os
+
+directories = ['Blackboard', 'Parser','TermMaster']
+__working_directory = os.getcwd()
+for path in directories:
+    sys.path.insert(1, __working_directory + '/' + path)
+    
+from blackboard_calendar import blackboard_calendar
+from tms import tms
+from parse import input_parser, output_parser
+from flask import Flask, request, render_template_string, render_template
 from icecream import ic
 import json
 import datetime
-
 class_info = []
 calendar_link = ''
 
 info = ''
-app = Flask(__name__, template_folder='./Flask Resources/template',static_folder='./Flask Resources/static')
+app = Flask(__name__, template_folder= __working_directory + '/Flask Resources/template',static_folder= __working_directory + '/Flask Resources/static')
 in_parse = input_parser()
 out_parse = output_parser()
 termmaster = tms()

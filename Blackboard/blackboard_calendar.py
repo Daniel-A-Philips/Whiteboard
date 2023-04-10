@@ -4,7 +4,6 @@ import datetime
 import csv
 from ics import Calendar
 
-
 class blackboard_calendar:
 
     def __init__(self):

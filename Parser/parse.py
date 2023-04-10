@@ -1,5 +1,6 @@
 import urllib.parse
 from icecream import ic
+
 class input_parser:
 
     def __init__(self):
@@ -14,7 +15,7 @@ class input_parser:
     def class_information(self, unparsed):
         all_info = urllib.parse.unquote(unparsed).split('\n')
         for line in all_info:
-            if '-' in line and '.' in line and ':' in line:
+            if 'Due date:' not in line and '-' in line and '.' in line and ':' in line :
                 self.classes.append(line)
         ic(self.classes)
         self.split_class_information()

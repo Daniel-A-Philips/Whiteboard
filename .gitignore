@@ -1,3 +1,5 @@
 .dsstore
 $GIT_DIR/download_test/Calendar.json
 $GIT_DIR/download_test/Readable.csv
+
+__pycache__/
