@@ -10,6 +10,7 @@ class blackboard_calendar:
     def __init__(self):
         print('** created blackboard_calendar instance **')
         self.wanted_as_table = False
+        self.wanted_as_csv = False
 
     # function to sort the event list by due date
     def sort(self, event_list):
@@ -42,7 +43,8 @@ class blackboard_calendar:
 
     # A function that given a .ics url downloads all events within the character
     # 'as_table' refers to whether the data should be returned raw or parsed into a table
-    def download_calendar(self, url, as_table):
+    def download_calendar(self, url, as_table, as_csv=False):
+        self.wanted_as_csv = as_csv
         self.wanted_as_table = as_table
         # Download the calendar from the URL
         r = requests.get(url)
@@ -50,11 +52,24 @@ class blackboard_calendar:
         calendar = Calendar(r.text)
         # Convert the calendar into an array
         events = [event for event in calendar.events]
-        return self.parse_to_table(events)
+        parsed = self.parse_to_table(events)
+        self.__save_as_csv(parsed)
+        return parsed
+
+    def __save_as_csv(self, parsed):
+        with open('assignments.csv', 'w+') as fp:
+            writer = csv.writer(fp, delimiter=',')
+            if not self.wanted_as_table:
+                 writer.writerow(['Assignment Name','Due Date','Summary'])
+            for row in parsed:
+                writer.writerow(row)
 
     def pretty_print(self, data):
         return tabulate(data,headers='firstrow',tablefmt='fancy_grid')
 
     def test(self):
-        event_info = self.download_calendar('https://learn.dcollege.net/webapps/calendar/calendarFeed/c2d84bf6673c402cb557f2a84ddabd87/learn.ics',False)
-        print(event_info)
+        event_info = self.download_calendar('https://learn.dcollege.net/webapps/calendar/calendarFeed/c2d84bf6673c402cb557f2a84ddabd87/learn.ics',False, True)
+        print(self.pretty_print(event_info))
+
+b = blackboard_calendar()
+b.test()

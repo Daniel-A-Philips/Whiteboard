@@ -1,6 +1,6 @@
-from blackboard_calendar import blackboard_calendar
-from tms import tms
-from parse import input_parser, output_parser
+from Blackboard.blackboard_calendar import blackboard_calendar
+from TermMaster.tms import tms
+from Parser.parse import input_parser, output_parser
 from flask import Flask, request, render_template_string, render_template, jsonify
 from icecream import ic
 import json
@@ -10,7 +10,7 @@ class_info = []
 calendar_link = ''
 
 info = ''
-app = Flask(__name__, template_folder='template',static_folder='static')
+app = Flask(__name__, template_folder='./Flask Resources/template',static_folder='./Flask Resources/static')
 in_parse = input_parser()
 out_parse = output_parser()
 termmaster = tms()
