@@ -50,9 +50,8 @@ function applyDataToPage() {
 	applyDataToAssignments(assignments, classes)
 }
 
-
 function applyDataToCalendar(assignments, classes) {
-		// Get the calendar columns
+	// Get the calendar columns
 	const col0 = document.querySelector('.calendar_col[style="grid-column:3"]');
 	const col1 = document.querySelector('.calendar_col[style="grid-column:4"]');
 	const col2 = document.querySelector('.calendar_col[style="grid-column:5"]');
@@ -62,41 +61,37 @@ function applyDataToCalendar(assignments, classes) {
 	const col6 = document.querySelector('.calendar_col.calendar_weekend[style="grid-column:9"]');
 
 	for (let className in classes) {
-	  const classInfo = classes[className];
+		const classInfo = classes[className];
 
-	  classInfo.days.forEach(day => {
-	    let column;
-	    if (day === 0) {
-	      column = col0;
-	    } else if (day === 1) {
-	      column = col1;
-	    } else if (day === 2) {
-	      column = col2;
-	    } else if (day === 3) {
-	      column = col3;
-	    } else if (day === 4) {
-	      column = col4;
-	    } else if (day === 5) {
-	      column = col5;
-	    } else if (day === 6) {
-	      column = col6;
-	    }
+		classInfo.days.forEach(day => {
+			let column;
+			if (day === 0) {
+				column = col0;
+			} else if (day === 1) {
+				column = col1;
+			} else if (day === 2) {
+				column = col2;
+			} else if (day === 3) {
+				column = col3;
+			} else if (day === 4) {
+				column = col4;
+			} else if (day === 5) {
+				column = col5;
+			} else if (day === 6) {
+				column = col6;
+			}
 
-	    // Create the HTML element for the class and append it to the appropriate column
-	    if (column) {
-	      const classElement = document.createElement('div');
-	      classElement.classList.add('class');
-	      classElement.innerHTML = className + '<br>' + classInfo.instructor;
+			// Create the HTML element for the class and append it to the appropriate column
+			if (column) {
+				const classElement = document.createElement('div');
+				classElement.classList.add('class');
+				classElement.innerHTML = className + '<br>' + classInfo.instructor;
 
-
-	      column.appendChild(classElement);
-	    }
-	  });
-
+				column.appendChild(classElement);
+			}
+		});
 	}
-
 }
-
 
 function applyDataToSidebar(assignments, classes) {
 	let beginningOfTerm = new Date("Sun Jan 8 2023") // temporarily hard coded
@@ -141,25 +136,26 @@ function applyDataToAssignments(assignments, classes) {
 	}
 }
 
-
-//add auto dates to the calendar instead of manuel input
+// add auto dates to the calendar instead of manuel input
 
 function updateCalendar() {
-	const daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+	const daysOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 	const today = new Date();
 	const todayIndex = today.getDay();
-  
+
 	for (let i = 1; i < 8; i++) {
-	  const date = new Date(today);
-	  date.setDate(date.getDate() + i - todayIndex);
-	  const dayOfWeek = daysOfWeek[date.getDay()];
-	  const dayOfMonth = date.getDate();
-	  const elementId = "day" + i;
-	  const element = document.getElementById(elementId);
-	  element.textContent = `${dayOfWeek}, ${dayOfMonth}`;
-		//helps find current date for bold
-	  if(i === todayIndex + 0) {
-		element.classList.add("current-date");
-	  }
+		const date = new Date(today);
+		date.setDate(date.getDate() + i - todayIndex);
+		const dayOfWeek = daysOfWeek[date.getDay()];
+		const dayOfMonth = date.getDate();
+		const elementId = "day" + i;
+		const element = document.getElementById(elementId);
+		element.textContent = `${dayOfWeek}, ${dayOfMonth}`;
+		// helps find current date for bold
+		if(i === todayIndex + 0) {
+			element.classList.add("current-date");
+		}
 	}
-  }
+}
+
+applyDataToPage();
