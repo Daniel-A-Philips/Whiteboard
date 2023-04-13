@@ -1,4 +1,5 @@
-var currentWeekStart = startOfCurrentWeek()
+var displayedWeekStart = startOfCurrentWeek();
+const beginningOfTerm = new Date("Mon Apr 3 2023");
 
 // collect user's calendar data from blackboard - done on page load
 document.getElementById("ctrl-a-input-submit").onclick = () => {
@@ -11,12 +12,19 @@ document.getElementById("ctrl-a-input-submit").onclick = () => {
 }
 
 function dateFromBBString(str) {
-	return new Date(Date.parse(str))
+	// return new Date(Date.parse(str));
+	// temp while we don't have data from this term
+	return new Date(Date.parse(str) + (1000 * 3600 * 24 * 7 * 12));
 }
 
 function startOfCurrentWeek() {
-	// TODO, currently hardcoded
-	return new Date("Mon Feb 27 2023")
+	let now = new Date();
+	let monday = new Date(now.getTime() - (1000 * 3600 * 24 * (now.getDay() - 1)));
+	monday.setHours(0);
+	monday.setMinutes(0);
+	monday.setSeconds(0);
+	monday.setMilliseconds(0);
+	return monday
 }
 function inWeek(weekStart, date) {
 	let startEpoch = weekStart.getTime(), dateEpoch = date.getTime()
@@ -51,35 +59,15 @@ function applyDataToPage() {
 }
 
 function applyDataToCalendar(assignments, classes) {
-	// Get the calendar columns
-	const col0 = document.querySelector('.calendar_col[style="grid-column:3"]');
-	const col1 = document.querySelector('.calendar_col[style="grid-column:4"]');
-	const col2 = document.querySelector('.calendar_col[style="grid-column:5"]');
-	const col3 = document.querySelector('.calendar_col[style="grid-column:6"]');
-	const col4 = document.querySelector('.calendar_col[style="grid-column:7"]');
-	const col5 = document.querySelector('.calendar_col.calendar_weekend[style="grid-column:8"]');
-	const col6 = document.querySelector('.calendar_col.calendar_weekend[style="grid-column:9"]');
+	for (let i = 0; i < 7; i++) {
+		document.querySelector('.calendar_col[style="grid-column:' + (i + 3) + '"]').innerHTML = "";
+	}
 
 	for (let className in classes) {
 		const classInfo = classes[className];
 
 		classInfo.days.forEach(day => {
-			let column;
-			if (day === 0) {
-				column = col0;
-			} else if (day === 1) {
-				column = col1;
-			} else if (day === 2) {
-				column = col2;
-			} else if (day === 3) {
-				column = col3;
-			} else if (day === 4) {
-				column = col4;
-			} else if (day === 5) {
-				column = col5;
-			} else if (day === 6) {
-				column = col6;
-			}
+			let column = document.querySelector('.calendar_col[style="grid-column:' + (day + 3) + '"]');
 
 			// Create the HTML element for the class and append it to the appropriate column
 			if (column) {
@@ -94,14 +82,13 @@ function applyDataToCalendar(assignments, classes) {
 }
 
 function applyDataToSidebar(assignments, classes) {
-	let beginningOfTerm = new Date("Sun Jan 8 2023") // temporarily hard coded
 	let currDate = new Date(beginningOfTerm)
 	let html = ""
 	for (let i = 0; i < 11; i++) {
-		html += '<tr><td class="ltc-weeknum">' + (i == 10 ? "F" : i + 1) + "</td>"
+		html += '<tr onclick="setDisplayedWeek(' + i + ');"><td class="ltc-weeknum">' + (i == 10 ? "F" : i + 1) + "</td>"
 		for (let j = 0; j < 7; j++) {
-			currDate.setDate(currDate.getDate() + 1)
 			html += "<td>" + currDate.getDate() + "</td>"
+			currDate.setDate(currDate.getDate() + 1)
 		}
 		if (i == 0 || currDate.getDate() <= 7) {
 			html += '<td class="ltc-month">' + ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"][currDate.getMonth()] + '</td>'
@@ -111,13 +98,21 @@ function applyDataToSidebar(assignments, classes) {
 	document.getElementById("ltc-table").innerHTML = html
 }
 
+function setDisplayedWeek(week) {
+	displayedWeekStart = new Date(beginningOfTerm.getTime() + (1000 * 3600 * 24 * 7 * week));
+	applyDataToPage();
+}
+
 function applyDataToAssignments(assignments, classes) {
+	for (let i = 0; i < 7; i++) {
+		document.getElementById("due-dates-grid").children[i].innerHTML = "";
+	}
 	for (key of Object.keys(assignments)) {
 		if (!key.startsWith("_blackboard.platform.gradebook2.GradableItem")) {
 			continue
 		}
 		let dueDate = dateFromBBString(assignments[key].end)
-		if (!inWeek(currentWeekStart, dueDate)) {
+		if (!inWeek(displayedWeekStart, dueDate)) {
 			continue
 		}
 		let col
