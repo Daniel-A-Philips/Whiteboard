@@ -39,6 +39,10 @@ body, html {
 	border-right: 3px solid #dadce0;
 }
 
+#logo {
+	width: 100%;
+}
+
 #long-term-calendar {
 	margin: 0 auto;
 	width: max-content;
