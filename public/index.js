@@ -75,6 +75,11 @@ function applyDataToCalendar(assignments, classes) {
 				const classElement = document.createElement('div');
 				classElement.classList.add('class');
 				classElement.innerHTML = className + '<br>' + classInfo.instructor;
+				column.appendChild(classElement);
+			}
+		});
+	}
+}
 
 function calendartime() {
 	const myDiv = document.querySelector(".calendar_current-time");
