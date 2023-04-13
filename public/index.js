@@ -1,5 +1,4 @@
-var displayedWeekStart = startOfCurrentWeek();
-const beginningOfTerm = new Date("Mon Apr 3 2023");
+var currentWeekStart = startOfCurrentWeek()
 
 // collect user's calendar data from blackboard - done on page load
 document.getElementById("ctrl-a-input-submit").onclick = () => {
@@ -8,6 +7,7 @@ document.getElementById("ctrl-a-input-submit").onclick = () => {
 	req.send(document.getElementById("ctrl-a-input-textarea").value)
 	document.getElementById("ctrl-a-input-window").remove()
 	updateCalendar()
+	calendartime()
 	setTimeout(applyDataToPage, 1000) // wait 1 second to make sure data is properly handled by server
 }
 
@@ -59,26 +59,93 @@ function applyDataToPage() {
 }
 
 function applyDataToCalendar(assignments, classes) {
-	for (let i = 0; i < 7; i++) {
-		document.querySelector('.calendar_col[style="grid-column:' + (i + 3) + '"]').innerHTML = "";
-	}
+	// Get the calendar columns
+	const col0 = document.querySelector('.calendar_col[style="grid-column:3"]');
+	const col1 = document.querySelector('.calendar_col[style="grid-column:4"]');
+	const col2 = document.querySelector('.calendar_col[style="grid-column:5"]');
+	const col3 = document.querySelector('.calendar_col[style="grid-column:6"]');
+	const col4 = document.querySelector('.calendar_col[style="grid-column:7"]');
+	const col5 = document.querySelector('.calendar_col.calendar_weekend[style="grid-column:8"]');
+	const col6 = document.querySelector('.calendar_col.calendar_weekend[style="grid-column:9"]');
 
 	for (let className in classes) {
 		const classInfo = classes[className];
+	  const classInfo = classes[className];
 
-		classInfo.days.forEach(day => {
-			let column = document.querySelector('.calendar_col[style="grid-column:' + (day + 3) + '"]');
+	  classInfo.days.forEach(day => {
+	    let column;
+	    if (day === 0) {
+	      column = col0;
+	    } else if (day === 1) {
+	      column = col1;
+	    } else if (day === 2) {
+	      column = col2;
+	    } else if (day === 3) {
+	      column = col3;
+	    } else if (day === 4) {
+	      column = col4;
+	    } else if (day === 5) {
+	      column = col5;
+	    } else if (day === 6) {
+	      column = col6;
+	    }
 
-			// Create the HTML element for the class and append it to the appropriate column
-			if (column) {
-				const classElement = document.createElement('div');
-				classElement.classList.add('class');
-				classElement.innerHTML = className + '<br>' + classInfo.instructor;
+	    // Create the HTML element for the class and append it to the appropriate column
+	    if (column) {
+	      const classElement = document.createElement('div');
+	      classElement.classList.add('class');
+	      classElement.innerHTML = className + '<br>' + classInfo.instructor;
 
-				column.appendChild(classElement);
-			}
-		});
+
+	      column.appendChild(classElement);
+	    }
+	  });
+
 	}
+
+}
+
+function calendartime() {
+	const myDiv = document.querySelector(".calendar_current-time");
+  
+	myDiv.classList.add("my-class");
+  
+	const currentTime = new Date().getTime();
+	const currentDateTime = new Date(currentTime);
+	const minutes = currentDateTime.getHours() * 60 + currentDateTime.getMinutes();
+	const pixelsToMove = Math.floor(minutes / 10) * 8;
+	const dayOfWeek = currentDateTime.getDay();
+  
+	// Assign a grid column to the element based on the day of the week
+	switch (dayOfWeek) {
+	  case 0:
+		myDiv.style.gridColumn = "2";
+		break;
+	  case 1:
+		myDiv.style.gridColumn = "3";
+		break;
+	  case 2:
+		myDiv.style.gridColumn = "4";
+		break;
+	  case 3:
+		myDiv.style.gridColumn = "5";
+		break;
+	  case 4:
+		myDiv.style.gridColumn = "6";
+		break;
+	  case 5:
+		myDiv.style.gridColumn = "7";
+		break;
+	  case 6:
+		myDiv.style.gridColumn = "8";
+		break;
+	  default:
+		break;
+	}
+  
+	myDiv.style.top = `${pixelsToMove}px`;
+	myDiv.style.left = 0;
+	myDiv.style.position = "absolute";
 }
 
 function applyDataToSidebar(assignments, classes) {
