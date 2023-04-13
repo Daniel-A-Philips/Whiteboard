@@ -7,6 +7,7 @@ document.getElementById("ctrl-a-input-submit").onclick = () => {
 	req.send(document.getElementById("ctrl-a-input-textarea").value)
 	document.getElementById("ctrl-a-input-window").remove()
 	updateCalendar()
+	calendartime()
 	setTimeout(applyDataToPage, 1000) // wait 1 second to make sure data is properly handled by server
 }
 
@@ -52,7 +53,7 @@ function applyDataToPage() {
 
 
 function applyDataToCalendar(assignments, classes) {
-		// Get the calendar columns
+	// Get the calendar columns
 	const col0 = document.querySelector('.calendar_col[style="grid-column:3"]');
 	const col1 = document.querySelector('.calendar_col[style="grid-column:4"]');
 	const col2 = document.querySelector('.calendar_col[style="grid-column:5"]');
@@ -97,6 +98,48 @@ function applyDataToCalendar(assignments, classes) {
 
 }
 
+function calendartime() {
+	const myDiv = document.querySelector(".calendar_current-time");
+  
+	myDiv.classList.add("my-class");
+  
+	const currentTime = new Date().getTime();
+	const currentDateTime = new Date(currentTime);
+	const minutes = currentDateTime.getHours() * 60 + currentDateTime.getMinutes();
+	const pixelsToMove = Math.floor(minutes / 10) * 8;
+	const dayOfWeek = currentDateTime.getDay();
+  
+	// Assign a grid column to the element based on the day of the week
+	switch (dayOfWeek) {
+	  case 0:
+		myDiv.style.gridColumn = "2";
+		break;
+	  case 1:
+		myDiv.style.gridColumn = "3";
+		break;
+	  case 2:
+		myDiv.style.gridColumn = "4";
+		break;
+	  case 3:
+		myDiv.style.gridColumn = "5";
+		break;
+	  case 4:
+		myDiv.style.gridColumn = "6";
+		break;
+	  case 5:
+		myDiv.style.gridColumn = "7";
+		break;
+	  case 6:
+		myDiv.style.gridColumn = "8";
+		break;
+	  default:
+		break;
+	}
+  
+	myDiv.style.top = `${pixelsToMove}px`;
+	myDiv.style.left = 0;
+	myDiv.style.position = "absolute";
+}
 
 function applyDataToSidebar(assignments, classes) {
 	let beginningOfTerm = new Date("Sun Jan 8 2023") // temporarily hard coded
@@ -150,16 +193,16 @@ function updateCalendar() {
 	const todayIndex = today.getDay();
   
 	for (let i = 1; i < 8; i++) {
-	  const date = new Date(today);
-	  date.setDate(date.getDate() + i - todayIndex);
-	  const dayOfWeek = daysOfWeek[date.getDay()];
-	  const dayOfMonth = date.getDate();
-	  const elementId = "day" + i;
-	  const element = document.getElementById(elementId);
-	  element.textContent = `${dayOfWeek}, ${dayOfMonth}`;
+		const date = new Date(today);
+		date.setDate(date.getDate() + i - todayIndex);
+		const dayOfWeek = daysOfWeek[date.getDay()];
+		const dayOfMonth = date.getDate();
+		const elementId = "day" + i;
+		const element = document.getElementById(elementId);
+		element.textContent = `${dayOfWeek}, ${dayOfMonth}`;
 		//helps find current date for bold
-	  if(i === todayIndex + 0) {
-		element.classList.add("current-date");
-	  }
+		if(i === todayIndex + 0) {
+			element.classList.add("current-date");
+		}
 	}
   }
