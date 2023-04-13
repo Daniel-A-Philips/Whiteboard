@@ -1,4 +1,5 @@
-var currentWeekStart = startOfCurrentWeek()
+var displayedWeekStart = startOfCurrentWeek();
+const beginningOfTerm = new Date("Mon Apr 3 2023");
 
 // collect user's calendar data from blackboard - done on page load
 document.getElementById("ctrl-a-input-submit").onclick = () => {
