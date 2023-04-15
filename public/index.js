@@ -125,12 +125,41 @@ function calendartime() {
 }
 
 function applyDataToSidebar(assignments, classes) {
+	let dateCounts = {}
+	for (key of Object.keys(assignments)) {
+		if (key.startsWith("_blackboard.platform.gradebook2.GradableItem")) {
+			let dateString = dateFromBBString(assignments[key].end).toDateString()
+			if (dateString in dateCounts) {
+				dateCounts[dateString] += 1
+			} else {
+				dateCounts[dateString] = 1
+			}
+		}
+	}
+
 	let currDate = new Date(beginningOfTerm)
 	let html = ""
 	for (let i = 0; i < 11; i++) {
 		html += '<tr onclick="setDisplayedWeek(' + i + ');"><td class="ltc-weeknum">' + (i == 10 ? "F" : i + 1) + "</td>"
 		for (let j = 0; j < 7; j++) {
-			html += "<td>" + currDate.getDate() + "</td>"
+			let numAssignments = dateCounts[currDate.toDateString()]
+			switch (numAssignments) {
+				case undefined:
+					html += "<td>"
+					break
+				case 1:
+				case 2:
+					html += '<td class="ltc-lowprio">'
+					break
+				case 3:
+				case 4:
+					html += '<td class="ltc-medprio">'
+					break
+				default:
+					html += '<td class="ltc-highprio">'
+					break
+			}
+			html += currDate.getDate() + "</td>"
 			currDate.setDate(currDate.getDate() + 1)
 		}
 		if (i == 0 || currDate.getDate() <= 7) {
