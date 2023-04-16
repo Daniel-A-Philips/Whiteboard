@@ -9,10 +9,16 @@ class input_parser:
         self.link = []
 
     def blackboard_link(self, unparsed):
+        f = open('./Information/link.txt', 'w')
+        f.write(unparsed)
+        f.close()
         self.link = urllib.parse.unquote(unparsed.replace('\"',''))
         return self.link
 
     def class_information(self, unparsed):
+        f = open('./Information/class_info.json', 'w')
+        f.write(unparsed)
+        f.close
         all_info = urllib.parse.unquote(unparsed).split('\n')
         for line in all_info:
             if 'Due date:' not in line and '-' in line and '.' in line and ':' in line :
