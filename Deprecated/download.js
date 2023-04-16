@@ -14,9 +14,12 @@ const ical = require('ical')
 const fs = require('fs')
 const { Parser } = require('@json2csv/plainjs')
 const express = require('express')
-const { parse } = require('path')
 
 let JSON_TO_SEND= '{'
+<<<<<<< HEAD:download.js
+=======
+let TMS_Link = ''
+>>>>>>> Python-Backend:Deprecated/download.js
 
 // Purpose:
 //  A function that takes in a .ics url, downloads it parses the information
@@ -112,6 +115,8 @@ async function readableOutput(json){
 //  February 28th
 //  Daniel Rochon 
 function getCourseInfo(pasted_input){
+  //console.log(pasted_input)
+  pasted_input = pasted_input.toString()
   let lines = pasted_input.split('\n')
   let user_crn = []
   let info = []
@@ -151,9 +156,8 @@ function getCourseInfo(pasted_input){
 //  March 2nd 2023
 //  Daniel Philips
 // Created by Daniel Rochon
-async function get_test_data(){
+async function get_test_data(data){
   try{
-    const data = await fs.promises.readFile("testInput.txt","utf-8")
     return getCourseInfo(data)
   } catch (err) {
     console.log(err)
@@ -161,13 +165,32 @@ async function get_test_data(){
   }
 }
 
-// Tester
-const url = 'https://learn.dcollege.net/webapps/calendar/calendarFeed/c2d84bf6673c402cb557f2a84ddabd87/learn.ics'
-
-//downloadAndPrintICalendar(url,true, true, false,false)
-
 const app = express()
+const fileTypes = ['html','js','css']
+fileTypes.forEach(fileType => {
+  app.get(`/index.${fileType}`, (req, res) => {
+    try{
+      res.sendFile(__dirname + `/public/index.${fileType}`)
+      console.log(`sent index.${fileType}`)
+    }catch(err){
+      console.log(err)
+    }
+  })
+})
 
+// Program to be run when data is sent from the frontend to the backend
+app.put('/put-classes', (req,res) =>{
+  let class_info = decodeURIComponent(req.headers['user-blackboard-copied'])
+  TMS_Link = decodeURIComponent(req.headers['user-blackboard-calendar-link']).toString().replaceAll('"','')
+  console.log(TMS_Link)
+  blackboard_calendar(TMS_Link)
+  get_test_data(class_info).then( foo => {
+    for(var i = 0; i < foo[1].length; i++){
+      var call = helper(foo[0][i],foo[1][i],foo[4])
+    }
+  }).then(write_get_classes)
+  
+})
 
 // Purpose:
 //  A function that runs and downloads the blackboard calendar
@@ -176,20 +199,18 @@ const app = express()
 // Last edited:
 //  March 2nd 2023
 //  Daniel Philips
-async function blackboard_calendar(){
+async function blackboard_calendar(tmsurl){
   console.log('Running blackboard_calendar')
-  const calendarJSON = await downloadAndPrintICalendar(url,false, false, true,false)
-  app.get('/blackboard-calendar/', (req,res) => {
+  const calendarJSON = await downloadAndPrintICalendar(tmsurl,false, false, true,false)
+  app.get('/get-blackboard-calendar', (req,res) => {
     console.log('blackboard-calendar')
-    console.log(calendarJSON)
     res.send(calendarJSON)
-    //res.json({test:'a'})
   })
 }
 
 async function write_get_classes(){
   console.log('Running write_get_classes')
-  app.get('/get-classes/',(req,res) => {
+  app.get('/get-classes',(req,res) => {
     JSON_TO_SEND = JSON_TO_SEND.slice(0,JSON_TO_SEND.length-1) + '}'
     res.send(JSON_TO_SEND)
   })
@@ -198,20 +219,6 @@ async function write_get_classes(){
 async function helper(a,b,c){
   return await TMS_Parser(a,b,c)
 }
-
-blackboard_calendar()
-var call = ''
-get_test_data().then( data => {
-  console.log('get_test_data():')
-  console.log(data)
-  console.log('data[1]')
-  console.log(data[1])
-  test_data = data[1]
-  for(var i = 0; i < data[1].length; i++){
-    var call = helper(data[0][i],data[1][i],data[4])
-  }
-}).then(write_get_classes)
-
 
 
 app.listen(2000)
@@ -225,13 +232,14 @@ function sendAllClasses(class_jsons){
 
 
 async function fetcher(jsessionid,crn,quarter){
+  console.log('quarter:',quarter)
   let headers = require('./TMS_Headers.json')['headers']
   headers['cookie'] = headers['cookie'].replace('${jsessionid}',jsessionid)
-  console.log(headers)
   fetch("https://termmasterschedule.drexel.edu/webtms_du/searchCourses", {  
   headers,
   "body": `term.termDesc=${quarter}&crseTitle=&crseNumb=&crn=${crn}&campus.desc=Any`,
   "method": "POST"  }).then(function (response) {
+  console.log(`term.termDesc=${quarter}&crseTitle=&crseNumb=&crn=${crn}&campus.desc=Any`,)
 	// The API call was successful!
 	return response.text();
 }).then(function (html) {
@@ -272,10 +280,12 @@ function TMS_HTML_CLASS_PARSER(html, crn){
 }
 //////////////////////////////////////////////////////////////////////////////////////////
 
-async function TMS_Parser(crn, school, quarterNumber){
+async function TMS_Parser(crn, quarterNumber){
   getTermIDS().then( output => {
     output.forEach( quarterInfo =>{
+      console.log('quarterInfo:', quarterInfo)
       if(quarterInfo[1].includes(quarterNumber)){
+        console.log(quarterInfo[0].replace(' ','+'))
         return fetcher(quarterInfo[1].split(';')[1].split('=')[1].split('?')[0],crn,quarterInfo[0].replace(' ','+'))
       }
     })
@@ -298,7 +308,6 @@ function class_to_json(name, days, times, instructor, crn,type){
     parsed_times.push(daylist.indexOf(day))
   })
   let text = `\"${name} - ${type}\": {\n\"days\": \"${parsed_times}\",\n\"time\": \"${times}\",\n\"instructor\": \"${instructor}\",\n\"crn\": \"${crn}\"},` 
-  console.log(text)
   JSON_TO_SEND = JSON_TO_SEND.concat(text)
   return text
 }

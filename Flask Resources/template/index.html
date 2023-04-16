@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link href="/static/index.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+	<section id="ctrl-a-input-window">
+		<h2>Enter Class Schedule</h2>
+		<p>Please open BlackBoard, go to the Calendar page, click the gear icon in the top right corner, then select all (ctrl+A or cmd+A) and copy (ctrl+C or cmd+C), and then paste (ctrl+V or cmd+V) below.</p>
+		<textarea id="ctrl-a-input-textarea"></textarea>
+		<p>Then, click the three dots in the top corner, click "Share Calendar", and copy paste the link they give into the box below.</p>
+		<input id="calendar-link-input" type="text" />
+		<br/>
+		<button id="ctrl-a-input-submit">Submit</button>
+	</section>
+	<section id="side-bar">
+		<div id="long-term-calendar">
+			<h4>Winter Term</h4>
+			<table id="ltc-table"></table>
+		</div>
+		<div id="class-filters">
+			<h4>Class Filters</h4>
+			<div><input type="checkbox" checked><span>MATH 122</span></div>
+			<div><input type="checkbox" checked><span>CI 102</span></div>
+			<div><input type="checkbox" checked><span>PHYS 101</span></div>
+			<div><input type="checkbox" checked><span>ENGL 102</span></div>
+		</div>
+	</section>
+	<section id="calendar">
+		<div class="calendar_container">
+				<div class="calendar_days">
+				<div class="calendar_filler"></div>
+				<div class="calendar_filler"></div>
+				<div class="calendar_day"><p id="day1"></p></div>
+				<div class="calendar_day"><p id="day2"></p></div>
+				<div class="calendar_day"><p id="day3"></p></div>
+				<div class="calendar_day"><p id="day4"></p></div>
+				<div class="calendar_day"><p id="day5"></p></div>
+				<div class="calendar_day"><p id="day6"></p></div>
+				<div class="calendar_day"><p id="day7"></p></div>
+			</div>
+			<div class="calendar_content">
+			<div class="calendar_time" style="grid-row:1">1am</div>
+			<div class="calendar_time" style="grid-row:2">2am</div>
+			<div class="calendar_time" style="grid-row:3">3am</div>
+			<div class="calendar_time" style="grid-row:4">4am</div>
+			<div class="calendar_time" style="grid-row:5">5am</div>
+			<div class="calendar_time" style="grid-row:6">6am</div>
+			<div class="calendar_time" style="grid-row:7">7am</div>
+			<div class="calendar_time" style="grid-row:8">8am</div>
+			<div class="calendar_time" style="grid-row:9">9am</div>
+			<div class="calendar_time" style="grid-row:10">10am</div>
+			<div class="calendar_time" style="grid-row:11">11am</div>
+			<div class="calendar_time" style="grid-row:12">12pm</div>
+			<div class="calendar_time" style="grid-row:13">1pm</div>
+			<div class="calendar_time" style="grid-row:14">2pm</div>
+			<div class="calendar_time" style="grid-row:15">3pm</div>
+			<div class="calendar_time" style="grid-row:16">4pm</div>
+			<div class="calendar_time" style="grid-row:17">5pm</div>
+			<div class="calendar_time" style="grid-row:18">6pm</div>
+			<div class="calendar_time" style="grid-row:19">7pm</div>
+			<div class="calendar_time" style="grid-row:20">8pm</div>
+			<div class="calendar_time" style="grid-row:21">9pm</div>
+			<div class="calendar_time" style="grid-row:22">10pm</div>
+			<div class="calendar_time" style="grid-row:23">11pm</div>
+			<div class="calendar_time" style="grid-row:24">12pm</div>
+			<div class="calendar_filler-col"></div>
+			<div class="calendar_col" style="grid-column:3"></div>
+			<div class="calendar_col" style="grid-column:4"></div>
+			<div class="calendar_col" style="grid-column:5"></div>
+			<div class="calendar_col" style="grid-column:6"></div>
+			<div class="calendar_col" style="grid-column:7"></div>
+			<div class="calendar_col calendar_weekend" style="grid-column:8"></div>
+			<div class="calendar_col calendar_weekend" style="grid-column:9"></div>
+			<div class="calendar_row" style="grid-row:1"></div>
+			<div class="calendar_row" style="grid-row:2"></div>
+			<div class="calendar_row" style="grid-row:3"></div>
+			<div class="calendar_row" style="grid-row:4"></div>
+			<div class="calendar_row" style="grid-row:5"></div>
+			<div class="calendar_row" style="grid-row:6"></div>
+			<div class="calendar_row" style="grid-row:7"></div>
+			<div class="calendar_row" style="grid-row:8"></div>
+			<div class="calendar_row" style="grid-row:9"></div>
+			<div class="calendar_row" style="grid-row:10"></div>
+			<div class="calendar_row" style="grid-row:11"></div>
+			<div class="calendar_row" style="grid-row:12"></div>
+			<div class="calendar_row" style="grid-row:13"></div>
+			<div class="calendar_row" style="grid-row:14"></div>
+			<div class="calendar_row" style="grid-row:15"></div>
+			<div class="calendar_row" style="grid-row:16"></div>
+			<div class="calendar_row" style="grid-row:17"></div>
+			<div class="calendar_row" style="grid-row:18"></div>
+			<div class="calendar_row" style="grid-row:19"></div>
+			<div class="calendar_row" style="grid-row:20"></div>
+			<div class="calendar_row" style="grid-row:21"></div>
+			<div class="calendar_row" style="grid-row:22"></div>
+			<div class="calendar_row" style="grid-row:23"></div>
+			<div class="event event1 calendar_calendar1">Event 1</div>
+			<div class="event event2 calendar_calendar2">Event 2</div>
+			<div class="event event3 calendar_calendar2">Event 3</div>
+			<div class="event event4 calendar_calendar1">Event 4</div>
+			<div class="calendar_current-time">
+				<div class="calendar_circle"></div>
+			</div>
+			</div>
+		</div>
+	</section>
+	<section id="due-dates">
+		<div id="due-dates-grid">
+			<div class="due-dates-col" style="grid-column:3; border-left: 1px solid #dadce0;"></div>
+			<div class="due-dates-col" style="grid-column:4"></div>
+			<div class="due-dates-col" style="grid-column:5"></div>
+			<div class="due-dates-col" style="grid-column:6"></div>
+			<div class="due-dates-col" style="grid-column:7"></div>
+			<div class="due-dates-col" style="grid-column:8"></div>
+			<div class="due-dates-col" style="grid-column:9"></div>
+		</div>
+	</section>
+	
+	<script src="/static/index.js"></script>
+</body>
+</html>
