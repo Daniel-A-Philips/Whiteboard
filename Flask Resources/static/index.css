@@ -212,7 +212,7 @@ body {
 	font-weight: bold;
 	font-size: 12px;
 	position: relative;
-	width: 100%;
+	width: 95%;
 }
 
 .row {
@@ -223,7 +223,7 @@ body {
 .calendar_current-time {
 	border-top: 2px solid #ea4335;
 	border-top-left-radius: 2px dashed #ea4335;
-	width: 25%;
+	width: 191px;
 }
 
 
