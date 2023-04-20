@@ -47,6 +47,7 @@ class blackboard_calendar:
         self.wanted_as_table = as_table
         # Download the calendar from the URL
         r = requests.get(url)
+        print(r)
         # Parse the calendar into an ics.Calendar object
         calendar = Calendar(r.text)
         # Convert the calendar into an array
