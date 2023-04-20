@@ -1,24 +1,32 @@
 import urllib.parse
 from icecream import ic
+import os
 
 class input_parser:
 
     def __init__(self):
         print('input_parser created')
+        self.__working_directory = os.getcwd()
         self.classes = []
         self.link = []
 
-    def blackboard_link(self, unparsed):
-        f = open('./Information/link.txt', 'w')
+    def __write_link(self, unparsed):
+        f = open(f'{self.__working_directory}/Information/link.txt','w')
         f.write(unparsed)
         f.close()
+    
+    def __write_class_information(self, unparsed):
+        f = open(f'{self.__working_directory}/Information/class_info.json', 'w')
+        f.write(unparsed)
+        f.close()
+
+    def blackboard_link(self, unparsed):
+        self.__write_link(unparsed)
         self.link = urllib.parse.unquote(unparsed.replace('\"',''))
         return self.link
 
     def class_information(self, unparsed):
-        f = open('./Information/class_info.json', 'w')
-        f.write(unparsed)
-        f.close
+        self.__write_class_information(unparsed)
         all_info = urllib.parse.unquote(unparsed).split('\n')
         for line in all_info:
             if 'Due date:' not in line and '-' in line and '.' in line and ':' in line :

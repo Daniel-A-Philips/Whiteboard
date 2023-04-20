@@ -18,8 +18,8 @@ calendar_link = ''
 
 info = ''
 app = Flask(__name__, template_folder= __working_directory + '/Flask Resources/template',static_folder= __working_directory + '/Flask Resources/static')
-in_parse = input_parser()
-out_parse = output_parser()
+input_parser = input_parser()
+output_parser = output_parser()
 termmaster = tms()
 bblearn = blackboard_calendar()
 
@@ -30,11 +30,11 @@ def main_page():
 
 @app.route('/put-classes', methods=['PUT'])
 def put_classes():
-    start = datetime.datetime.now()
     global class_info
     global calendar_link
-    calendar_link = in_parse.blackboard_link(request.headers.get('user-blackboard-calendar-link'))
-    user_copied = in_parse.class_information(request.headers.get('user-blackboard-copied'))    
+    start = datetime.datetime.now()
+    calendar_link = input_parser.blackboard_link(request.headers.get('user-blackboard-calendar-link'))
+    user_copied = input_parser.class_information(request.headers.get('user-blackboard-copied'))    
     class_info = termmaster.get_all_class_info(user_copied)
     time_taken_for_put_classes = datetime.datetime.now() - start
     ic(time_taken_for_put_classes)
@@ -42,17 +42,17 @@ def put_classes():
 
 @app.route('/get-classes')
 def get_classes():
-    start = datetime.datetime.now()
     global class_info
-    parsed = out_parse.class_info_parser(class_info)
+    start = datetime.datetime.now()
+    parsed = output_parser.class_info_parser(class_info)
     time_taken_for_get_classes = datetime.datetime.now() - start
     ic(time_taken_for_get_classes)
     return render_template_string(json.dumps(parsed))
 
 @app.route('/get-blackboard-calendar')
 def get_blackboard_calendar():
-    start = datetime.datetime.now()
     global calendar_link
+    start = datetime.datetime.now()
     blackboard_calendar_info = bblearn.download_calendar(calendar_link, False)
     time_taken_for_get_blackboard_calendar = datetime.datetime.now() - start
     ic(time_taken_for_get_blackboard_calendar)
