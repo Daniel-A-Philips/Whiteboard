@@ -18,7 +18,7 @@ class input_parser:
         if link == '':
             f.write(unparsed)
         f.close()
-        self.haslink = True 
+        self.hasLink = True 
     
     def __write_class_information(self, unparsed):
         f = open(f'{self.__working_directory}/Information/class_info.json', 'r+')
@@ -27,6 +27,24 @@ class input_parser:
             f.write(unparsed)
         f.close()
         self.hasClass = True
+
+    def check_link_exist(self):
+        self.hasLink = True
+        f = open(f'{self.__working_directory}/Information/link.txt','r+')
+        link = f.read()
+        f.close()
+        if link == '':
+            self.hasLink = False
+        return self.hasLink
+
+    def check_classes_exist(self):
+        self.hasClass = True
+        f = open(f'{self.__working_directory}/Information/class_info.json','r+')
+        classes = f.read()
+        f.close()
+        if classes == '':
+            self.hasClass = False
+        return self.hasClass
 
     def blackboard_link(self, unparsed):
         self.__write_link(unparsed)
