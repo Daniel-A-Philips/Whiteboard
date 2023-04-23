@@ -22,4 +22,12 @@ Whiteboard is a web app allowing for better organization and planning of homewor
 If you would like to make changes, please make a pull request, or create an issue and discuss within this repository
 
 ## License
-GNU AGPLv3
+
+This project can not be copied and/or distributed without the express permission of the product owner, Daniel Philips, or any other team members as stated below
+
+## Team Members
+ - Daniel Philips
+ - Daniel Rochon
+ - Joshua Eddy
+ - Teauge Millette
+
