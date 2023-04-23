@@ -9,16 +9,24 @@ class input_parser:
         self.__working_directory = os.getcwd()
         self.classes = []
         self.link = []
+        self.hasLink = False
+        self.hasClass = False 
 
     def __write_link(self, unparsed):
-        f = open(f'{self.__working_directory}/Information/link.txt','w')
-        f.write(unparsed)
+        f = open(f'{self.__working_directory}/Information/link.txt','r+')
+        link = f.read()
+        if link == '':
+            f.write(unparsed)
         f.close()
+        self.haslink = True 
     
     def __write_class_information(self, unparsed):
-        f = open(f'{self.__working_directory}/Information/class_info.json', 'w')
-        f.write(unparsed)
+        f = open(f'{self.__working_directory}/Information/class_info.json', 'r+')
+        information = f.read()
+        if information == '':
+            f.write(unparsed)
         f.close()
+        self.hasClass = True
 
     def blackboard_link(self, unparsed):
         self.__write_link(unparsed)
