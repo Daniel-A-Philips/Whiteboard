@@ -1,10 +1,11 @@
 import sys
 import os
 
-directories = ['Blackboard', 'Parser','TermMaster']
 __working_directory = os.getcwd()
-for path in directories:
-    sys.path.insert(1, __working_directory + '/' + path)
+
+for directory in ['Blackboard', 'Parser','TermMaster']:
+    print(__working_directory + '/' + directory)
+    sys.path.insert(1, __working_directory + '/' + directory)
     
 from blackboard_calendar import blackboard_calendar
 from tms import tms
@@ -58,4 +59,15 @@ def get_blackboard_calendar():
     ic(time_taken_for_get_blackboard_calendar)
     return render_template_string(json.dumps( blackboard_calendar_info))
 
-app.run(debug=True, host='0.0.0.0', port=2000)
+@app.route('/get-persistent-info')
+def get_persistent_info():
+    link = input_parser.check_link_exist()
+    classes = input_parser.check_classes_exist()
+    ic(link)
+    ic(classes)
+    output = {'has_link':link,
+              'has_classes':classes}
+    return render_template_string(json.dumps( output) )
+    
+    
+app.run(debug=True, host='0.0.0.0', port=2001)
