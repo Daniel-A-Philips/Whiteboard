@@ -53,20 +53,19 @@ function applyDataToPage() {
 	// hardcoded, remove when server hooked up
 	let assignments = {"80999.10500096728":{"type":"VTIMEZONE","params":[],"tzid":"America/New_York","lastmodified":"2022-11-05T02:45:26.000Z","tzurl":"https://www.tzurl.org/zoneinfo/America/New_York","LIC-LOCATION":"America/New_York","PROLEPTIC-TZNAME":"LMT","30955.354569209503":{"type":"STANDARD","params":[],"tzname":"EST","tzoffsetfrom":"-045602","tzoffsetto":"-0500","start":"1883-11-18T17:03:58.000Z"},"41987.46593692275":{"type":"DAYLIGHT","params":[],"tzname":"EDT","tzoffsetfrom":"-0500","tzoffsetto":"-0400","start":"1918-03-31T07:00:00.000Z","rrule":"RRULE:FREQ=YEARLY;UNTIL=19200328T070000Z;BYMONTH=3;BYDAY=-1SU"},"51822.64600451707":{"type":"STANDARD","params":[],"tzname":"EST","tzoffsetfrom":"-0400","tzoffsetto":"-0500","start":"1918-10-27T07:00:00.000Z","rrule":"RRULE:FREQ=YEARLY;UNTIL=19201031T060000Z;BYMONTH=10;BYDAY=-1SU"},"34613.236379445465":{"type":"DAYLIGHT","params":[],"tzname":"EDT","tzoffsetfrom":"-0500","tzoffsetto":"-0400","start":"1921-04-24T07:00:00.000Z","rrule":"RRULE:FREQ=YEARLY;UNTIL=19410427T070000Z;BYMONTH=4;BYDAY=-1SU"},"50993.51847260223":{"type":"STANDARD","params":[],"tzname":"EST","tzoffsetfrom":"-0400","tzoffsetto":"-0500","start":"1921-09-25T07:00:00.000Z","rrule":"RRULE:FREQ=YEARLY;UNTIL=19410928T060000Z;BYMONTH=9;BYDAY=-1SU"},"12948.5128074059":{"type":"DAYLIGHT","params":[],"tzname":"EWT","tzoffsetfrom":"-0500","tzoffsetto":"-0400","start":"1942-02-09T07:00:00.000Z"},"37075.30485826951":{"type":"DAYLIGHT","params":[],"tzname":"EPT","tzoffsetfrom":"-0400","tzoffsetto":"-0400","start":"1945-08-14T23:00:00.000Z"},"63783.69166145337":{"type":"STANDARD","params":[],"tzname":"EST","tzoffsetfrom":"-0400","tzoffsetto":"-0500","start":"1945-09-30T07:00:00.000Z"},"17634.020024743146":{"type":"DAYLIGHT","params":[],"tzname":"EDT","tzoffsetfrom":"-0500","tzoffsetto":"-0400","start":"1946-04-28T07:00:00.000Z","rrule":"RRULE:FREQ=YEARLY;UNTIL=19730429T070000Z;BYMONTH=4;BYDAY=-1SU"},"10541.839365227212":{"type":"STANDARD","params":[],"tzname":"EST","tzoffsetfrom":"-0400","tzoffsetto":"-0500","start":"1946-09-29T07:00:00.000Z","rrule":"RRULE:FREQ=YEARLY;UNTIL=19540926T060000Z;BYMONTH=9;BYDAY=-1SU"},"42746.58387120085":{"type":"STANDARD","params":[],"tzname":"EST","tzoffsetfrom":"-0400","tzoffsetto":"-0500","start":"1955-10-30T07:00:00.000Z","rrule":"RRULE:FREQ=YEARLY;UNTIL=20061029T060000Z;BYMONTH=10;BYDAY=-1SU"},"10204.773282227508":{"type":"DAYLIGHT","params":[],"tzname":"EDT","tzoffsetfrom":"-0500","tzoffsetto":"-0400","start":"1974-01-06T07:00:00.000Z","rdate":"19750223T020000"},"95578.48590770904":{"type":"DAYLIGHT","params":[],"tzname":"EDT","tzoffsetfrom":"-0500","tzoffsetto":"-0400","start":"1976-04-25T07:00:00.000Z","rrule":"RRULE:FREQ=YEARLY;UNTIL=19860427T070000Z;BYMONTH=4;BYDAY=-1SU"},"67347.98265838878":{"type":"DAYLIGHT","params":[],"tzname":"EDT","tzoffsetfrom":"-0500","tzoffsetto":"-0400","start":"1987-04-05T07:00:00.000Z","rrule":"RRULE:FREQ=YEARLY;UNTIL=20060402T070000Z;BYMONTH=4;BYDAY=1SU"},"34350.58664605451":{"type":"DAYLIGHT","params":[],"tzname":"EDT","tzoffsetfrom":"-0500","tzoffsetto":"-0400","start":"2007-03-11T07:00:00.000Z","rrule":"RRULE:FREQ=YEARLY;BYMONTH=3;BYDAY=2SU"},"99328.36321505028":{"type":"STANDARD","params":[],"tzname":"EST","tzoffsetfrom":"-0400","tzoffsetto":"-0500","start":"2007-11-04T07:00:00.000Z","rrule":"RRULE:FREQ=YEARLY;BYMONTH=11;BYDAY=1SU"}},"_blackboard.platform.gradebook2.GradableItem-_2868714_1":{"type":"VEVENT","params":[],"dtstamp":"2023-02-26T17:13:35.000Z","start":"2023-01-12T04:59:00.000Z","end":"2023-01-12T04:59:00.000Z","summary":"Introduction on Disc Brd","uid":"_blackboard.platform.gradebook2.GradableItem-_2868714_1","description":"<p>Discussion board post introduction</p>"},"_blackboard.platform.gradebook2.GradableItem-_2879630_1":{"type":"VEVENT","params":[],"dtstamp":"2023-02-26T17:13:35.000Z","start":"2023-01-10T21:00:00.000Z","end":"2023-01-10T21:00:00.000Z","summary":"AttLect1","uid":"_blackboard.platform.gradebook2.GradableItem-_2879630_1","description":""},"_blackboard.platform.gradebook2.GradableItem-_2868716_1":{"type":"VEVENT","params":[],"dtstamp":"2023-02-26T17:13:35.000Z","start":"2023-01-14T04:59:00.000Z","end":"2023-01-14T04:59:00.000Z","summary":"AttLab1","uid":"_blackboard.platform.gradebook2.GradableItem-_2868716_1","description":""},"_blackboard.platform.gradebook2.GradableItem-_2890015_1":{"type":"VEVENT","params":[],"dtstamp":"2023-02-26T17:13:35.000Z","start":"2023-01-17T04:59:00.000Z","end":"2023-01-17T04:59:00.000Z","summary":"Lab 1 Experience Report (ind)","uid":"_blackboard.platform.gradebook2.GradableItem-_2890015_1","description":""},"_blackboard.platform.gradebook2.GradableItem-_2868717_1":{"type":"VEVENT","params":[],"dtstamp":"2023-02-26T17:13:35.000Z","start":"2023-01-17T04:59:00.000Z","end":"2023-01-17T04:59:00.000Z","summary":"Homework Reading Week 1","uid":"_blackboard.platform.gradebook2.GradableItem-_2868717_1","description":""},"_blackboard.platform.gradebook2.GradableItem-_2868718_1":{"type":"VEVENT","params":[],"dtstamp":"2023-02-26T17:13:35.000Z","start":"2023-01-17T04:59:00.000Z","end":"2023-01-17T04:59:00.000Z","summary":"Reflection 1","uid":"_blackboard.platform.gradebook2.GradableItem-_2868718_1","description":""},"_blackboard.platform.gradebook2.GradableItem-_2868766_1":{"type":"VEVENT","params":[],"dtstamp":"2023-02-26T17:13:35.000Z","start":"2023-01-18T04:59:00.000Z","end":"2023-01-18T04:59:00.000Z","summary":"Week 2 Attendance Question","uid":"_blackboard.platform.gradebook2.GradableItem-_2868766_1","description":""},"_blackboard.platform.gradebook2.GradableItem-_2868720_1":{"type":"VEVENT","params":[],"dtstamp":"2023-02-26T17:13:35.000Z","start":"2023-01-20T22:00:00.000Z","end":"2023-01-20T22:00:00.000Z","summary":"AttLab2","uid":"_blackboard.platform.gradebook2.GradableItem-_2868720_1","description":""},"_blackboard.platform.gradebook2.GradableItem-_2868721_1":{"type":"VEVENT","params":[],"dtstamp":"2023-02-26T17:13:35.000Z","start":"2023-01-24T04:59:00.000Z","end":"2023-01-24T04:59:00.000Z","summary":"Turn in Team Profile Here","uid":"_blackboard.platform.gradebook2.GradableItem-_2868721_1","description":""},"_blackboard.platform.gradebook2.GradableItem-_2868722_1":{"type":"VEVENT","params":[],"dtstamp":"2023-02-26T17:13:35.000Z","start":"2023-01-24T04:59:00.000Z","end":"2023-01-24T04:59:00.000Z","summary":"Reflection 2","uid":"_blackboard.platform.gradebook2.GradableItem-_2868722_1","description":""},"_blackboard.platform.gradebook2.GradableItem-_2868724_1":{"type":"VEVENT","params":[],"dtstamp":"2023-02-26T17:13:35.000Z","start":"2023-01-24T22:00:00.000Z","end":"2023-01-24T22:00:00.000Z","summary":"Attendance Wk 3","uid":"_blackboard.platform.gradebook2.GradableItem-_2868724_1","description":""},"_blackboard.platform.gradebook2.GradableItem-_2868726_1":{"type":"VEVENT","params":[],"dtstamp":"2023-02-26T17:13:35.000Z","start":"2023-01-28T00:00:00.000Z","end":"2023-01-28T00:00:00.000Z","summary":"AttLab3","uid":"_blackboard.platform.gradebook2.GradableItem-_2868726_1","description":""},"_blackboard.platform.gradebook2.GradableItem-_2920151_1":{"type":"VEVENT","params":[],"dtstamp":"2023-02-26T17:13:35.000Z","start":"2023-01-31T04:59:00.000Z","end":"2023-01-31T04:59:00.000Z","summary":"Lab3","uid":"_blackboard.platform.gradebook2.GradableItem-_2920151_1","description":""},"_blackboard.platform.gradebook2.GradableItem-_2868728_1":{"type":"VEVENT","params":[],"dtstamp":"2023-02-26T17:13:35.000Z","start":"2023-01-31T04:59:00.000Z","end":"2023-01-31T04:59:00.000Z","summary":"Reflection 3","uid":"_blackboard.platform.gradebook2.GradableItem-_2868728_1","description":""},"_blackboard.platform.gradebook2.GradableItem-_2868729_1":{"type":"VEVENT","params":[],"dtstamp":"2023-02-26T17:13:35.000Z","start":"2023-01-31T04:59:00.000Z","end":"2023-01-31T04:59:00.000Z","summary":"Week 3 Homework Quiz","uid":"_blackboard.platform.gradebook2.GradableItem-_2868729_1","description":""},"_blackboard.platform.gradebook2.GradableItem-_2868730_1":{"type":"VEVENT","params":[],"dtstamp":"2023-02-26T17:13:35.000Z","start":"2023-02-01T04:59:00.000Z","end":"2023-02-01T04:59:00.000Z","summary":"AttLect4","uid":"_blackboard.platform.gradebook2.GradableItem-_2868730_1","description":""},"_blackboard.platform.gradebook2.GradableItem-_2868731_1":{"type":"VEVENT","params":[],"dtstamp":"2023-02-26T17:13:35.000Z","start":"2023-02-03T22:00:00.000Z","end":"2023-02-03T22:00:00.000Z","summary":"AttLab4","uid":"_blackboard.platform.gradebook2.GradableItem-_2868731_1","description":""},"_blackboard.platform.gradebook2.GradableItem-_2868732_1":{"type":"VEVENT","params":[],"dtstamp":"2023-02-26T17:13:35.000Z","start":"2023-02-07T04:59:00.000Z","end":"2023-02-07T04:59:00.000Z","summary":"Lab 4 - User Stories","uid":"_blackboard.platform.gradebook2.GradableItem-_2868732_1","description":""},"_blackboard.platform.gradebook2.GradableItem-_2868733_1":{"type":"VEVENT","params":[],"dtstamp":"2023-02-26T17:13:35.000Z","start":"2023-02-07T04:59:00.000Z","end":"2023-02-07T04:59:00.000Z","summary":"Homework 4","uid":"_blackboard.platform.gradebook2.GradableItem-_2868733_1","description":""},"_blackboard.platform.gradebook2.GradableItem-_2868734_1":{"type":"VEVENT","params":[],"dtstamp":"2023-02-26T17:13:35.000Z","start":"2023-02-07T04:59:00.000Z","end":"2023-02-07T04:59:00.000Z","summary":"Reflection 4","uid":"_blackboard.platform.gradebook2.GradableItem-_2868734_1","description":""},"_blackboard.platform.gradebook2.GradableItem-_2868736_1":{"type":"VEVENT","params":[],"dtstamp":"2023-02-26T17:13:35.000Z","start":"2023-02-10T22:00:00.000Z","end":"2023-02-10T22:00:00.000Z","summary":"AttLab5","uid":"_blackboard.platform.gradebook2.GradableItem-_2868736_1","description":""},"_blackboard.platform.gradebook2.GradableItem-_2868737_1":{"type":"VEVENT","params":[],"dtstamp":"2023-02-26T17:13:35.000Z","start":"2023-02-14T04:59:00.000Z","end":"2023-02-14T04:59:00.000Z","summary":"Week 5 Lab","uid":"_blackboard.platform.gradebook2.GradableItem-_2868737_1","description":""},"_blackboard.platform.gradebook2.GradableItem-_2868738_1":{"type":"VEVENT","params":[],"dtstamp":"2023-02-26T17:13:35.000Z","start":"2023-02-14T04:59:00.000Z","end":"2023-02-14T04:59:00.000Z","summary":"CLI and GIT Assignment","uid":"_blackboard.platform.gradebook2.GradableItem-_2868738_1","description":""},"_blackboard.platform.gradebook2.GradableItem-_2868739_1":{"type":"VEVENT","params":[],"dtstamp":"2023-02-26T17:13:35.000Z","start":"2023-02-14T04:59:00.000Z","end":"2023-02-14T04:59:00.000Z","summary":"Reflection 5","uid":"_blackboard.platform.gradebook2.GradableItem-_2868739_1","description":""},"_blackboard.platform.gradebook2.GradableItem-_2868740_1":{"type":"VEVENT","params":[],"dtstamp":"2023-02-26T17:13:35.000Z","start":"2023-02-14T04:59:00.000Z","end":"2023-02-14T04:59:00.000Z","summary":"Mid Term Self Evaluation","uid":"_blackboard.platform.gradebook2.GradableItem-_2868740_1","description":""},"_blackboard.platform.gradebook2.GradableItem-_2868741_1":{"type":"VEVENT","params":[],"dtstamp":"2023-02-26T17:13:35.000Z","start":"2023-02-14T22:00:00.000Z","end":"2023-02-14T22:00:00.000Z","summary":"AttLect6","uid":"_blackboard.platform.gradebook2.GradableItem-_2868741_1","description":""},"_blackboard.platform.gradebook2.GradableItem-_2868742_1":{"type":"VEVENT","params":[],"dtstamp":"2023-02-26T17:13:35.000Z","start":"2023-02-23T23:00:00.000Z","end":"2023-02-23T23:00:00.000Z","summary":"Q2","uid":"_blackboard.platform.gradebook2.GradableItem-_2868742_1","description":""},"_blackboard.platform.gradebook2.GradableItem-_2868743_1":{"type":"VEVENT","params":[],"dtstamp":"2023-02-26T17:13:35.000Z","start":"2023-02-17T22:00:00.000Z","end":"2023-02-17T22:00:00.000Z","summary":"AttLab6","uid":"_blackboard.platform.gradebook2.GradableItem-_2868743_1","description":""},"_blackboard.platform.gradebook2.GradableItem-_2868744_1":{"type":"VEVENT","params":[],"dtstamp":"2023-02-26T17:13:35.000Z","start":"2023-02-21T04:59:00.000Z","end":"2023-02-21T04:59:00.000Z","summary":"Lab 6","uid":"_blackboard.platform.gradebook2.GradableItem-_2868744_1","description":""},"_blackboard.platform.gradebook2.GradableItem-_2868745_1":{"type":"VEVENT","params":[],"dtstamp":"2023-02-26T17:13:35.000Z","start":"2023-02-21T04:59:00.000Z","end":"2023-02-21T04:59:00.000Z","summary":"Week 6 Homework","uid":"_blackboard.platform.gradebook2.GradableItem-_2868745_1","description":""},"_blackboard.platform.gradebook2.GradableItem-_2868746_1":{"type":"VEVENT","params":[],"dtstamp":"2023-02-26T17:13:35.000Z","start":"2023-02-21T04:59:00.000Z","end":"2023-02-21T04:59:00.000Z","summary":"Week 6 Reflection","uid":"_blackboard.platform.gradebook2.GradableItem-_2868746_1","description":""},"_blackboard.platform.gradebook2.GradableItem-_2868747_1":{"type":"VEVENT","params":[],"dtstamp":"2023-02-26T17:13:35.000Z","start":"2023-02-21T22:00:00.000Z","end":"2023-02-21T22:00:00.000Z","summary":"AttLect7","uid":"_blackboard.platform.gradebook2.GradableItem-_2868747_1","description":""},"_blackboard.platform.gradebook2.GradableItem-_2868748_1":{"type":"VEVENT","params":[],"dtstamp":"2023-02-26T17:13:35.000Z","start":"2023-02-24T22:00:00.000Z","end":"2023-02-24T22:00:00.000Z","summary":"AttLab7","uid":"_blackboard.platform.gradebook2.GradableItem-_2868748_1","description":""},"_blackboard.platform.gradebook2.GradableItem-_2868749_1":{"type":"VEVENT","params":[],"dtstamp":"2023-02-26T17:13:35.000Z","start":"2023-02-28T04:59:00.000Z","end":"2023-02-28T04:59:00.000Z","summary":"Week 7 Lab","uid":"_blackboard.platform.gradebook2.GradableItem-_2868749_1","description":""},"_blackboard.platform.gradebook2.GradableItem-_2868750_1":{"type":"VEVENT","params":[],"dtstamp":"2023-02-26T17:13:35.000Z","start":"2023-02-28T04:59:00.000Z","end":"2023-02-28T04:59:00.000Z","summary":"Week7HW","uid":"_blackboard.platform.gradebook2.GradableItem-_2868750_1","description":"<p>Self and Peer evaluation through google form</p>"},"_blackboard.platform.gradebook2.GradableItem-_2868751_1":{"type":"VEVENT","params":[],"dtstamp":"2023-02-26T17:13:35.000Z","start":"2023-02-28T04:59:00.000Z","end":"2023-02-28T04:59:00.000Z","summary":"Reflection 7","uid":"_blackboard.platform.gradebook2.GradableItem-_2868751_1","description":""},"_blackboard.platform.gradebook2.GradableItem-_2868752_1":{"type":"VEVENT","params":[],"dtstamp":"2023-02-26T17:13:35.000Z","start":"2023-02-28T22:00:00.000Z","end":"2023-02-28T22:00:00.000Z","summary":"AttLect8","uid":"_blackboard.platform.gradebook2.GradableItem-_2868752_1","description":""},"_blackboard.platform.gradebook2.GradableItem-_2868753_1":{"type":"VEVENT","params":[],"dtstamp":"2023-02-26T17:13:35.000Z","start":"2023-03-03T22:00:00.000Z","end":"2023-03-03T22:00:00.000Z","summary":"AttLab8","uid":"_blackboard.platform.gradebook2.GradableItem-_2868753_1","description":""},"_blackboard.platform.gradebook2.GradableItem-_2868754_1":{"type":"VEVENT","params":[],"dtstamp":"2023-02-26T17:13:35.000Z","start":"2023-03-07T04:59:00.000Z","end":"2023-03-07T04:59:00.000Z","summary":"Lab 8","uid":"_blackboard.platform.gradebook2.GradableItem-_2868754_1","description":""},"_blackboard.platform.gradebook2.GradableItem-_2868755_1":{"type":"VEVENT","params":[],"dtstamp":"2023-02-26T17:13:35.000Z","start":"2023-03-07T04:59:00.000Z","end":"2023-03-07T04:59:00.000Z","summary":"Using Feedback","uid":"_blackboard.platform.gradebook2.GradableItem-_2868755_1","description":""},"_blackboard.platform.gradebook2.GradableItem-_2868756_1":{"type":"VEVENT","params":[],"dtstamp":"2023-02-26T17:13:35.000Z","start":"2023-03-07T04:59:00.000Z","end":"2023-03-07T04:59:00.000Z","summary":"Reflection 8","uid":"_blackboard.platform.gradebook2.GradableItem-_2868756_1","description":""},"_blackboard.platform.gradebook2.GradableItem-_2868757_1":{"type":"VEVENT","params":[],"dtstamp":"2023-02-26T17:13:35.000Z","start":"2023-03-07T22:00:00.000Z","end":"2023-03-07T22:00:00.000Z","summary":"AttLect9","uid":"_blackboard.platform.gradebook2.GradableItem-_2868757_1","description":""},"_blackboard.platform.gradebook2.GradableItem-_2868758_1":{"type":"VEVENT","params":[],"dtstamp":"2023-02-26T17:13:35.000Z","start":"2023-03-07T22:00:00.000Z","end":"2023-03-07T22:00:00.000Z","summary":"Q3","uid":"_blackboard.platform.gradebook2.GradableItem-_2868758_1","description":""},"_blackboard.platform.gradebook2.GradableItem-_2868759_1":{"type":"VEVENT","params":[],"dtstamp":"2023-02-26T17:13:35.000Z","start":"2023-03-11T04:59:00.000Z","end":"2023-03-11T04:59:00.000Z","summary":"AttLab9","uid":"_blackboard.platform.gradebook2.GradableItem-_2868759_1","description":""},"_blackboard.platform.gradebook2.GradableItem-_2868760_1":{"type":"VEVENT","params":[],"dtstamp":"2023-02-26T17:13:35.000Z","start":"2023-03-14T03:59:00.000Z","end":"2023-03-14T03:59:00.000Z","summary":"Week 9 Lab","uid":"_blackboard.platform.gradebook2.GradableItem-_2868760_1","description":""},"_blackboard.platform.gradebook2.GradableItem-_2868761_1":{"type":"VEVENT","params":[],"dtstamp":"2023-02-26T17:13:35.000Z","start":"2023-03-14T03:59:00.000Z","end":"2023-03-14T03:59:00.000Z","summary":"Presentation Outline","uid":"_blackboard.platform.gradebook2.GradableItem-_2868761_1","description":""},"_blackboard.platform.gradebook2.GradableItem-_2868762_1":{"type":"VEVENT","params":[],"dtstamp":"2023-02-26T17:13:35.000Z","start":"2023-03-14T03:59:00.000Z","end":"2023-03-14T03:59:00.000Z","summary":"Reflection 9","uid":"_blackboard.platform.gradebook2.GradableItem-_2868762_1","description":""},"_blackboard.platform.gradebook2.GradableItem-_2868764_1":{"type":"VEVENT","params":[],"dtstamp":"2023-02-26T17:13:35.000Z","start":"2023-03-15T03:59:00.000Z","end":"2023-03-15T03:59:00.000Z","summary":"AttLect10","uid":"_blackboard.platform.gradebook2.GradableItem-_2868764_1","description":""},"_blackboard.platform.gradebook2.GradableItem-_2868767_1":{"type":"VEVENT","params":[],"dtstamp":"2023-02-26T17:13:35.000Z","start":"2023-03-21T03:59:00.000Z","end":"2023-03-21T03:59:00.000Z","summary":"Final Self Evaluation","uid":"_blackboard.platform.gradebook2.GradableItem-_2868767_1","description":""},"_blackboard.platform.gradebook2.GradableItem-_2868768_1":{"type":"VEVENT","params":[],"dtstamp":"2023-02-26T17:13:35.000Z","start":"2023-03-21T03:59:00.000Z","end":"2023-03-21T03:59:00.000Z","summary":"FinalPres","uid":"_blackboard.platform.gradebook2.GradableItem-_2868768_1","description":""},"_blackboard.platform.gradebook2.GradableItem-_2868770_1":{"type":"VEVENT","params":[],"dtstamp":"2023-02-26T17:13:35.000Z","start":"2023-03-16T03:59:00.000Z","end":"2023-03-16T03:59:00.000Z","summary":"Final Presentations","uid":"_blackboard.platform.gradebook2.GradableItem-_2868770_1","description":""},"_blackboard.platform.gradebook2.GradableItem-_2868772_1":{"type":"VEVENT","params":[],"dtstamp":"2023-02-26T17:13:35.000Z","start":"2023-03-21T03:59:00.000Z","end":"2023-03-21T03:59:00.000Z","summary":"Feedback and Surveys","uid":"_blackboard.platform.gradebook2.GradableItem-_2868772_1","description":""},"_blackboard.platform.gradebook2.GradableItem-_2898596_1":{"type":"VEVENT","params":[],"dtstamp":"2023-02-26T17:13:35.000Z","start":"2023-01-30T04:30:00.000Z","end":"2023-01-30T04:30:00.000Z","summary":"Week 3 Quiz","uid":"_blackboard.platform.gradebook2.GradableItem-_2898596_1","description":""},"_blackboard.platform.gradebook2.GradableItem-_2901292_1":{"type":"VEVENT","params":[],"dtstamp":"2023-02-26T17:13:35.000Z","start":"2023-02-06T04:59:00.000Z","end":"2023-02-06T04:59:00.000Z","summary":"Resume Re-Submits - Due Sunday, 2/5 at Midnight","uid":"_blackboard.platform.gradebook2.GradableItem-_2901292_1"},"_blackboard.platform.gradebook2.GradableItem-_2916772_1":{"type":"VEVENT","params":[],"dtstamp":"2023-02-26T17:13:35.000Z","start":"2023-01-30T04:59:00.000Z","end":"2023-01-30T04:59:00.000Z","summary":"Resume Rough Draft due Sunday, January 29th at Midnight","uid":"_blackboard.platform.gradebook2.GradableItem-_2916772_1","description":""},"_blackboard.platform.gradebook2.GradableItem-_2885668_1":{"type":"VEVENT","params":[],"dtstamp":"2023-02-26T17:13:35.000Z","start":"2023-01-16T04:59:00.000Z","end":"2023-01-16T04:59:00.000Z","summary":"Discussion Board #1 Pick Your Thing","uid":"_blackboard.platform.gradebook2.GradableItem-_2885668_1"},"_blackboard.platform.gradebook2.GradableItem-_2885672_1":{"type":"VEVENT","params":[],"dtstamp":"2023-02-26T17:13:35.000Z","start":"2023-01-25T04:59:00.000Z","end":"2023-01-25T04:59:00.000Z","summary":"Discussion Board#2 Developing a historical consciousness due 1/24","uid":"_blackboard.platform.gradebook2.GradableItem-_2885672_1"},"_blackboard.platform.gradebook2.GradableItem-_2886179_1":{"type":"VEVENT","params":[],"dtstamp":"2023-02-26T17:13:35.000Z","start":"2023-02-02T04:59:00.000Z","end":"2023-02-02T04:59:00.000Z","summary":"Literature Review Rough Draft","uid":"_blackboard.platform.gradebook2.GradableItem-_2886179_1"},"_blackboard.platform.gradebook2.GradableItem-_2886180_1":{"type":"VEVENT","params":[],"dtstamp":"2023-02-26T17:13:35.000Z","start":"2023-02-08T04:59:00.000Z","end":"2023-02-08T04:59:00.000Z","summary":"Literature Review Final Version","uid":"_blackboard.platform.gradebook2.GradableItem-_2886180_1"},"_blackboard.platform.gradebook2.GradableItem-_2886181_1":{"type":"VEVENT","params":[],"dtstamp":"2023-02-26T17:13:35.000Z","start":"2023-01-25T04:59:00.000Z","end":"2023-01-25T04:59:00.000Z","summary":"Submit Project Pitch Rough Draft","uid":"_blackboard.platform.gradebook2.GradableItem-_2886181_1"},"_blackboard.platform.gradebook2.GradableItem-_2907855_1":{"type":"VEVENT","params":[],"dtstamp":"2023-02-26T17:13:35.000Z","start":"2023-02-01T04:59:00.000Z","end":"2023-02-01T04:59:00.000Z","summary":"Discussion Board #3 We Are What We Keep--due Jan 31","uid":"_blackboard.platform.gradebook2.GradableItem-_2907855_1"},"_blackboard.platform.gradebook2.GradableItem-_2919295_1":{"type":"VEVENT","params":[],"dtstamp":"2023-02-26T17:13:35.000Z","start":"2023-02-08T04:59:00.000Z","end":"2023-02-08T04:59:00.000Z","summary":"Discussion Board #4--Did the objects that surrounded you have a bearing on your life?","uid":"_blackboard.platform.gradebook2.GradableItem-_2919295_1"},"_blackboard.platform.gradebook2.GradableItem-_2922555_1":{"type":"VEVENT","params":[],"dtstamp":"2023-02-26T17:13:35.000Z","start":"2023-02-15T04:59:00.000Z","end":"2023-02-15T04:59:00.000Z","summary":"Discussion Board #5","uid":"_blackboard.platform.gradebook2.GradableItem-_2922555_1"},"_blackboard.platform.gradebook2.GradableItem-_2927014_1":{"type":"VEVENT","params":[],"dtstamp":"2023-02-26T17:13:35.000Z","start":"2023-02-22T04:59:00.000Z","end":"2023-02-22T04:59:00.000Z","summary":"Discussion Board #6","uid":"_blackboard.platform.gradebook2.GradableItem-_2927014_1"},"_blackboard.platform.gradebook2.GradableItem-_2927015_1":{"type":"VEVENT","params":[],"dtstamp":"2023-02-26T17:13:35.000Z","start":"2023-02-28T04:59:00.000Z","end":"2023-02-28T04:59:00.000Z","summary":"Academic Paper Rough Draft due week 8","uid":"_blackboard.platform.gradebook2.GradableItem-_2927015_1"},"_blackboard.platform.gradebook2.GradableItem-_2930828_1":{"type":"VEVENT","params":[],"dtstamp":"2023-02-26T17:13:35.000Z","start":"2023-03-01T04:59:00.000Z","end":"2023-03-01T04:59:00.000Z","summary":"Discussion Board 7/Week 8","uid":"_blackboard.platform.gradebook2.GradableItem-_2930828_1"},"_blackboard.platform.gradebook2.GradableItem-_2930829_1":{"type":"VEVENT","params":[],"dtstamp":"2023-02-26T17:13:35.000Z","start":"2023-03-13T03:59:00.000Z","end":"2023-03-13T03:59:00.000Z","summary":"Academic Paper Final Version","uid":"_blackboard.platform.gradebook2.GradableItem-_2930829_1"},"_blackboard.platform.gradebook2.GradableItem-_2898859_1":{"type":"VEVENT","params":[],"dtstamp":"2023-02-26T17:13:35.000Z","start":"2023-01-19T04:59:00.000Z","end":"2023-01-19T04:59:00.000Z","summary":"HW 1: Area as a Limit","uid":"_blackboard.platform.gradebook2.GradableItem-_2898859_1"},"_blackboard.platform.gradebook2.GradableItem-_2898865_1":{"type":"VEVENT","params":[],"dtstamp":"2023-02-26T17:13:35.000Z","start":"2023-01-19T04:59:00.000Z","end":"2023-01-19T04:59:00.000Z","summary":"HW 2: The Definite Integral","uid":"_blackboard.platform.gradebook2.GradableItem-_2898865_1"},"_blackboard.platform.gradebook2.GradableItem-_2898902_1":{"type":"VEVENT","params":[],"dtstamp":"2023-02-26T17:13:35.000Z","start":"2023-01-26T04:59:00.000Z","end":"2023-01-26T04:59:00.000Z","summary":"HW 3: Indefinite Integrals","uid":"_blackboard.platform.gradebook2.GradableItem-_2898902_1"},"_blackboard.platform.gradebook2.GradableItem-_2898915_1":{"type":"VEVENT","params":[],"dtstamp":"2023-02-26T17:13:35.000Z","start":"2023-01-26T04:59:00.000Z","end":"2023-01-26T04:59:00.000Z","summary":"HW 4: The Fundamental Theorem of Calculus","uid":"_blackboard.platform.gradebook2.GradableItem-_2898915_1"},"_blackboard.platform.gradebook2.GradableItem-_2898925_1":{"type":"VEVENT","params":[],"dtstamp":"2023-02-26T17:13:35.000Z","start":"2023-02-02T04:59:00.000Z","end":"2023-02-02T04:59:00.000Z","summary":"HW 5: Substitution, Indefinite Integrals","uid":"_blackboard.platform.gradebook2.GradableItem-_2898925_1"},"_blackboard.platform.gradebook2.GradableItem-_2898932_1":{"type":"VEVENT","params":[],"dtstamp":"2023-02-26T17:13:35.000Z","start":"2023-02-02T04:59:00.000Z","end":"2023-02-02T04:59:00.000Z","summary":"HW 6: Substitution, Definite Integrals","uid":"_blackboard.platform.gradebook2.GradableItem-_2898932_1"},"_blackboard.platform.gradebook2.GradableItem-_2898941_1":{"type":"VEVENT","params":[],"dtstamp":"2023-02-26T17:13:35.000Z","start":"2023-02-09T04:59:00.000Z","end":"2023-02-09T04:59:00.000Z","summary":"HW 7: Area Between Curves","uid":"_blackboard.platform.gradebook2.GradableItem-_2898941_1"},"_blackboard.platform.gradebook2.GradableItem-_2898946_1":{"type":"VEVENT","params":[],"dtstamp":"2023-02-26T17:13:35.000Z","start":"2023-02-09T04:59:00.000Z","end":"2023-02-09T04:59:00.000Z","summary":"HW 8: Volumes","uid":"_blackboard.platform.gradebook2.GradableItem-_2898946_1"},"_blackboard.platform.gradebook2.GradableItem-_2898952_1":{"type":"VEVENT","params":[],"dtstamp":"2023-02-26T17:13:35.000Z","start":"2023-02-16T04:59:00.000Z","end":"2023-02-16T04:59:00.000Z","summary":"HW 9: Arc Length","uid":"_blackboard.platform.gradebook2.GradableItem-_2898952_1"},"_blackboard.platform.gradebook2.GradableItem-_2898963_1":{"type":"VEVENT","params":[],"dtstamp":"2023-02-26T17:13:35.000Z","start":"2023-02-16T04:59:00.000Z","end":"2023-02-16T04:59:00.000Z","summary":"HW 10: Work","uid":"_blackboard.platform.gradebook2.GradableItem-_2898963_1"},"_blackboard.platform.gradebook2.GradableItem-_2898968_1":{"type":"VEVENT","params":[],"dtstamp":"2023-02-26T17:13:35.000Z","start":"2023-02-23T04:59:00.000Z","end":"2023-02-23T04:59:00.000Z","summary":"HW 11: Integration by Parts","uid":"_blackboard.platform.gradebook2.GradableItem-_2898968_1"},"_blackboard.platform.gradebook2.GradableItem-_2898969_1":{"type":"VEVENT","params":[],"dtstamp":"2023-02-26T17:13:35.000Z","start":"2023-02-23T04:59:00.000Z","end":"2023-02-23T04:59:00.000Z","summary":"HW 12: Partial Fractions","uid":"_blackboard.platform.gradebook2.GradableItem-_2898969_1"},"_blackboard.platform.gradebook2.GradableItem-_2898972_1":{"type":"VEVENT","params":[],"dtstamp":"2023-02-26T17:13:35.000Z","start":"2023-03-02T04:59:00.000Z","end":"2023-03-02T04:59:00.000Z","summary":"HW 13: Improper Integrals","uid":"_blackboard.platform.gradebook2.GradableItem-_2898972_1"},"_blackboard.platform.gradebook2.GradableItem-_2898973_1":{"type":"VEVENT","params":[],"dtstamp":"2023-02-26T17:13:35.000Z","start":"2023-03-09T04:59:00.000Z","end":"2023-03-09T04:59:00.000Z","summary":"HW 15: Trigonometric Integrals","uid":"_blackboard.platform.gradebook2.GradableItem-_2898973_1"},"_blackboard.platform.gradebook2.GradableItem-_2898975_1":{"type":"VEVENT","params":[],"dtstamp":"2023-02-26T17:13:35.000Z","start":"2023-03-09T04:59:00.000Z","end":"2023-03-09T04:59:00.000Z","summary":"HW 14: Separable Equations","uid":"_blackboard.platform.gradebook2.GradableItem-_2898975_1"}}
 	let classes = {"PHYS-101-B": {"days": [0, 2], "time": "11:00-12:50", "instructor": "John Doe", "crn": 20000}, 
-	"MATH-122-017": {"days": [0, 1, 2, 4], "time": "14:00-14:50", "instructor": "Jane Doe", "crn": 20001}, 
-	"Ct-200-001": {"days": [1, 3], "time": "14:00-15:20", "instructor": "Daniel Moix", "crn": 20002},
+	"MATH-122-017": {"days": [0, 2, 4], "time": "14:00-14:50", "instructor": "Jane Doe", "crn": 20001}, 
+	"CT-200-001": {"days": [1, 3], "time": "14:00-15:20", "instructor": "Hengyi Chu", "crn": 20002},
 	"CI-103-060": {"days": [3], "time": "9:00-10:50", "instructor": "Daniel Moix", "crn": 20003},
-	"CI-103-B": {"days": [1], "time": "9:00-10:50", "instructor": "Daniel Moix", "crn": 20004},
-	"CT-140-001": {"days": [0, 2], "time": "9:00-10:20", "instructor": "Daniel Moix", "crn": 20005},
-	"INFO-153-001": {"days": [0, 3], "time": "15:30-16:50", "instructor": "Daniel Moix", "crn": 20006}}
+	"CI-103-B": {"days": [1], "time": "10:00-10:50", "instructor": "Daniel Moix", "crn": 20004},
+	"CT-140-001": {"days": [0, 2], "time": "9:00-10:20", "instructor": "Chris Carroll", "crn": 20005},
+	"INFO-153-001": {"days": [0, 3], "time": "15:30-16:50", "instructor": "Bo Song", "crn": 20006}}
 
-	applyDataToCalendar(assignments, classes)
-	applyDataToSidebar(assignments, classes)
-	applyDataToAssignments(assignments, classes)
+	applyDataToCalendar(assignments, classes);
+	applyDataToSidebar(assignments, classes);
+	applyDataToAssignments(assignments, classes);
 }
 
 function applyDataToCalendar(assignments, classes) {
-	// Get the calendar columns
 	const col0 = document.querySelector('.calendar_col[style="grid-column:3"]');
 	const col1 = document.querySelector('.calendar_col[style="grid-column:4"]');
 	const col2 = document.querySelector('.calendar_col[style="grid-column:5"]');
@@ -74,67 +73,63 @@ function applyDataToCalendar(assignments, classes) {
 	const col4 = document.querySelector('.calendar_col[style="grid-column:7"]');
 	const col5 = document.querySelector('.calendar_col.calendar_weekend[style="grid-column:8"]');
 	const col6 = document.querySelector('.calendar_col.calendar_weekend[style="grid-column:9"]');
-
-
-	const classColors = ['#FFC107', '#3F51B5', '#8BC34A', '#E91E63', '#009688', '#9E9764', '#308446', '#A18594', '#412227']; // Define an array of class colors
+  
+  
+	const classColors = ['#FFC107', '#3F51B5', '#8BC34A', '#808080', '#009688', '#9E9764', '#308446', '#A18594', '#412227'];
 	const hourHeight = 47.6;
-
+  
 	for (let className in classes) {
-	const classInfo = classes[className];
-
-	const [startTime, endTime] = classInfo.time.split('-');
-    const [startHour, startMinute] = startTime.split(':');
-    const [endHour, endMinute] = endTime.split(':');
-
-	  classInfo.days.forEach(day => {
-	    let column;
-	    if (day === 0) {
-	      column = col0;
-	    } else if (day === 1) {
-	      column = col1;
-	    } else if (day === 2) {
-	      column = col2;
-	    } else if (day === 3) {
-	      column = col3;
-	    } else if (day === 4) {
-	      column = col4;
-	    } else if (day === 5) {
-	      column = col5;
-	    } else if (day === 6) { 
-	      column = col6;
-	    }
-
-	    if (column) {
+	  	const classInfo = classes[className];
+	  	const checkbox = document.getElementById(`box-${className}`);
+  
+		if (checkbox && !checkbox.checked) {
+		continue; // skip this class if checkbox is unchecked
+		}
+  
+		const [startTime, endTime] = classInfo.time.split('-');
+		const [startHour, startMinute] = startTime.split(':');
+		const [endHour, endMinute] = endTime.split(':');
+  
+	  	classInfo.days.forEach(day => {
+			let column;
+			if (day === 0) {
+			column = col0;
+			} else if (day === 1) {
+			column = col1;
+			} else if (day === 2) {
+			column = col2;
+			} else if (day === 3) {
+			column = col3;
+			} else if (day === 4) {
+			column = col4;
+			} else if (day === 5) {
+			column = col5;
+			} else if (day === 6) { 
+			column = col6;
+			}
+  
+		if (column) {
 			const classElement = document.createElement('div');
 			classElement.classList.add('class');
-
-			//const [hour] = classInfo.time.split(':');
-
-			//classElement.style.position = 'absolute';
-			//classElement.style.top = `${47.5 * hour}px`;
-			//classElement.style.height = `${hourHeight * (classInfo.duration / 60)}px`;
-			//classElement.style.backgroundColor = classColors[Object.keys(classes).indexOf(className) % classColors.length];
-
+	
 			const start = parseInt(startHour) * 60 + parseInt(startMinute);
 			const end = parseInt(endHour) * 60 + parseInt(endMinute);
 			const duration = end - start;
-
+	
 			classElement.style.position = 'absolute';
 			classElement.style.top = `${hourHeight * startHour + hourHeight * startMinute / 60}px`;
 			classElement.style.height = `${hourHeight * (duration / 60)}px`;
 			classElement.style.backgroundColor = classColors[Object.keys(classes).indexOf(className) % classColors.length];
-
-
+	
 			classElement.innerHTML = className + '<br>' + classInfo.instructor;
- 
+	
 			column.appendChild(classElement);
-	    }
-
-	  });
-
+			}
+  
+		});
+  
 	}
-
-}
+}  
 
 function calendartime() {
 	const myDiv = document.querySelector(".calendar_current-time");
@@ -223,6 +218,27 @@ function applyDataToSidebar(assignments, classes) {
 		html += "</tr>";
 	}
 	document.getElementById("ltc-table").innerHTML = html;
+	if (!window.hasRunOnce) {
+		const classFilters = document.getElementById("class-filters");
+	  
+		Object.keys(classes).forEach(courseKey => {
+		  const courseDiv = document.createElement("div");
+		  const input = document.createElement("input");
+		  const span = document.createElement("span");
+	  
+		  input.type = "checkbox";
+		  input.checked = true;
+		  input.id = "box";
+		  span.textContent = courseKey;
+	  
+		  courseDiv.appendChild(input);
+		  courseDiv.appendChild(span);
+		  classFilters.appendChild(courseDiv);
+		});
+	  
+		window.hasRunOnce = true; // Set the flag variable to true
+	  }
+	  
 }
 
 function setDisplayedWeek(week) {
@@ -279,5 +295,3 @@ function updateCalendar() {
 		}
 	}
 }
-
-applyDataToPage();
