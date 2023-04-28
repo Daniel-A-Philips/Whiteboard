@@ -149,7 +149,7 @@ body {
 	height: calc(100vh - 30vh);
 	border-bottom: 3px solid #dadce0;
 }
-/* je578 Edits */
+
 * {
 	box-sizing: border-box;
 }
@@ -174,15 +174,17 @@ body {
 	position: sticky;
 	z-index: 10;
 	border-bottom: 2px solid #dadce0;
+	overflow-y: scroll;
 }
 
 .calendar_day {
 	border-left: 1px solid #dadce0;
 }
 
-<!--  
+.calendar_day > p {
+	margin: 10px 0;
+}
 
--->
 .calendar_content {
 	display: grid;
 	grid-template-columns: 3em 10px repeat(7, 1fr);
