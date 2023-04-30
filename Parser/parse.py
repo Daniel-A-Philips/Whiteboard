@@ -21,7 +21,7 @@ class input_parser:
         self.hasLink = True 
     
     def __write_class_information(self, unparsed):
-        f = open(f'{self.__working_directory}/Information/class_info.json', 'r+')
+        f = open(f'{self.__working_directory}/Information/class_info.txt', 'r+')
         information = f.read()
         if information == '':
             f.write(unparsed)
@@ -39,7 +39,7 @@ class input_parser:
 
     def check_classes_exist(self):
         self.hasClass = True
-        f = open(f'{self.__working_directory}/Information/class_info.json','r+')
+        f = open(f'{self.__working_directory}/Information/class_info.txt','r+')
         classes = f.read()
         f.close()
         if classes == '':
@@ -52,6 +52,7 @@ class input_parser:
         return self.link
 
     def class_information(self, unparsed):
+        ic(unparsed)
         self.__write_class_information(unparsed)
         all_info = urllib.parse.unquote(unparsed).split('\n')
         for line in all_info:
@@ -85,13 +86,16 @@ class output_parser:
         print('Running class_info_parser')
         returnable = {}
         for individual_class in class_info:
-            class_data = {}
-            class_data['Days'] = self.__parse_days(individual_class)
-            class_data['Time'] = individual_class['Times']
-            class_data['Instructor'] = individual_class['Instructor']
-            class_data['CRN'] = individual_class['CRN']
-            full_class_name = individual_class['Subject Code'] + '-' + individual_class['Course No.'] + '-' + individual_class['Sec']
-            returnable[full_class_name] = class_data
+            try:
+                class_data = {}
+                class_data['Days'] = self.__parse_days(individual_class)
+                class_data['Time'] = individual_class['Times']
+                class_data['Instructor'] = individual_class['Instructor']
+                class_data['CRN'] = individual_class['CRN']
+                full_class_name = individual_class['Subject Code'] + '-' + individual_class['Course No.'] + '-' + individual_class['Sec']
+                returnable[full_class_name] = class_data
+            except KeyError:
+                continue
         return returnable
 
     def __parse_days(self, individual_class):
