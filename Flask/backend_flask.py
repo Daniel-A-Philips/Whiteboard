@@ -35,7 +35,7 @@ def put_classes():
     global calendar_link
     start = datetime.datetime.now()
     calendar_link = input_parser.blackboard_link(request.headers.get('user-blackboard-calendar-link'))
-    user_copied = input_parser.class_information(request.headers.get('user-blackboard-copied'))    
+    user_copied = input_parser.class_information(request.headers.get('user-blackboard-copied'))   
     class_info = termmaster.get_all_class_info(user_copied)
     time_taken_for_put_classes = datetime.datetime.now() - start
     ic(time_taken_for_put_classes)
@@ -61,13 +61,24 @@ def get_blackboard_calendar():
 
 @app.route('/get-persistent-info')
 def get_persistent_info():
+    global class_info
     link = input_parser.check_link_exist()
-    classes = input_parser.check_classes_exist()
+    hasClasses = input_parser.check_classes_exist()
     ic(link)
-    ic(classes)
+    ic(hasClasses)
+    if link and hasClasses:
+        f = open(f'{__working_directory}/Information/class_info.txt')
+        contents = f.read()
+        ic(contents)
+        classes = input_parser.class_information(contents)
+        information = termmaster.get_all_class_info(classes)
+        ic(information)
+        
     output = {'has_link':link,
-              'has_classes':classes}
+              'has_classes':hasClasses,
+              'classes': information
+              }
     return render_template_string(json.dumps( output) )
     
     
-app.run(debug=True, host='0.0.0.0', port=2001)
+app.run(debug=True, host='0.0.0.0', port=2000)
