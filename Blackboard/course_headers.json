@@ -1,0 +1,15 @@
+{ "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7",
+  "Accept-Language": "en-GB,en-US;q=0.9,en;q=0.8'",
+  "Connection": "keep-alive",
+  "Cookie": "apt.uid=AP-PQQY5YJEHTTA-2-1663180781939-68723673.0.2.fcf6507e-23da-4e5c-a886-35ff35396162; JSESSIONID=AB05096F0DCBB05A881EC01A73F50AC8; BbClientCalenderTimeZone=America/New_York; web_client_cache_guid=4b7dd05d-1bf6-438a-b65a-68af4a704818; apt.sid=AP-PQQY5YJEHTTA-2-1682600759394-77543192; amp_6e403e=HVtq3VCmJNouEl0tfLNdar.ZGFwbG92ZXNwb29jaGllQGdtYWlsLmNvbQ==..1gv1d45ln.1gv1ekah7.0.2t.2t; xythosdrive=0; AWSELB=9987079F1C0310C1F6F3C2C0D039DF880E48635072216B77200E71AA1FDF731C6EE550AA88562375532EBC2139367688878EBF4C992463843E0CFA1784D589E5072D333D41; AWSELBCORS=9987079F1C0310C1F6F3C2C0D039DF880E48635072216B77200E71AA1FDF731C6EE550AA88562375532EBC2139367688878EBF4C992463843E0CFA1784D589E5072D333D41; BbRouter=expires:1682615133,id:1E6B44AA89B50C9CA9A38EE68B5E7DD9,signature:e56589475bf4a72b0d819ced3d1719f2eccebc90f4272f54948f5ee24596ba78,site:0c7fd5ef-a8be-4d47-a1ed-240c8bb3d82b,timeout:10800,user:7397e9f4a2dc4fae86e99e1555d432cf,v:2,xsrf:34d7697b-95b6-41fe-a744-22ced50e7ec9",
+  "Referer": "https://learn.dcollege.net/ultra/courses/CLASS_NUM/cl/outline?legacyUrl=~2Fwebapps~2Fcalendar~2Flaunch~2Fattempt~2F_blackboard.platform.gradebook2.GradableItem-ITEMNUM",
+  "Sec-Fetch-Dest": "iframe",
+  "Sec-Fetch-Mode": "navigate",
+  "Sec-Fetch-Site": "same-origin",
+  "Sec-Fetch-User": "?1",
+  "Upgrade-Insecure-Requests": "1",
+  "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36",
+  "sec-ch-ua": "Chromium ;v=112, Google Chrome;v=112, Not:A-Brand;v=99",
+  "sec-ch-ua-mobile": "?0'",
+  "sec-ch-ua-platform": "macOS"
+}
