@@ -73,7 +73,14 @@ function applyDataToCalendar(assignments, classes) {
 	const col4 = document.querySelector('.calendar_col[style="grid-column:7"]');
 	const col5 = document.querySelector('.calendar_col.calendar_weekend[style="grid-column:8"]');
 	const col6 = document.querySelector('.calendar_col.calendar_weekend[style="grid-column:9"]');
-  
+ 
+	const colums = [col0, col1, col2, col3, col4, col5, col6];
+	for (let column of colums) {
+		const classElement = column.getElementsByClassName("class");
+		for (let i = classElement.length - 1; i >= 0; i--) {
+			classElement[i].remove();
+		}
+	}
   
 	const classColors = ['#FFC107', '#3F51B5', '#8BC34A', '#808080', '#009688', '#9E9764', '#308446', '#A18594', '#412227'];
 	const hourHeight = 47.6;
@@ -220,25 +227,65 @@ function applyDataToSidebar(assignments, classes) {
 	document.getElementById("ltc-table").innerHTML = html;
 	if (!window.hasRunOnce) {
 		const classFilters = document.getElementById("class-filters");
-	  
+		
 		Object.keys(classes).forEach(courseKey => {
-		  const courseDiv = document.createElement("div");
-		  const input = document.createElement("input");
-		  const span = document.createElement("span");
-	  
-		  input.type = "checkbox";
-		  input.checked = true;
-		  input.id = "box";
-		  span.textContent = courseKey;
-	  
-		  courseDiv.appendChild(input);
-		  courseDiv.appendChild(span);
-		  classFilters.appendChild(courseDiv);
+			const courseDiv = document.createElement("div");
+			const label = document.createElement("label");
+			const input = document.createElement("input");
+			
+			input.type = "checkbox";
+			input.checked = true; // Set the initial state to checked
+			input.id = `box-${courseKey}`;
+			input.classList.add("box"); // Add the class name to the input element
+			label.textContent = courseKey;
+		
+			label.classList.add("checkbox-button"); // Add the class name to the label element
+			label.appendChild(input);
+			courseDiv.appendChild(label);
+			classFilters.appendChild(courseDiv);
+			
+			// Add event listener to toggle checked and unchecked class on label
+			input.addEventListener("change", () => {
+				if (input.checked) {
+					label.classList.remove("unchecked");
+				} else {
+					label.classList.add("unchecked");
+				}
+				applyDataToCalendar(assignments, classes);
+			});
 		});
-	  
+		
+			const checkAllButton = document.createElement("button");
+			checkAllButton.textContent = "Check All";
+			checkAllButton.classList.add("check-all-button"); // Add the class name to the button element
+			checkAllButton.addEventListener("click", () => {
+			const inputs = document.querySelectorAll("#class-filters input[type='checkbox']");
+			inputs.forEach(input => {
+				input.checked = true;
+				const label = input.parentElement;
+				label.classList.remove("unchecked");
+			});
+			applyDataToCalendar(assignments, classes);
+		});
+		classFilters.appendChild(checkAllButton);
+		
+		const uncheckAllButton = document.createElement("button");
+		uncheckAllButton.textContent = "Uncheck All";
+		uncheckAllButton.classList.add("uncheck-all-button"); // Add the class name to the button element
+		uncheckAllButton.addEventListener("click", () => {
+			const inputs = document.querySelectorAll("#class-filters input[type='checkbox']");
+			inputs.forEach(input => {
+				input.checked = false;
+				const label = input.parentElement;
+				label.classList.add("unchecked");
+			});
+			applyDataToCalendar(assignments, classes);
+		});
+		classFilters.appendChild(uncheckAllButton);
+		
 		window.hasRunOnce = true; // Set the flag variable to true
-	  }
-	  
+	}
+			
 }
 
 function setDisplayedWeek(week) {
