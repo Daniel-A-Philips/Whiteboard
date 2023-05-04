@@ -120,26 +120,6 @@ body {
 	background-color: tomato;
 }
 
-#class-filters {
-	width: max-content;
-	margin: 0 auto;
-	position: relative;
-	border: 2.5px solid #dadce0;
-	padding: 10px;
-	bottom: 20px;
-	top: 20px;
-
-}
-
-#class-filters h4 {
-	text-align: center;
-	margin: 0;
-}
-
-#class-filters > div {
-	width: max-content;
-}
-
 /* calendar */
 #calendar {
 	position: absolute;
@@ -251,7 +231,7 @@ body {
 	box-sizing: border-box;
 	color: #fff;
 	font-weight: bold;
-	font-size: 12px;
+	font-size: 11px;
 	position: relative;
 	width: 95%;
 }
@@ -311,3 +291,126 @@ body {
 .due-date-time {
 	color: slategray;
 }
+
+/* Class filters*/
+
+  
+#class-filters > div {
+	align-items: center;
+	margin: 0.5em;
+}
+  
+label.checkbox-button {
+	display: flex;
+	align-items: center;
+	padding: 0.5em 1em;
+	font-size: 1em;
+	font-weight: bold;
+	color: #fff;
+	background-color: #017BB6;
+	border-radius: 5px;
+	cursor: pointer;  
+}
+label.checkbox-button:hover {
+	background-color: #00AAE7;
+}
+  
+label.checkbox-button input[type="checkbox"] {
+	display: none;
+}
+  
+label.checkbox-button:before {
+	display: inline-block;
+	vertical-align: middle;
+	margin-right: 0.5em;
+	font-size: 1.5em;
+	line-height: 0;
+}
+  
+label.checkbox-button.checked:before {
+	content: "\2611";
+}
+  
+label.checkbox-button span {
+	display: inline-block;
+	vertical-align: middle;
+	margin-left: 0.5em;
+}
+  
+label.checkbox-button.unchecked {
+	background-color: #fff;
+	color: black;
+}
+  
+#class-filters {
+	width: max-content;
+	margin: 0 auto;
+	position: relative;
+	border: 2.5px solid #dadce0;
+	padding: 10px;
+	bottom: 20px;
+	top: 30px;
+	flex-wrap: wrap;
+	justify-content: center;
+	font-size: 12px;
+
+}
+
+#class-filters h4 {
+	text-align: center;
+	margin: 0;
+	font-size: 14px;
+}
+
+#class-filters > div {
+	width: max-content;
+}
+#class-filters input {
+	cursor: pointer;
+
+}
+/* Class filters Check/Uncheck all Buttom*/
+.check-all-button {
+	display: block;
+	margin: 1em auto;
+	padding: 0.5em 1em;
+	font-size: 1em;
+	font-weight: bold;
+	color: #fff;
+	background-color: #00AAE7;
+	border-radius: 5px;
+	cursor: pointer;
+	border: none;
+  }
+  
+.check-all-button:hover {
+	background-color: lightgreen;
+}
+  
+.check-all-button:focus {
+	outline: none;
+	box-shadow: 0 0 0 2px #fff, 0 0 0 4px lightgreen;
+}
+
+
+.uncheck-all-button {
+	display: block;
+	margin: 1em auto;
+	padding: 0.5em 1em;
+	font-size: 1em;
+	font-weight: bold;
+	color: #fff;
+	background-color: #00AAE7;
+	border-radius: 5px;
+	cursor: pointer;
+	border: none;
+}
+.uncheck-all-button:hover {
+	background-color: #ff0002;
+}
+  
+.uncheck-all-button:focus {
+	outline: none;
+	box-shadow: 0 0 0 2px #fff, 0 0 0 4px #ff0002;
+}
+
