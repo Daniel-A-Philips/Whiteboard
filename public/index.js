@@ -292,6 +292,7 @@ function applyDataToSidebar(assignments, classes) {
 function setDisplayedWeek(week) {
 	displayedWeekStart = new Date(beginningOfTerm.getTime() + (1000 * 3600 * 24 * 7 * week));
 	applyDataToPage();
+	updateCalendar();
 }
 
 function applyDataToAssignments(assignments, classes) {
@@ -326,20 +327,21 @@ function applyDataToAssignments(assignments, classes) {
 
 function updateCalendar() {
 	const daysOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-	const today = new Date();
-	const todayIndex = today.getDay();
+	let today = new Date();
 
-	for (let i = 1; i < 8; i++) {
-		const date = new Date(today);
-		date.setDate(date.getDate() + i - todayIndex);
+	for (let i = 0; i < 7; i++) {
+		const date = new Date(displayedWeekStart);
+		date.setDate(date.getDate() + i);
 		const dayOfWeek = daysOfWeek[date.getDay()];
 		const dayOfMonth = date.getDate();
-		const elementId = "day" + i;
+		const elementId = "day" + (i + 1);
 		const element = document.getElementById(elementId);
 		element.textContent = `${dayOfWeek}, ${dayOfMonth}`;
 		// helps find current date for bold
-		if(i === todayIndex + 0) {
+		if (date.getMonth() == today.getMonth() && date.getDate() == today.getDate()) {
 			element.classList.add("current-date");
+		} else {
+			element.classList.remove("current-date");
 		}
 	}
 }
