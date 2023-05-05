@@ -19,7 +19,6 @@ calendar_link = ''
 
 info = ''
 app = Flask(__name__, template_folder= __working_directory + '/Flask Resources/template',static_folder= __working_directory + '/Flask Resources/static')
-input_parser = input_parser()
 output_parser = output_parser()
 termmaster = tms()
 bblearn = blackboard_calendar()
@@ -33,9 +32,10 @@ def main_page():
 def put_classes():
     global class_info
     global calendar_link
+    input_parser1 = input_parser()
     start = datetime.datetime.now()
-    calendar_link = input_parser.blackboard_link(request.headers.get('user-blackboard-calendar-link'))
-    user_copied = input_parser.class_information(request.headers.get('user-blackboard-copied'))   
+    calendar_link = input_parser1.blackboard_link(request.headers.get('user-blackboard-calendar-link'))
+    user_copied = input_parser1.class_information(request.headers.get('user-blackboard-copied'))   
     class_info = termmaster.get_all_class_info(user_copied)
     time_taken_for_put_classes = datetime.datetime.now() - start
     ic(time_taken_for_put_classes)
@@ -61,16 +61,16 @@ def get_blackboard_calendar():
 
 @app.route('/get-persistent-info')
 def get_persistent_info():
-    global class_info
-    link = input_parser.check_link_exist()
-    hasClasses = input_parser.check_classes_exist()
+    input_parser2 = input_parser()
+    link = input_parser2.check_link_exist()
+    hasClasses = input_parser2.check_classes_exist()
     ic(link)
     ic(hasClasses)
     if link and hasClasses:
         f = open(f'{__working_directory}/Information/class_info.txt')
         contents = f.read()
         ic(contents)
-        classes = input_parser.class_information(contents)
+        classes = input_parser2.class_information(contents)
         information = termmaster.get_all_class_info(classes)
         ic(information)
         

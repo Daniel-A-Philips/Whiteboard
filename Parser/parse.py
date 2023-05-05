@@ -3,7 +3,6 @@ from icecream import ic
 import os
 
 class input_parser:
-
     def __init__(self):
         print('input_parser created')
         self.__working_directory = os.getcwd()
