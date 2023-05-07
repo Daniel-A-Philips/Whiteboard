@@ -1,3 +1,4 @@
+# A program that downloads all class numbers and names saved on Blackboards Drexel Server
 import grequests
 import json
 

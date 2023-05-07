@@ -2,6 +2,7 @@ from tabulate import tabulate
 import requests
 import datetime
 import csv
+from Assignment import assignment
 from ics import Calendar
 
 class blackboard_calendar:
@@ -10,6 +11,7 @@ class blackboard_calendar:
         print('** created blackboard_calendar instance **')
         self.wanted_as_table = False
         self.wanted_as_csv = False
+        self.uids = []
 
     # function to sort the event list by due date
     def sort(self, event_list):
@@ -29,7 +31,6 @@ class blackboard_calendar:
             event_array.append(str(event.begin.datetime).split(':00-')[0])
             # Remove any existing html prefixes or suffixes that might exist
             description = str(event.description).removeprefix('<p>').removesuffix('</p>')
-            print(event)
             # Check if there is no description, if so replace 'None' with blankspace
             if description == 'None':
                 description = ''
@@ -47,11 +48,12 @@ class blackboard_calendar:
         self.wanted_as_table = as_table
         # Download the calendar from the URL
         r = requests.get(url)
-        print(r)
         # Parse the calendar into an ics.Calendar object
         calendar = Calendar(r.text)
         # Convert the calendar into an array
         events = [event for event in calendar.events]
+        for event in events:
+            self.uids.append(event.uid.split('_')[2])
         parsed = self.parse_to_table(events)
         self.__save_as_csv(parsed)
         return parsed
@@ -69,7 +71,6 @@ class blackboard_calendar:
 
     def test(self):
         event_info = self.download_calendar('https://learn.dcollege.net/webapps/calendar/calendarFeed/c2d84bf6673c402cb557f2a84ddabd87/learn.ics',False, True)
-        print(self.pretty_print(event_info))
 
 b = blackboard_calendar()
 b.test()

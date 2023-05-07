@@ -3,7 +3,7 @@ import json
 import os
 from icecream import ic
 from itertools import groupby
-
+from difflib import get_close_matches
 class BlackboardClass():
     
     def __init__(self, item_id, class_list):
@@ -17,7 +17,7 @@ class BlackboardClass():
     # Formats of saved data in course_ids.json:
     #   COLL: Class Type (CHEM, COM, CS, etc)
     #   NUM: Class Number (101, 102, etc)
-    #   SEC: Section Number (60, 61, etc)
+    #   SEC: Section Number (60, 61, A, etc)
     #   QRT: Quarter Number (202225, etc)
     # Versions:
     #   1. COLL-NUM-SEC/SEC...-XLIST-QRT : PTRS-795-001/002-XLIST-201925
@@ -55,8 +55,12 @@ class BlackboardClass():
                 sections = value.split('-')
                 #ic(value)
                 #ic(sections)
-                classes = self.format_finder(sections)
+                #classes = self.format_finder(sections)
                 #ic(classes)
+
+    def find_closest_match(self, to_match):
+        matches = get_close_matches(to_match, self.all_classes.values(), 5)
+        ic(to_match,matches)
 
     def format_finder(self, sections):
         classes = []
@@ -76,7 +80,8 @@ class BlackboardClass():
                         #print('v2')
                 finally:
                     try:
-                        if version == -1 and any(not char.isdigit() for char in sections[2].split('/')[1]) and len(sections[2].split('/')[1]) != 1:
+                        #COLL-NUM-SEC/COLL-NUM-SEC/...-XLIST-QRT : ARCH-T480-003/URBS-620-001/WEST-T480-003-XLIST-201925
+                        if version == -1 and any(not char.isdigit() for char in sections[2].split('/')[ len(sections[2].split('/')) - 1]) and len(sections[2].split('/')[1]) != 1:
                             version = 3
                             classes = self.v3_format(sections)
                             #print('v3')
@@ -90,8 +95,12 @@ class BlackboardClass():
                                 if version == -1 and '/' in sections[0] and sections[0].split('/')[1][1].isdigit():
                                     version = 5
                                     classes = self.v5_format(sections)
-                            except:
-                                raise Exception('No format found')
+                            finally:
+                                try:
+                                    if version == -1 and '/' in sections[2]:
+                                        pass
+                                except:
+                                    raise Exception('No format found')
         except Exception as e:
             ic(version)
             print(e)
@@ -122,6 +131,7 @@ class BlackboardClass():
         return classes
     
     def v3_format(self, sections):
+        ic(sections)
         classes = []
         num_sections = 1
         for sec in sections:
@@ -133,6 +143,7 @@ class BlackboardClass():
             else:
                 test_class = [sections[i-1].split('/')[1], sections[i], sections[i+1].split('/')[0],sections[len(sections)-1]]
             classes.append(test_class)
+        ic(classes)
         return classes
     
     def v4_format(self, sections):
@@ -190,29 +201,75 @@ class BlackboardClass():
         
         for class_num in possible_classes:
             if self.get_assignment_page(class_num):
-                print(class_num)
+                print('Class Found!')
+                ic(self.class_number, self.class_name)
+
         
     def get_assignment_page(self, course_id):
         req = requests.get(f'https://learn.dcollege.net/webapps/assignment/uploadAssignment?course_id=_{course_id}_1&content_id=_{self.item_id}_1&group_id=&mode=view')
+        self.class_number = course_id
+        self.class_name = self.all_classes[course_id]
         if self.check_if_valid_page(req.content):
-            self.class_number = course_id
-            self.class_name = self.all_classes[course_id]
             return True
         return False
         
-    def check_if_valid_page(self,html):
+    def check_if_valid_page(self, html):
         html = str(html)
+        # Check if child course
+        if 'Unavailable child course:' in html:
+            return self.get_parent_course(html)
         if 'For reference, the Error ID is ' in html and 'crumb_2' in html:
             return True
         return False
-    
-foo = BlackboardClass(13176041,['EXAM-080-001 - SP 22-23',
-                                'CS-172-065 - SP 22-23',
+
+    def get_parent_course(self, html):
+        link_data = (html.split('\\n')[388].strip().split('\\'))
+        parent_link = link_data[5]
+        if 'course_id=' in parent_link:
+            course_id = parent_link.split('_')[2]
+            return self.get_assignment_page(course_id)
+        return False
+
+foo = BlackboardClass(13152621,['JWST-202-900 - SP 22-23',
+                                'EXAM-080-001 - SP 22-23',
+                               'CS-172-065 - SP 22-23',
                                 'ENGL-103-183 - SP 22-23',
                                 'CI-103-060 - SP 22-23',
-                                'CI-103-F - SP 22-23',
-                               'CI-103-060/061/062/063/064/065-XLIST-202235'])
-
-foo.v6_format(['HMP', '660', '900/901/HMP', 'T880', '900', 'XLIST', '202235'])
-
+                             'CI-103-F - SP 22-23',
+                             'CI-103-060/061/062/063/064/065-XLIST-202235'])
 foo.match()
+
+req = requests.get('https://learn.dcollege.net/webapps/assignment/uploadAssignment?course_id=_341274_1&content_id=_13152621_1&group_id=&mode=view')
+#print(foo.check_if_valid_page(req.content))
+
+if '<div id="pageTitleBar" class=\\\'pageTitleIcon\\\' tabindex="0">' in str(req.content).split('\\n'):
+    pass
+    
+req = requests.get('https://learn.dcollege.net/webapps/assignment/uploadAssignment?course_id=_341273_1&content_id=_13152621_1&group_id=&mode=view')
+#print(foo.check_if_valid_page(req.content))
+
+split = str(req.content).split('\\n')
+if '<div id="pageTitleBar" class=\\\'pageTitleIcon\\\' tabindex="0">' in split:
+    line = split.index('<div id="pageTitleBar" class=\\\'pageTitleIcon\\\' tabindex="0">')
+    if 'Error' in split[line + 2]:
+        pass
+    else:
+        pass
+
+
+
+#ic(foo.get_assignment_page(2946365))
+
+
+#for c in ['EXAM-080-001 - SP 22-23',
+#                                'CS-172-065 - SP 22-23',
+#                                'ENGL-103-183 - SP 22-23',
+#                                'CI-103-F - SP 22-23',
+#                                'CI-103-060 - SP 22-23',
+ #                              'CI-103-060/061/062/063/064/065-XLIST-202235']:
+    #foo.find_closest_match(c)
+
+
+#foo.v6_format(['HMP', '660', '900/901/HMP', 'T880', '900', 'XLIST', '202235'])
+
+#foo.match()
