@@ -22,11 +22,16 @@ class assignment:
         self.get_class_name()
     
     def get_ids(self):
-        with open(f'{self.__working_directory}/Blackboard/calendar_headers.json','r+') as file:
+        with open(f'{self.__working_directory}/Blackboard/assignment_headers.json','r+') as file:
             headers = json.load(file)['headers']
 
         req = requests.get(f'https://learn.dcollege.net/webapps/calendar/launch/attempt/_blackboard.platform.gradebook2.GradableItem-_{self.item_id}_1',headers=headers)
+        
+        if req.status_code == 403:
+            print('** Error, please revalidate cookies! **')
+            return
         lines = req.text.split('\n')
+        ic(req.status_code)
         for line in lines:
             self.is_discussion_board = 'discussion_board_entry' in line
             if 'breadcrumbs.rightMostParentURL' in line:
