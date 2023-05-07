@@ -59,10 +59,11 @@ function applyDataToPage() {
 	"CI-103-B": {"days": [1], "time": "10:00-10:50", "instructor": "Daniel Moix", "crn": 20004},
 	"CT-140-001": {"days": [0, 2], "time": "9:00-10:20", "instructor": "Chris Carroll", "crn": 20005},
 	"INFO-153-001": {"days": [0, 3], "time": "15:30-16:50", "instructor": "Bo Song", "crn": 20006}}
+	let assignment_matching = "2972893":{"Course ID":"338575","Content ID":"_13025995_1","Complex Name":"CIVC-101-026 - SP 22-23","Standard Name":"CIVC-101-026 - SP 22-23","Discussion":false}
 
-	applyDataToCalendar(assignments, classes);
-	applyDataToSidebar(assignments, classes);
-	applyDataToAssignments(assignments, classes);
+	applyDataToCalendar(assignments, classes, assignment_matching);
+	applyDataToSidebar(assignments, classes, assignment_matching);
+	applyDataToAssignments(assignments, classes, assignment_matching);
 }
 
 function applyDataToCalendar(assignments, classes) {
@@ -181,7 +182,7 @@ function calendartime() {
 	myDiv.style.position = "absolute";
 }
 
-function applyDataToSidebar(assignments, classes) {
+function applyDataToSidebar(assignments, classes, assignment_matching) {
 	let dateCounts = {};
 	for (key of Object.keys(assignments)) {
 		if (key.startsWith("_blackboard.platform.gradebook2.GradableItem")) {
@@ -294,7 +295,7 @@ function setDisplayedWeek(week) {
 	updateCalendar();
 }
 
-function applyDataToAssignments(assignments, classes) {
+function applyDataToAssignments(assignments, classes, assignment_matching) {
 	for (let i = 0; i < 7; i++) {
 		document.getElementById("due-dates-grid").children[i].innerHTML = "";
 	}
