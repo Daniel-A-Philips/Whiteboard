@@ -4,7 +4,7 @@ from icecream import ic
 import requests
 from difflib import get_close_matches
 
-class assignment:
+class Assignment:
     
     def __init__(self, GradableItem, classes):
         ic(GradableItem)
@@ -46,15 +46,18 @@ class assignment:
                 break
     
     def get_class_name(self):
-        with open(f'{self.__working_directory}/Blackboard/course_ids.json', 'r+') as file:
-            all_classes = json.load(file)
-            self.complex_name = all_classes[self.course_id]
-            is_xlist = 'XLIST' in self.complex_name
-            file.close()
-        if is_xlist:
-            matches = get_close_matches(self.complex_name, self.classes, cutoff=0.3)
-            self.class_name = matches[0]
-        else:
-            self.class_name = self.complex_name
-        ic(self.complex_name, self.class_name)
-        print('\n\n')
+        try:
+            with open(f'{self.__working_directory}/Blackboard/course_ids.json', 'r+') as file:
+                all_classes = json.load(file)
+                self.complex_name = all_classes[self.course_id]
+                is_xlist = 'XLIST' in self.complex_name
+                file.close()
+            if is_xlist:
+                matches = get_close_matches(self.complex_name, self.classes, cutoff=0.3)
+                self.class_name = matches[0]
+            else:
+                self.class_name = self.complex_name
+            ic(self.complex_name, self.class_name)
+            print('\n\n')
+        except:
+            print('Error in get_class_name')
