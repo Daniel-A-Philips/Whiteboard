@@ -1,26 +1,23 @@
-import sys
 import os
 
 __working_directory = os.getcwd()
 
-for directory in ['Blackboard', 'Parser','TermMaster']:
-    print(__working_directory + '/' + directory)
-    sys.path.insert(1, __working_directory + '/' + directory)
-    
-from blackboard_calendar import blackboard_calendar
-from Assignment import assignment
-from tms import tms
-from parse import input_parser, output_parser
+from Blackboard.blackboard_calendar import blackboard_calendar
+from Blackboard.assignment import Assignment
+from TermMaster.tms import tms
+from Parser.parse import input_parser, output_parser
 from flask import Flask, request, render_template_string, render_template
 from icecream import ic
 import json
 import datetime
+import copy
 class_info = []
 calendar_link = ''
 
 info = ''
 app = Flask(__name__, template_folder= __working_directory + '/Flask Resources/template',static_folder= __working_directory + '/Flask Resources/static')
-output_parser = output_parser()
+out_parser = output_parser()
+in_parser = input_parser()
 termmaster = tms()
 bblearn = blackboard_calendar()
 assignment_info = {}
@@ -33,20 +30,18 @@ def main_page():
 def put_classes():
     global class_info
     global calendar_link
-    input_parser1 = input_parser()
-    start = datetime.datetime.now()
-    calendar_link = input_parser1.blackboard_link(request.headers.get('user-blackboard-calendar-link'))
-    user_copied = input_parser1.class_information(request.headers.get('user-blackboard-copied'))   
+    in_parser1 = input_parser()
+    calendar_link = in_parser1.blackboard_link(request.headers.get('user-blackboard-calendar-link'))
+    user_copied = in_parser1.class_information(request.headers.get('user-blackboard-copied'))   
     class_info = termmaster.get_all_class_info(user_copied)
-    time_taken_for_put_classes = datetime.datetime.now() - start
-    ic(time_taken_for_put_classes)
+    in_parser = in_parser1
     return calendar_link
 
 @app.route('/get-classes')
 def get_classes():
     global class_info
     start = datetime.datetime.now()
-    parsed = output_parser.class_info_parser(class_info)
+    parsed = out_parser.class_info_parser(class_info)
     time_taken_for_get_classes = datetime.datetime.now() - start
     ic(time_taken_for_get_classes)
     return render_template_string(json.dumps(parsed))
@@ -55,10 +50,12 @@ def get_classes():
 def get_blackboard_calendar():
     global calendar_link
     blackboard_calendar_info = bblearn.download_calendar(calendar_link, False)
-    classes = [f'{data["School"]}-{data["Class Number"]}-{data["Section Number"]} - {data["Quarter Name"]} {data["Year"]}' for data in input_parser.classes]
-    print(classes)
+    print(in_parser)
+    classes = [f'{data["School"]}-{data["Class Number"]}-{data["Section Number"]} - {data["Quarter Name"]} {data["Year"]}' for data in in_parser.classes]
     for uid in bblearn.uids:
-        temp_assignment = assignment(uid, classes)
+        ic(uid)
+        ic(classes)
+        temp_assignment = Assignment(uid, classes)
         assignment_info[uid] = {'Course ID':temp_assignment.course_id,
                                 'Content ID': temp_assignment.content_id,
                                 'Complex Name': temp_assignment.complex_name,
@@ -73,16 +70,16 @@ def get_assignment_information():
     
 @app.route('/get-persistent-info')
 def get_persistent_info():
-    input_parser2 = input_parser()
-    link = input_parser2.check_link_exist()
-    hasClasses = input_parser2.check_classes_exist()
+    in_parser2 = input_parser()
+    link = in_parser2.check_link_exist()
+    hasClasses = in_parser2.check_classes_exist()
     ic(link)
     ic(hasClasses)
     if link and hasClasses:
         f = open(f'{__working_directory}/Information/class_info.txt')
         contents = f.read()
         ic(contents)
-        classes = input_parser2.class_information(contents)
+        classes = in_parser2.class_information(contents)
         information = termmaster.get_all_class_info(classes)
         ic(information)
         
@@ -90,6 +87,7 @@ def get_persistent_info():
               'has_classes':hasClasses,
               'classes': information
               }
+    in_parser = in_parser2
     return render_template_string(json.dumps( output) )
     
     

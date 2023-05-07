@@ -51,14 +51,13 @@ class input_parser:
         return self.link
 
     def class_information(self, unparsed):
-        ic(unparsed)
         self.__write_class_information(unparsed)
         all_info = urllib.parse.unquote(unparsed).split('\n')
         for line in all_info:
             if 'Due date:' not in line and '-' in line and '.' in line and ':' in line :
                 self.classes.append(line)
-        ic(self.classes)
         self.split_class_information()
+        ic(self.classes)
         return self.classes
 
     def split_class_information(self):
@@ -75,7 +74,9 @@ class input_parser:
                 'Year' : all_info[4]
             })
         self.classes = split_classes
-        ic(self.classes)
+    
+    def get_classes(self):
+        return self.classes
     
 class output_parser:
 

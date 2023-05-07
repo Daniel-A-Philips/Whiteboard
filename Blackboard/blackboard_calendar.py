@@ -2,7 +2,6 @@ from tabulate import tabulate
 import requests
 import datetime
 import csv
-from Assignment import assignment
 from ics import Calendar
 
 class blackboard_calendar:
