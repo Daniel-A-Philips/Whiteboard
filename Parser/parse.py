@@ -76,6 +76,7 @@ class input_parser:
                 'Year' : all_info[4]
             })
         self.classes = split_classes
+        ic(self.classes)
     
 class output_parser:
 

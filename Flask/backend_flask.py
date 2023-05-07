@@ -8,6 +8,7 @@ for directory in ['Blackboard', 'Parser','TermMaster']:
     sys.path.insert(1, __working_directory + '/' + directory)
     
 from blackboard_calendar import blackboard_calendar
+from Assignment import assignment
 from tms import tms
 from parse import input_parser, output_parser
 from flask import Flask, request, render_template_string, render_template
@@ -23,7 +24,7 @@ input_parser = input_parser()
 output_parser = output_parser()
 termmaster = tms()
 bblearn = blackboard_calendar()
-
+assignment_info = {}
 
 @app.route('/')
 def main_page():
@@ -53,12 +54,23 @@ def get_classes():
 @app.route('/get-blackboard-calendar')
 def get_blackboard_calendar():
     global calendar_link
-    start = datetime.datetime.now()
     blackboard_calendar_info = bblearn.download_calendar(calendar_link, False)
-    time_taken_for_get_blackboard_calendar = datetime.datetime.now() - start
-    ic(time_taken_for_get_blackboard_calendar)
+    classes = [f'{data["School"]}-{data["Class Number"]}-{data["Section Number"]} - {data["Quarter Name"]} {data["Year"]}' for data in input_parser.classes]
+    print(classes)
+    for uid in bblearn.uids:
+        temp_assignment = assignment(uid, classes)
+        assignment_info[uid] = {'Course ID':temp_assignment.course_id,
+                                'Content ID': temp_assignment.content_id,
+                                'Complex Name': temp_assignment.complex_name,
+                                'Standard Name': temp_assignment.class_name,
+                                'Discussion': temp_assignment.is_discussion_board}
+    ic(assignment_info)
     return render_template_string(json.dumps( blackboard_calendar_info))
 
+@app.route('/get-assignment-information')
+def get_assignment_information():
+    return render_template_string(json.dumps(assignment_info))
+    
 @app.route('/get-persistent-info')
 def get_persistent_info():
     global class_info
