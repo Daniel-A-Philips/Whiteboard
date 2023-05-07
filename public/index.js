@@ -20,7 +20,7 @@ function dateFromBBString(str) {
 
 function startOfCurrentWeek() {
 	let now = new Date();
-	let monday = new Date(now.getTime() - (1000 * 3600 * 24 * (now.getDay() - 1)));
+	let monday = new Date(now.getTime() - (1000 * 3600 * 24 * ((now.getDay() == 0 ? 7 : now.getDay()) - 1)));
 	monday.setHours(0);
 	monday.setMinutes(0);
 	monday.setSeconds(0);
