@@ -58,8 +58,9 @@ function applyDataToPage() {
 	"CI-103-060": {"days": [3], "time": "9:00-10:50", "instructor": "Daniel Moix", "crn": 20003},
 	"CI-103-B": {"days": [1], "time": "10:00-10:50", "instructor": "Daniel Moix", "crn": 20004},
 	"CT-140-001": {"days": [0, 2], "time": "9:00-10:20", "instructor": "Chris Carroll", "crn": 20005},
-	"INFO-153-001": {"days": [0, 3], "time": "15:30-16:50", "instructor": "Bo Song", "crn": 20006}}
-	let assignment_matching = "2972893":{"Course ID":"338575","Content ID":"_13025995_1","Complex Name":"CIVC-101-026 - SP 22-23","Standard Name":"CIVC-101-026 - SP 22-23","Discussion":false}
+	"INFO-153-001": {"days": [0, 3], "time": "15:30-16:50", "instructor": "Bo Song", "crn": 20006}};
+	
+	let assignment_matching = {"2972893":{"Course ID":"338575","Content ID":"_13025995_1","Complex Name":"CIVC-101-026 - SP 22-23","Standard Name":"CIVC-101-026 - SP 22-23","Discussion":false}}
 
 	applyDataToCalendar(assignments, classes, assignment_matching);
 	applyDataToSidebar(assignments, classes, assignment_matching);
@@ -228,9 +229,10 @@ function applyDataToSidebar(assignments, classes, assignment_matching) {
 	}
 	document.getElementById("ltc-table").innerHTML = html;
 	if (!window.hasRunOnce) {
+		const classColors = ['#FFC107', '#3F51B5', '#8BC34A', '#808080', '#009688', '#9E9764', '#308446', '#A18594', '#412227'];
 		const classFilters = document.getElementById("class-filters");
 		
-		Object.keys(classes).forEach(courseKey => {
+		Object.keys(classes).forEach((courseKey, index) => {
 			const courseDiv = document.createElement("div");
 			const label = document.createElement("label");
 			const input = document.createElement("input");
@@ -242,6 +244,7 @@ function applyDataToSidebar(assignments, classes, assignment_matching) {
 			label.textContent = courseKey;
 		
 			label.classList.add("checkbox-button"); // Add the class name to the label element
+			label.style.backgroundColor = classColors[index % classColors.length]; // Set the background color of the label to a color from the classColors array
 			label.appendChild(input);
 			courseDiv.appendChild(label);
 			classFilters.appendChild(courseDiv);
@@ -250,41 +253,14 @@ function applyDataToSidebar(assignments, classes, assignment_matching) {
 			input.addEventListener("change", () => {
 				if (input.checked) {
 					label.classList.remove("unchecked");
+					label.style.backgroundColor = classColors[index % classColors.length];
 				} else {
 					label.classList.add("unchecked");
+					label.style.backgroundColor = "white";
 				}
 				applyDataToCalendar(assignments, classes);
 			});
 		});
-		
-			const checkAllButton = document.createElement("button");
-			checkAllButton.textContent = "Check All";
-			checkAllButton.classList.add("check-all-button"); // Add the class name to the button element
-			checkAllButton.addEventListener("click", () => {
-			const inputs = document.querySelectorAll("#class-filters input[type='checkbox']");
-			inputs.forEach(input => {
-				input.checked = true;
-				const label = input.parentElement;
-				label.classList.remove("unchecked");
-			});
-			applyDataToCalendar(assignments, classes);
-		});
-		classFilters.appendChild(checkAllButton);
-		
-		const uncheckAllButton = document.createElement("button");
-		uncheckAllButton.textContent = "Uncheck All";
-		uncheckAllButton.classList.add("uncheck-all-button"); // Add the class name to the button element
-		uncheckAllButton.addEventListener("click", () => {
-			const inputs = document.querySelectorAll("#class-filters input[type='checkbox']");
-			inputs.forEach(input => {
-				input.checked = false;
-				const label = input.parentElement;
-				label.classList.add("unchecked");
-			});
-			applyDataToCalendar(assignments, classes);
-		});
-		classFilters.appendChild(uncheckAllButton);
-		
 		window.hasRunOnce = true; // Set the flag variable to true
 	}
 			
