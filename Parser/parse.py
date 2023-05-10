@@ -57,7 +57,6 @@ class input_parser:
             if 'Due date:' not in line and '-' in line and '.' in line and ':' in line :
                 self.classes.append(line)
         self.split_class_information()
-        ic(self.classes)
         return self.classes
 
     def split_class_information(self):
