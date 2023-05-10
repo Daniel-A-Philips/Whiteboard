@@ -7,7 +7,6 @@ from difflib import get_close_matches
 class Assignment:
     
     def __init__(self, item_id, classes):
-        ic(item_id)
         self.item_id = item_id
         self.classes = classes
         self.course_id = ''
@@ -24,14 +23,12 @@ class Assignment:
     def get_ids(self):
         with open(f'{self.__working_directory}/Blackboard/assignment_headers.json','r+') as file:
             headers = json.load(file)['headers']
-
-        req = requests.get(f'https://learn.dcollege.net/webapps/calendar/launch/attempt/_blackboard.platform.gradebook2.item_id-_{self.item_id}_1',headers=headers)
-        
+        url = f'https://learn.dcollege.net/webapps/calendar/launch/attempt/_blackboard.platform.gradebook2.GradableItem-_{self.item_id}_1'
+        req = requests.get(url, headers=headers)
         if req.status_code == 403:
             print('** Error, please revalidate cookies! **')
             return
         lines = req.text.split('\n')
-        ic(req.status_code)
         for line in lines:
             self.is_discussion_board = 'discussion_board_entry' in line
             if 'breadcrumbs.rightMostParentURL' in line:
@@ -53,11 +50,12 @@ class Assignment:
                 is_xlist = 'XLIST' in self.complex_name
                 file.close()
             if is_xlist:
+                #TODO
                 matches = get_close_matches(self.complex_name, self.classes, cutoff=0.3)
                 self.class_name = matches[0]
             else:
                 self.class_name = self.complex_name
-            ic(self.complex_name, self.class_name)
-            print('\n\n')
+            ic(self.class_name, self.course_id, self.content_id)
         except:
             print('Error in get_class_name')
+            
