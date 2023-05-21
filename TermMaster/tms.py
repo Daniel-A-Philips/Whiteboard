@@ -1,9 +1,14 @@
+from gevent import monkey
+def stub(*args, **kwargs):  # pylint: disable=unused-argument
+    pass
+monkey.patch_all = stub
+import grequests
 import json
 import requests
 from icecream import ic
 
 class tms:
-    
+    class_urls = []
     def __init__(self):
         self.terms = []
         self.download_homepage()        
@@ -54,6 +59,7 @@ class tms:
                                 headers = self.headers, 
                                 data=f'term.termDesc={quarter}&crseTitle=&crseNumb=&crn={crn}&campus.desc=Any')
         self.headers['cookie'] = self.headers['cookie'].replace(jsessionid,'INSERT_SESSION_ID')
+        tms.class_urls.append(response.url)
         return self.class_page_parser(response.content.decode(),crn)        
 
     def get_all_class_info(self,class_info):
@@ -68,3 +74,8 @@ class tms:
         for term_info in self.terms:
             if info['Quarter Number'] in term_info[1]:
                 return term_info[0]
+
+    @classmethod
+    def send_class_urls(cls):
+        unsent_urls = (grequests.get(unsent) for unsent in cls.class_urls)
+        grequests.map(unsent_urls)
