@@ -287,9 +287,10 @@ body {
 
 .due-date-entry {
 	margin-bottom: 3px;
+	color: white;
 }
 .due-date-time {
-	color: slategray;
+	color: white;
 }
 
 /* Class filters*/
