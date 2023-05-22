@@ -83,7 +83,42 @@ function getRemoteData() {
 	"CT-140-001": {"days": [0, 2], "time": "9:00-10:20", "instructor": "Chris Carroll", "crn": 20005},
 	"INFO-153-001": {"days": [0, 3], "time": "15:30-16:50", "instructor": "Bo Song", "crn": 20006}};
 	
-	assignment_matching = {"2972893":{"Course ID":"338575","Content ID":"_13025995_1","Complex Name":"CIVC-101-026 - SP 22-23","Standard Name":"CIVC-101-026 - SP 22-23","Discussion":false}}
+	assignment_matching = {
+		"2922555":
+		{"Course ID":"338575",
+		"Content ID":"_13025995_1",
+		"Complex Name":"INFO-153-001",
+		"Standard Name":"INFO-153-001",
+		"Discussion":false},
+
+		"2868738":
+		{"Course ID":"338575",
+		"Content ID":"_13025995_1",
+		"Complex Name":"CT-140-001",
+		"Standard Name":"CT-140-001",
+		"Discussion":false},
+
+		"2868737":
+		{"Course ID":"338575",
+		"Content ID":"_13025995_1",
+		"Complex Name":"CI-103-B",
+		"Standard Name":"CI-103-B",
+		"Discussion":false},
+
+		"2868747":
+		{"Course ID":"338575",
+		"Content ID":"_13025995_1",
+		"Complex Name":"CI-103-B",
+		"Standard Name":"CI-103-B",
+		"Discussion":false},
+
+		"2868748":
+		{"Course ID":"338575",
+		"Content ID":"_13025995_1",
+		"Complex Name":"CI-103-B",
+		"Standard Name":"CI-103-B",
+		"Discussion":false}
+	}
 	applyDataToPage();
 }
 
@@ -92,6 +127,7 @@ function applyDataToPage() {
 	applyDataToSidebar();
 	applyDataToAssignments();
 }
+classColorMap = {};
 
 function applyDataToCalendar(assignments, classes) {
 	const col0 = document.querySelector('.calendar_col[style="grid-column:3"]');
@@ -150,6 +186,7 @@ function applyDataToCalendar(assignments, classes) {
 			const start = parseInt(startHour) * 60 + parseInt(startMinute);
 			const end = parseInt(endHour) * 60 + parseInt(endMinute);
 			const duration = end - start;
+			const color = classColors[Object.keys(classes).indexOf(className) % classColors.length];
 	
 			classElement.style.position = 'absolute';
 			classElement.style.top = `${hourHeight * startHour + hourHeight * startMinute / 60}px`;
@@ -158,12 +195,15 @@ function applyDataToCalendar(assignments, classes) {
 	
 			classElement.innerHTML = className + '<br>' + classInfo.instructor;
 	
+			classColorMap[className] = color;
+
 			column.appendChild(classElement);
 			}
   
 		});
   
 	}
+	return classColorMap;
 }  
 
 function calendartime() {
@@ -322,6 +362,42 @@ function applyDataToAssignments() {
 			time = (dueDate.getHours() % 12) + (dueDate.getHours() > 12 ? "pm" : "am")
 		}
 		col.innerHTML += '<div class="due-date-entry calendar_calendar1"><span class="due-date-time">' + time + '</span> ' + assignments[key].summary + '</div>'
+	}
+
+	const pattern = /GradableItem-_(\d+)/;
+
+	for (const key in assignments) {
+		const match = key.match(pattern);
+		if (match) {
+			const number = parseInt(match[1], 10);
+			const assignment = assignments[key];
+			const summary = assignments[key].summary;
+
+			// Look for a matching key in assignment_matching
+			let matchingObject = null;
+			for (const matchingKey in assignment_matching) {
+			if (parseInt(matchingKey, 10) === number) {
+				matchingObject = assignment_matching[matchingKey];
+				break;
+			}
+			}
+
+			if (matchingObject && matchingObject["Standard Name"]) {
+			const standardName = matchingObject["Standard Name"];
+			const color = classColorMap[standardName];
+			assignment.color = color;  // Get color from classColorMap
+			
+			const dueDateEntries = document.getElementsByClassName('due-date-entry');
+			for (let i = 0; i < dueDateEntries.length; i++) {
+				if (dueDateEntries[i].innerHTML.includes(summary)) {
+					// Set the background color of the due-date-entry element
+					dueDateEntries[i].style.backgroundColor = color;
+					break;
+				}
+			}
+
+		}
+	}
 	}
 }
 
