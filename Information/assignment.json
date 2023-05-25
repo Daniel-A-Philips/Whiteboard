@@ -1,0 +1,22 @@
+{
+    "uid": [
+        {
+        "Course ID": "temp_assignment.course_id",
+        "Content ID": "temp_assignment.content_id",
+        "Complex Name": "temp_assignment.complex_name",
+        "Standard Name": "temp_assignment.class_name",
+        "Discussion": "temp_assignment.is_discussion_board"
+    }
+
+    ],
+
+    "uid2": [
+        {
+            "Course ID": "temp_assignment.course_id",
+            "Content ID": "temp_assignment.content_id",
+            "Complex Name": "temp_assignment.complex_name",
+            "Standard Name": "temp_assignment.class_name",
+            "Discussion": "temp_assignment.is_discussion_board"
+        }
+    ]
+}

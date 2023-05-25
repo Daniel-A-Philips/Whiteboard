@@ -1,5 +1,6 @@
 import urllib.parse
 from icecream import ic
+import json
 import os
 
 class input_parser:
@@ -10,6 +11,8 @@ class input_parser:
         self.link = []
         self.hasLink = False
         self.hasClass = False 
+        self.hasAssignments = False
+        self.hasCalendar = False
 
     def __write_link(self, unparsed):
         f = open(f'{self.__working_directory}/Information/link.txt','r+')
@@ -34,7 +37,15 @@ class input_parser:
         f.close()
         if link == '':
             self.hasLink = False
+        self.link = self.blackboard_link(link)
         return self.hasLink
+
+    def check_calendar_exist(self):
+        f = open(f'{self.__working_directory}/Information/calendar.json')
+        data = json.load(f)
+        if bool(data):
+            self.hasCalendar = True
+        return True
 
     def check_classes_exist(self):
         self.hasClass = True
@@ -44,6 +55,15 @@ class input_parser:
         if classes == '':
             self.hasClass = False
         return self.hasClass
+
+    def check_assignments_exist(self):
+        self.hasAssignments = True
+        f = open(f'{self.__working_directory}/Information/assignment.json')
+        data = json.load(f)
+        if not bool(data):
+            return False, {}
+        else:
+            return True, data
 
     def blackboard_link(self, unparsed):
         self.__write_link(unparsed)
@@ -80,11 +100,13 @@ class input_parser:
 class output_parser:
 
     def __init__(self):
+        self.__working_directory = os.getcwd()
         print('output_parser created')
     
-    def class_info_parser(self, class_info):
+    def class_info_parser(self, class_info, write=True):
         print('Running class_info_parser')
         returnable = {}
+        ic(class_info)
         for individual_class in class_info:
             try:
                 class_data = {}
@@ -96,6 +118,9 @@ class output_parser:
                 returnable[full_class_name] = class_data
             except KeyError:
                 continue
+        if write:
+            with open(f'{self.__working_directory}/Information/calendar.json','w+') as f:
+                json.dump(returnable,f)
         return returnable
 
     def __parse_days(self, individual_class):

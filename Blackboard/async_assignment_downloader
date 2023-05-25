@@ -1,9 +1,0 @@
-import grequests
-from icecream import ic 
-
-class downloader:
-    def __init__(self, assignment_instances):
-        self.urls = [instance.url for instance in assignment_instances]
-        rs = (grequests.get(u) for u in self.urls)
-        self.responses = grequests.map(rs)
-        ic(self.responses)
