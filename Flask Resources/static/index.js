@@ -129,7 +129,8 @@ function applyDataToPage() {
 }
 classColorMap = {};
 
-function applyDataToCalendar(assignments, classes) {
+function applyDataToCalendar() {
+
 	const col0 = document.querySelector('.calendar_col[style="grid-column:3"]');
 	const col1 = document.querySelector('.calendar_col[style="grid-column:4"]');
 	const col2 = document.querySelector('.calendar_col[style="grid-column:5"]');
