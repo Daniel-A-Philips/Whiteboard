@@ -17,10 +17,12 @@ class blackboard_calendar:
         return sorted(event_list, key=lambda x: x[1], reverse=False)
 
     # function to parse the events into a table format
-    def parse_to_table(self, events):
+    def parse_to_table(self, events, wants_uid = False):
         event_info = []
         for event in events:
             event_array = []
+            if wants_uid:
+                event_array.append(event.uid)
             event_array.append(event.name)
             # convert the due date to datetime object
             due_date = datetime.datetime.strptime(str(event.begin.datetime).split(':00-')[0], "%Y-%m-%d %H:%M")
@@ -36,16 +38,27 @@ class blackboard_calendar:
             event_array.append(description)
             event_info.append(event_array)
         event_info = self.sort(event_info)
+        to_return = event_info
+        if wants_uid:
+            to_return = {}
+            for event_array in event_info:
+                print(event_array[0].split('-')[1].split('_')[1])
+                to_return[event_array[0].split('-')[1].split('_')[1]] = {
+                            'name' : event_array[1],
+                            'due date' : event_array[2],
+                            'description' : event_array[3]
+                }
         if self.wanted_as_table:
             event_info.insert(0,['Assignment Name','Due Date','Summary'])
-        return event_info
+        return to_return
 
     # A function that given a .ics url downloads all events within the character
     # 'as_table' refers to whether the data should be returned raw or parsed into a table
-    def download_calendar(self, url, as_table, as_csv=False):
+    def download_calendar(self, url, as_table, as_csv=False, wants_uid = False):
         self.wanted_as_csv = as_csv
         self.wanted_as_table = as_table
         # Download the calendar from the URL
+        print(url)
         r = requests.get(url)
         # Parse the calendar into an ics.Calendar object
         calendar = Calendar(r.text)
@@ -53,7 +66,7 @@ class blackboard_calendar:
         events = [event for event in calendar.events]
         for event in events:
             self.uids.append(event.uid.split('_')[2])
-        parsed = self.parse_to_table(events)
+        parsed = self.parse_to_table(events, wants_uid)
         self.__save_as_csv(parsed)
         return parsed
 
@@ -70,6 +83,3 @@ class blackboard_calendar:
 
     def test(self):
         event_info = self.download_calendar('https://learn.dcollege.net/webapps/calendar/calendarFeed/c2d84bf6673c402cb557f2a84ddabd87/learn.ics',False, True)
-
-b = blackboard_calendar()
-b.test()
