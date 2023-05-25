@@ -1,4 +1,5 @@
 .dsstore
+.DS_Store
 $GIT_DIR/download_test/Calendar.json
 $GIT_DIR/download_test/Readable.csv
 $GIT_DIR/Information/class_info.json
