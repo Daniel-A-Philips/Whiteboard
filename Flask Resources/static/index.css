@@ -1,28 +1,48 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700;800&display=swap");
+
 body, html {
 	width: 100vw;
 	height: 100vh;
 	margin: 0;
+	font-family: "Open Sans", sans-serif;
 }
 
 /* ctrl a input */
 #ctrl-a-input-window {
 	position: fixed;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
 	background-color: white;
-	border: 1px solid black;
-	width: 50vw;
-	height: 50vh;
-	z-index: 10;
-	padding: 5px;
-	box-shadow: 0 0 15px black;
+	z-index: 100;
+	padding: 50px;
+}
+
+#ctrl-a-input-window > div {
+	position: fixed;
+	width: 50%;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+}
+
+#ctrl-a-input-window img {
+	width: 40%;
+}
+
+#ctrl-a-input-window h1 {
+	margin-top: 0;
 }
 
 #ctrl-a-input-textarea {
 	width: 100%;
-	height: 200px;
+	height: 150px;
 	resize: none;
+}
+
+#calendar-link-input {
+	width: 100%;
 }
 
 #ctrl-a-input-submit {
@@ -37,6 +57,23 @@ body, html {
 	width: 17vw;
 	height: 100vh;
 	border-right: 3px solid #dadce0;
+}
+
+#logo {
+	width: 100%;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+
+.hidden {
+    display: none;
 }
 
 #long-term-calendar {
@@ -83,20 +120,6 @@ body, html {
 	background-color: tomato;
 }
 
-#class-filters {
-	width: max-content;
-	margin: 0 auto;
-}
-
-#class-filters h4 {
-	text-align: center;
-	margin-bottom: 0;
-}
-
-#class-filters > div {
-	width: max-content;
-}
-
 /* calendar */
 #calendar {
 	position: absolute;
@@ -106,7 +129,7 @@ body, html {
 	height: calc(100vh - 30vh);
 	border-bottom: 3px solid #dadce0;
 }
-/* je578 Edits */
+
 * {
 	box-sizing: border-box;
 }
@@ -131,10 +154,15 @@ body {
 	position: sticky;
 	z-index: 10;
 	border-bottom: 2px solid #dadce0;
+	overflow-y: scroll;
 }
 
 .calendar_day {
 	border-left: 1px solid #dadce0;
+}
+
+.calendar_day > p {
+	margin: 10px 0;
 }
 
 .calendar_content {
@@ -143,6 +171,7 @@ body {
 	grid-template-rows: repeat(24, 3em);
 	overflow-y: scroll;
 	height: calc(94vh - 30vh);
+	position: relative;
 }
 
 .calendar_time {
@@ -160,6 +189,7 @@ body {
 	border-right: 1px solid #dadce0;
 	grid-row: 1/span 24;
 	grid-column: span 1;
+	position: relative;
 }
 
 .calendar_filler-col {
@@ -170,7 +200,7 @@ body {
 
 .calendar_row {
 	grid-column: 2/-1;
-	border-bottom: 1px solid #dadce0;
+	border-bottom: 2px solid #dadce0;
 }
 
 .calendar_event {
@@ -194,34 +224,29 @@ body {
 	background-color: #b3e1f7;
 	border-color: #81cdf2;
 }
-
-.event1 {
-	grid-column: 3;
-	grid-row: 9/span 4;
+.class {
+	border-radius: 4px;
+	padding: 8px;
+	margin: 5px;
+	box-sizing: border-box;
+	color: #fff;
+	font-weight: bold;
+	font-size: 11px;
+	position: relative;
+	width: 95%;
 }
 
-.event2 {
-	grid-column: 5;
-	grid-row: 10/span 6;
-}
-
-.event3 {
-	grid-column: 7;
-	grid-row: 8/span 10;
-}
-
-.event4 {
-	grid-column: 8;
-	grid-row: 21/span 2;
+.row {
+	display: flex;
+	flex-wrap: wrap;
 }
 
 .calendar_current-time {
-	grid-column: 6;
-	grid-row: 10;
 	border-top: 2px solid #ea4335;
-	position: relative;
-	top: calc(50% - 1px);
+	border-top-left-radius: 2px dashed #ea4335;
+	width: 191px;
 }
+
 
 .calendar_circle {
 	width: 12px;
@@ -229,13 +254,13 @@ body {
 	border: 1px solid #ea4335;
 	border-radius: 50%;
 	background: #ea4335;
-	position: relative;
+	position: absolute;
 	top: -6px;
 	left: -6px;
 }
 
 .current-date {
-	font-weight: bold;
+	font-weight: 800;
 }
 
 /* due dates */
@@ -262,7 +287,131 @@ body {
 
 .due-date-entry {
 	margin-bottom: 3px;
+	color: white;
 }
 .due-date-time {
-	color: slategray;
+	color: white;
 }
+
+/* Class filters*/
+
+  
+#class-filters > div {
+	align-items: center;
+	margin: 0.5em;
+}
+  
+label.checkbox-button {
+	display: flex;
+	align-items: center;
+	padding: 0.5em 1em;
+	font-size: 1em;
+	font-weight: bold;
+	color: #fff;
+	background-color: #017BB6;
+	border-radius: 5px;
+	cursor: pointer;  
+}
+label.checkbox-button:hover {
+	background-color: #00AAE7;
+}
+  
+label.checkbox-button input[type="checkbox"] {
+	display: none;
+}
+  
+label.checkbox-button:before {
+	display: inline-block;
+	vertical-align: middle;
+	margin-right: 0.5em;
+	font-size: 1.5em;
+	line-height: 0;
+}
+  
+label.checkbox-button.checked:before {
+	content: "\2611";
+}
+  
+label.checkbox-button span {
+	display: inline-block;
+	vertical-align: middle;
+	margin-left: 0.5em;
+}
+  
+label.checkbox-button.unchecked {
+	background-color: #fff;
+	color: black;
+}
+  
+#class-filters {
+	width: max-content;
+	margin: 0 auto;
+	position: relative;
+	border: 2.5px solid #dadce0;
+	padding: 10px;
+	bottom: 20px;
+	top: 30px;
+	flex-wrap: wrap;
+	justify-content: center;
+	font-size: 12px;
+
+}
+
+#class-filters h4 {
+	text-align: center;
+	margin: 0;
+	font-size: 14px;
+}
+
+#class-filters > div {
+	width: max-content;
+}
+#class-filters input {
+	cursor: pointer;
+
+}
+/* Class filters Check/Uncheck all Buttom*/
+.check-all-button {
+	display: block;
+	margin: 1em auto;
+	padding: 0.5em 1em;
+	font-size: 1em;
+	font-weight: bold;
+	color: #fff;
+	background-color: #00AAE7;
+	border-radius: 5px;
+	cursor: pointer;
+	border: none;
+  }
+  
+.check-all-button:hover {
+	background-color: lightgreen;
+}
+  
+.check-all-button:focus {
+	outline: none;
+	box-shadow: 0 0 0 2px #fff, 0 0 0 4px lightgreen;
+}
+
+
+.uncheck-all-button {
+	display: block;
+	margin: 1em auto;
+	padding: 0.5em 1em;
+	font-size: 1em;
+	font-weight: bold;
+	color: #fff;
+	background-color: #00AAE7;
+	border-radius: 5px;
+	cursor: pointer;
+	border: none;
+}
+.uncheck-all-button:hover {
+	background-color: #ff0002;
+}
+  
+.uncheck-all-button:focus {
+	outline: none;
+	box-shadow: 0 0 0 2px #fff, 0 0 0 4px #ff0002;
+}
+
