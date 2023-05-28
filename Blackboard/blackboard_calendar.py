@@ -41,9 +41,7 @@ class blackboard_calendar:
         to_return = event_info
         if wants_uid:
             to_return = {}
-            ic(event_info)
             for event_array in event_info:
-                ic(event_array[0].split('-')[1].split('_')[1])
                 to_return[event_array[0].split('-')[1].split('_')[1]] = {
                             'name' : event_array[1],
                             'due date' : event_array[2],

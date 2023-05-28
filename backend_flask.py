@@ -70,8 +70,6 @@ def get_blackboard_calendar():
     with open(f'{__working_directory}/Information/assignment.json', "w") as outfile:
         json.dump(assignment_info, outfile)
     for key in assignment_info.keys():
-        ic(assignment_info[key])
-        ic(calendar_info[key])
         try:
             assignment_info[key].update(calendar_info[key])
         except:

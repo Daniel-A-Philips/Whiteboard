@@ -155,9 +155,8 @@ function applyDataToCalendar() {
 	const classColors = ['#FFC107', '#3F51B5', '#8BC34A', '#808080', '#009688', '#9E9764', '#308446', '#A18594', '#412227'];
 	const hourHeight = 47.6;
   
-	for (let classInfo in classes) {
-	  	const checkbox = document.getElementById(`box-${className}`);
-  
+	for (let className in classes) {
+		const classInfo = classes[className];
 		if (checkbox && !checkbox.checked) {
 		continue; // skip this class if checkbox is unchecked
 		}

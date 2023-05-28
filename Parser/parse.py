@@ -107,14 +107,13 @@ class output_parser:
     def class_info_parser(self, class_info, write=True):
         print('Running class_info_parser')
         returnable = {}
-        ic(class_info)
         for individual_class in class_info:
             try:
                 class_data = {}
-                class_data['Days'] = self.__parse_days(individual_class)
-                class_data['Time'] = individual_class['Times']
-                class_data['Instructor'] = individual_class['Instructor']
-                class_data['CRN'] = individual_class['CRN']
+                class_data['days'] = self.__parse_days(individual_class)
+                class_data['time'] = individual_class['Times']
+                class_data['instructor'] = individual_class['Instructor']
+                class_data['crn'] = individual_class['CRN']
                 full_class_name = individual_class['Subject Code'] + '-' + individual_class['Course No.'] + '-' + individual_class['Sec']
                 returnable[full_class_name] = class_data
             except KeyError:
