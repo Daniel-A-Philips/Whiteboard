@@ -8,7 +8,7 @@ function init() {
 	req.open("GET", "http://localhost:2000/get-persistent-info");
 	req.send();
 	if (req.status != 200) {
-		throw Exception("could not get /get-persistent-info");
+		throw "could not get /get-persistent-info";
 	}
 	let res = JSON.parse(req.responseText);
 	if (res.has_assignments && res.has_classes && res.has_link) {
@@ -66,14 +66,14 @@ function getRemoteData() {
 	req.open("GET", "http://localhost:2000/get-blackboard-calendar", false)
 	req.send()
 	if (req.status != 200) {
-		throw Exception("could not get /get-blackboard-calendar")
+		throw "could not get /get-blackboard-calendar";
 	}
 	assignments = JSON.parse(req.responseText)
 
 	req.open("GET", "http://localhost:2000/get-classes", false)
 	req.send()
 	if (req.status != 200) {
-		throw Exception("could not get /get-classes")
+		throw "could not get /get-classes";
 	}
 	classes = JSON.parse(req.responseText)
 
@@ -155,8 +155,7 @@ function applyDataToCalendar() {
 	const classColors = ['#FFC107', '#3F51B5', '#8BC34A', '#808080', '#009688', '#9E9764', '#308446', '#A18594', '#412227'];
 	const hourHeight = 47.6;
   
-	for (let className in classes) {
-	  	const classInfo = classes[className];
+	for (let classInfo in classes) {
 	  	const checkbox = document.getElementById(`box-${className}`);
   
 		if (checkbox && !checkbox.checked) {
