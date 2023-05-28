@@ -157,12 +157,15 @@ function applyDataToCalendar() {
   
 	for (let className in classes) {
 		const classInfo = classes[className];
+		const checkbox = document.getElementById('box=${className}')
 		if (checkbox && !checkbox.checked) {
 		continue; // skip this class if checkbox is unchecked
 		}
   
 		const [startTime, endTime] = classInfo.time.split('-');
 		const [startHour, startMinute] = startTime.split(':');
+		console.log('endTime')
+		console.log(endTime)
 		const [endHour, endMinute] = endTime.split(':');
   
 	  	classInfo.days.forEach(day => {

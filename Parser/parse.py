@@ -111,7 +111,7 @@ class output_parser:
             try:
                 class_data = {}
                 class_data['days'] = self.__parse_days(individual_class)
-                class_data['time'] = individual_class['Times']
+                class_data['time'] = self.__parse_times(individual_class['Times'])
                 class_data['instructor'] = individual_class['Instructor']
                 class_data['crn'] = individual_class['CRN']
                 full_class_name = individual_class['Subject Code'] + '-' + individual_class['Course No.'] + '-' + individual_class['Sec']
@@ -123,6 +123,26 @@ class output_parser:
                 json.dump(returnable,f)
         return returnable
 
+    def __parse_times(self, times):
+        if times == 'TBD':
+            return '00:00-00:00'
+        ic(times.replace(' ','').split('-'))
+        start, end = times.replace(' ','').split('-')
+        if 'pm' in start:
+            hour, minutes = start.replace('pm','').split(':')
+            hour = int(hour)+12
+            start = f'{hour}:{minutes}'
+        else:
+            start = start.replace('am','')
+            
+        if 'pm' in end:
+            hour, minutes = end.replace('pm','').split(':')
+            hour = int(hour)+12
+            end = f'{hour}:{minutes}'
+        else:
+            end = end.replace('am','')
+        return f'{start}-{end}'
+    
     def __parse_days(self, individual_class):
         day_list = ['M','T','W','R','F']
         days = []
