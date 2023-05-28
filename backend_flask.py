@@ -73,9 +73,9 @@ def get_blackboard_calendar():
         ic(assignment_info[key])
         ic(calendar_info[key])
         try:
-            calendar_info[key].update(assignment_info[key])
+            assignment_info[key].update(calendar_info[key])
         except:
-            calendar_info[key].update(assignment_info[key][0])
+            assignment_info[key][0].update(calendar_info[key])
     return render_template_string(json.dumps( calendar_info))
 
 @app.route('/get-assignment-information')
