@@ -29,8 +29,12 @@ function prepMainPage() {
 // collect user's calendar data from blackboard - done on page load
 document.getElementById("ctrl-a-input-submit").onclick = () => {
 	let req = new XMLHttpRequest();
-	req.open("PUT", "http://localhost:2000/put-classes");
-	req.send(document.getElementById("ctrl-a-input-textarea").value);
+	req.open("PUT", "http://localhost:2000/put-classes")
+	console.log(document.getElementById("ctrl-a-input-textarea").value)
+	req.setRequestHeader('user-blackboard-copied',JSON.stringify(encodeURIComponent(document.getElementById("ctrl-a-input-textarea").value)))
+	req.setRequestHeader('user-blackboard-calendar-link',JSON.stringify(encodeURIComponent(document.getElementById("calendar-link-input").value)))
+	req.send(document.getElementById("ctrl-a-input-textarea").value)
+
 	prepMainPage();
 	setTimeout(getRemoteData, 1000); // wait 1 second to make sure data is properly handled by server
 }
