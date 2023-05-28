@@ -3,6 +3,7 @@ import requests
 import datetime
 import csv
 from ics import Calendar
+from icecream import ic
 
 class blackboard_calendar:
 
@@ -27,8 +28,7 @@ class blackboard_calendar:
             # convert the due date to datetime object
             due_date = datetime.datetime.strptime(str(event.begin.datetime).split(':00-')[0], "%Y-%m-%d %H:%M")
             # If the due date of the assingment is before the current date, continue onto the next assignment
-            if due_date < datetime.datetime.now():
-                continue
+
             event_array.append(str(event.begin.datetime).split(':00-')[0])
             # Remove any existing html prefixes or suffixes that might exist
             description = str(event.description).removeprefix('<p>').removesuffix('</p>')
@@ -41,8 +41,9 @@ class blackboard_calendar:
         to_return = event_info
         if wants_uid:
             to_return = {}
+            ic(event_info)
             for event_array in event_info:
-                print(event_array[0].split('-')[1].split('_')[1])
+                ic(event_array[0].split('-')[1].split('_')[1])
                 to_return[event_array[0].split('-')[1].split('_')[1]] = {
                             'name' : event_array[1],
                             'due date' : event_array[2],

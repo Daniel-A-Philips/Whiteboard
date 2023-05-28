@@ -66,6 +66,7 @@ class input_parser:
             return True, data
 
     def blackboard_link(self, unparsed):
+        ic(unparsed)
         self.__write_link(unparsed)
         self.link = urllib.parse.unquote(unparsed.replace('\"',''))
         return self.link
