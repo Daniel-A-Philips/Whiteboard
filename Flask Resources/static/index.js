@@ -68,14 +68,14 @@ function getRemoteData() {
 	if (req.status != 200) {
 		throw Exception("could not get /get-blackboard-calendar")
 	}
-	let assignments = JSON.parse(req.responseText)
+	assignments = JSON.parse(req.responseText)
 
 	req.open("GET", "http://localhost:2000/get-classes", false)
 	req.send()
 	if (req.status != 200) {
 		throw Exception("could not get /get-classes")
 	}
-	let classes = JSON.parse(req.responseText)
+	classes = JSON.parse(req.responseText)
 
 	// hardcoded, remove when server hooked up
 	
