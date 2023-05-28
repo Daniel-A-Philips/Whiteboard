@@ -9,7 +9,7 @@ class Assignment:
     def __init__(self, item_id, classes):
         self.headers = []
         self.url = ''
-        self.item_id = item_id
+        self.item_id = item_id.split('_')[2]
         self.classes = classes
         self.course_id = ''
         self.content_id = ''

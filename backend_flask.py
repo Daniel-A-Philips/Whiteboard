@@ -58,6 +58,7 @@ def get_blackboard_calendar():
     print(in_parser)
     classes = [f'{data["School"]}-{data["Class Number"]}-{data["Section Number"]} - {data["Quarter Name"]} {data["Year"]}' for data in in_parser.classes]
     urls = []
+    ic(bblearn.uids)
     for uid in bblearn.uids:
         temp_assignment = Assignment(uid, classes)
         urls.append(temp_assignment.url)
@@ -69,11 +70,15 @@ def get_blackboard_calendar():
     async_assignment = downloader(urls)
     with open(f'{__working_directory}/Information/assignment.json', "w") as outfile:
         json.dump(assignment_info, outfile)
+    ic(assignment_info)
+    to_remove = []
     for key in assignment_info.keys():
-        try:
-            assignment_info[key].update(calendar_info[key])
-        except:
-            assignment_info[key][0].update(calendar_info[key])
+        if not '_' in key:
+            to_remove.append(key)
+            continue
+        assignment_info[key].update(calendar_info[key])
+    for key in to_remove:
+        del assignment_info[key]
     ic(calendar_info)
     return render_template_string(json.dumps( calendar_info))
 

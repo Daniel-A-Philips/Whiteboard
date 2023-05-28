@@ -42,7 +42,8 @@ class blackboard_calendar:
         if wants_uid:
             to_return = {}
             for event_array in event_info:
-                to_return[event_array[0].split('-')[1].split('_')[1]] = {
+                ic(event_array[0])
+                to_return[event_array[0]] = {
                             'name' : event_array[1],
                             'due date' : event_array[2],
                             'description' : event_array[3]
@@ -64,7 +65,7 @@ class blackboard_calendar:
         # Convert the calendar into an array
         events = [event for event in calendar.events]
         for event in events:
-            self.uids.append(event.uid.split('_')[2])
+            self.uids.append(event.uid)
         parsed = self.parse_to_table(events, wants_uid)
         self.__save_as_csv(parsed)
         return parsed
