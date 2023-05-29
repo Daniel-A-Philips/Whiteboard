@@ -1,6 +1,5 @@
 import os
 import json
-from icecream import ic
 import requests
 from difflib import get_close_matches
 
@@ -44,7 +43,6 @@ class Assignment:
                 else:
                     print('both')
                     self.course_id = data[2].split('=')[1].split('_')[1]
-                ic(self.course_id, self.content_id)
                 break
     
     def get_class_name(self):
@@ -66,9 +64,6 @@ class Assignment:
     def check_if_class_name_in_complex(self, class_name):
         coll, num, sec = class_name.split('-')[:3]
         try:
-            ic(self.complex_name.index(coll))
-            ic(self.complex_name.index(num))
-            ic(self.complex_name.index(sec))
             if self.complex_name.index(coll) != -1 and self.complex_name.index(num) != -1 and self.complex_name.index(sec) != -1:
                 return True
         except:

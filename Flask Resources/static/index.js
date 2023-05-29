@@ -258,9 +258,12 @@ function calendartime() {
 
 function applyDataToSidebar() {
 	let dateCounts = {};
+	console.log(assignments)
 	for (key of Object.keys(assignments)) {
+		console.log(key)
 		if (key.startsWith("_blackboard.platform.gradebook2.GradableItem")) {
 			let dateString = dateFromBBString(assignments[key].end).toDateString();
+			console.log(assignments[key])
 			if (dateString in dateCounts) {
 				dateCounts[dateString] += 1;
 			} else {
@@ -368,7 +371,7 @@ function applyDataToAssignments() {
 		} else {
 			time = (dueDate.getHours() % 12) + (dueDate.getHours() > 12 ? "pm" : "am")
 		}
-		col.innerHTML += '<div class="due-date-entry calendar_calendar1"><span class="due-date-time">' + time + '</span> ' + assignments[key].summary + '</div>'
+		col.innerHTML += '<div class="due-date-entry calendar_calendar1"><span class="due-date-time">' + time + '</span> ' + assignments[key].description + '</div>'
 	}
 
 	const pattern = /GradableItem-_(\d+)/;
@@ -378,7 +381,7 @@ function applyDataToAssignments() {
 		if (match) {
 			const number = parseInt(match[1], 10);
 			const assignment = assignments[key];
-			const summary = assignments[key].summary;
+			const summary = assignments[key].description;
 
 			// Look for a matching key in assignment_matching
 			let matchingObject = null;

@@ -55,10 +55,9 @@ def get_blackboard_calendar():
     global assignment_info
     global calendar_info
     calendar_info = bblearn.download_calendar(calendar_link, False, wants_uid=True)
-    print(in_parser)
+    ic(calendar_info)
     classes = [f'{data["School"]}-{data["Class Number"]}-{data["Section Number"]} - {data["Quarter Name"]} {data["Year"]}' for data in in_parser.classes]
     urls = []
-    ic(bblearn.uids)
     for uid in bblearn.uids:
         temp_assignment = Assignment(uid, classes)
         urls.append(temp_assignment.url)
@@ -70,7 +69,6 @@ def get_blackboard_calendar():
     async_assignment = downloader(urls)
     with open(f'{__working_directory}/Information/assignment.json', "w") as outfile:
         json.dump(assignment_info, outfile)
-    ic(assignment_info)
     to_remove = []
     for key in assignment_info.keys():
         if not '_' in key:
@@ -119,5 +117,4 @@ def check_persistence():
     return output
 
 persistent_info = check_persistence()
-ic(persistent_info)
 app.run(debug=False, host='0.0.0.0', port=2000)

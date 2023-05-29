@@ -20,6 +20,7 @@ class blackboard_calendar:
     # function to parse the events into a table format
     def parse_to_table(self, events, wants_uid = False):
         event_info = []
+        to_return = {}
         for event in events:
             event_array = []
             if wants_uid:
@@ -31,19 +32,28 @@ class blackboard_calendar:
 
             event_array.append(str(event.begin.datetime).split(':00-')[0])
             # Remove any existing html prefixes or suffixes that might exist
-            description = str(event.description).removeprefix('<p>').removesuffix('</p>')
+            description = ''.join(str(event.description).removeprefix('<p>').removesuffix('</p>'))
             # Check if there is no description, if so replace 'None' with blankspace
             if description == 'None':
                 description = ''
             event_array.append(description)
             event_info.append(event_array)
+            to_return[event.uid] = {
+                'type': 'VEVENT',
+                'start' : str(event.begin),
+                'end' : str(event.begin),
+                'uid' : event.uid,
+                'description' : description
+                
+            }
         event_info = self.sort(event_info)
-        to_return = event_info
+        return to_return
         if wants_uid:
             to_return = {}
             for event_array in event_info:
                 ic(event_array[0])
                 to_return[event_array[0]] = {
+                            'type' : '',
                             'name' : event_array[1],
                             'due date' : event_array[2],
                             'description' : event_array[3]
