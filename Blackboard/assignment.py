@@ -74,5 +74,3 @@ class Assignment:
         if 'XLIST' in self.complex_name:
             matches = get_close_matches(self.complex_name, self.classes, cutoff=0.3)
             self.class_name = matches[0]
-
-test = Assignment('_blackboard.platform.gradebook2.GradableItem-_2946171_1',['CI-103-F','CI-103','A'])
