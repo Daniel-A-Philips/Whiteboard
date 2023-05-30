@@ -40,7 +40,6 @@ def put_classes():
     print('Created new Input Parser for passed through information')
     in_parser = in_parser1
     time_taken = time.perf_counter() - start
-    ic(time_taken)
     return calendar_link
 
 @app.route('/get-classes')
@@ -55,10 +54,10 @@ def get_blackboard_calendar():
     global assignment_info
     global calendar_info
     calendar_info = bblearn.download_calendar(calendar_link, False, wants_uid=True)
-    ic(calendar_info)
     classes = [f'{data["School"]}-{data["Class Number"]}-{data["Section Number"]} - {data["Quarter Name"]} {data["Year"]}' for data in in_parser.classes]
     urls = []
     for uid in bblearn.uids:
+        ic(uid)
         temp_assignment = Assignment(uid, classes)
         urls.append(temp_assignment.url)
         assignment_info[uid] = {'Course ID':temp_assignment.course_id,
@@ -77,7 +76,6 @@ def get_blackboard_calendar():
         assignment_info[key].update(calendar_info[key])
     for key in to_remove:
         del assignment_info[key]
-    ic(calendar_info)
     return render_template_string(json.dumps( calendar_info))
 
 @app.route('/get-assignment-information')
