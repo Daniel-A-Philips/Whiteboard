@@ -66,7 +66,6 @@ class input_parser:
             return True, data
 
     def blackboard_link(self, unparsed):
-        ic(unparsed)
         self.__write_link(unparsed)
         self.link = urllib.parse.unquote(unparsed.replace('\"',''))
         return self.link
@@ -125,8 +124,7 @@ class output_parser:
 
     def __parse_times(self, times):
         if times == 'TBD':
-            return '00:00-00:00'
-        ic(times.replace(' ','').split('-'))
+            return '00:00-00:01'
         start, end = times.replace(' ','').split('-')
         if 'pm' in start:
             hour, minutes = start.replace('pm','').split(':')

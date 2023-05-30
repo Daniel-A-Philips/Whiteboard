@@ -16,7 +16,9 @@ class_info = []
 calendar_link = ''
 persistent_info = {}
 info = ''
-app = Flask(__name__, template_folder= __working_directory + '/Flask Resources/template',static_folder= __working_directory + '/Flask Resources/static')
+app = Flask(__name__, 
+            template_folder= __working_directory + '/Flask Resources/template',
+            static_folder= __working_directory + '/Flask Resources/static')
 out_parser = output_parser()
 in_parser = input_parser()
 termmaster = tms()
@@ -58,6 +60,7 @@ def get_blackboard_calendar():
     urls = []
     for uid in bblearn.uids:
         temp_assignment = Assignment(uid, classes)
+        print(f'{bblearn.uids.index(uid)+1}/{len(bblearn.uids)}: Found assignment for {temp_assignment.class_name}')
         urls.append(temp_assignment.url)
         assignment_info[uid] = {'Course ID':temp_assignment.course_id,
                                 'Content ID': temp_assignment.content_id,

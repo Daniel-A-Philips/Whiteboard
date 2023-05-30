@@ -75,7 +75,8 @@ class blackboard_calendar:
         # Convert the calendar into an array
         events = [event for event in calendar.events]
         for event in events:
-            self.uids.append(event.uid)
+            if event.uid not in self.uids:
+                self.uids.append(event.uid)
         parsed = self.parse_to_table(events, wants_uid)
         self.__save_as_csv(parsed)
         return parsed
