@@ -57,7 +57,6 @@ def get_blackboard_calendar():
     classes = [f'{data["School"]}-{data["Class Number"]}-{data["Section Number"]} - {data["Quarter Name"]} {data["Year"]}' for data in in_parser.classes]
     urls = []
     for uid in bblearn.uids:
-        ic(uid)
         temp_assignment = Assignment(uid, classes)
         urls.append(temp_assignment.url)
         assignment_info[uid] = {'Course ID':temp_assignment.course_id,

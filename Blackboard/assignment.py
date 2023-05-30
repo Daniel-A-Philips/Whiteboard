@@ -40,11 +40,11 @@ class Assignment:
     def cookie_validation(self):
         last_edit_time = self.check_cookies_last_edited()
         if last_edit_time is not None:
-            five_hours_ago = time.time() - (4 * 60 * 60)  # 4 hours in seconds
-            if last_edit_time > five_hours_ago:
-                return True
-            else:
+            four_hours = 4 * 60 * 60  # 4 hours in seconds
+            if last_edit_time > four_hours:
                 return False
+            else:
+                return True
         else:
             return False
     
