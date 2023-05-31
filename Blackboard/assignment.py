@@ -19,7 +19,7 @@ class Assignment:
         self.content_id = ''
         self.class_name = ''
         self.complex_name = ''
-        self.is_discussion_board = True
+        self.is_discussion_board = False
 
     def make_url(self):
         with open(self.__cookie_file, 'r+') as file:

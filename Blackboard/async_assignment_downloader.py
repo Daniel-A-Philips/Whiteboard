@@ -33,19 +33,28 @@ class Downloader:
         with open(self.__course_id_file, 'r+') as file:
             self.class_list = json.load(file)
 
+
+    async def download_link(self, session : aiohttp.ClientSession, url: str):
+        async with session.get(url) as response:
+            resp = await response.content.read()
+            print(f'Completed async task for {self.urls.index(url)}/{len(self.urls)}')
+            return resp
     async def download_data(self):
         start = time.time()
+        print(self.urls)
         print('starting data from async_assignment_downloader')
         async with aiohttp.ClientSession(headers=self.headers) as session:
+            tasks = []
             for url in self.urls:
-                print(f'Started {self.urls.index(url)+1}/{len(self.urls)}')
-                async with session.get(url) as resp:
-                    data = await resp.content.read()
-                    data = str(data).split('\\n')
-                    self.url_match_assignment[url].get_ids(data)
-                    self.url_match_assignment[url].get_class_name(self.class_list)
-                    print(f'{self.urls.index(url)+1}/{len(self.urls)} : {self.url_match_assignment[url].class_name}')
-
+                print(f'Created async task for {self.urls.index(url)}/{len(self.urls)}')
+                tasks.append(asyncio.ensure_future(self.download_link(session, url)))
+            downloaded = await asyncio.gather(*tasks)
+            for data in downloaded:
+                url = self.urls[downloaded.index(data)]
+                data = str(data).split('\\n')
+                self.url_match_assignment[url].get_ids(data)
+                self.url_match_assignment[url].get_class_name(self.class_list)
+                print(f'{self.urls.index(url)+1}/{len(self.urls)} : {self.url_match_assignment[url].class_name}')
         print(f'Asynchronous Time: {time.time() - start}')
 
 
