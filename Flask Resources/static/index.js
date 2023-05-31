@@ -42,7 +42,8 @@ document.getElementById("ctrl-a-input-submit").onclick = () => {
 function dateFromBBString(str) {
 	// return new Date(Date.parse(str));
 	// temp while we don't have data from this term
-	return new Date(Date.parse(str) + (1000 * 3600 * 24 * 7 * 12));
+	//return new Date(Date.parse(str) + (1000 * 3600 * 24 * 7 * 12));
+	return new Date(Date.parse(str));
 }
 
 function startOfCurrentWeek() {
@@ -159,7 +160,7 @@ function applyDataToCalendar() {
 		const classInfo = classes[className];
 		const checkbox = document.getElementById('box=${className}')
 		if (checkbox && !checkbox.checked) {
-		continue; // skip this class if checkbox is unchecked
+		    continue; // skip this class if checkbox is unchecked
 		}
   
 		const [startTime, endTime] = classInfo.time.split('-');
@@ -263,7 +264,7 @@ function applyDataToSidebar() {
 		console.log(key)
 		if (key.startsWith("_blackboard.platform.gradebook2.GradableItem")) {
 			let dateString = dateFromBBString(assignments[key].end).toDateString();
-			console.log(assignments[key])
+			//console.log('assignments[key]',assignments[key])
 			if (dateString in dateCounts) {
 				dateCounts[dateString] += 1;
 			} else {
@@ -329,8 +330,10 @@ function applyDataToSidebar() {
 				if (input.checked) {
 					label.classList.remove("unchecked");
 					label.style.backgroundColor = classColors[index % classColors.length];
+					console.log('on',label)
 				} else {
 					label.classList.add("unchecked");
+					console.log('off',label)
 					label.style.backgroundColor = "white";
 				}
 				applyDataToCalendar(assignments, classes);
@@ -371,7 +374,8 @@ function applyDataToAssignments() {
 		} else {
 			time = (dueDate.getHours() % 12) + (dueDate.getHours() > 12 ? "pm" : "am")
 		}
-		col.innerHTML += '<div class="due-date-entry calendar_calendar1"><span class="due-date-time">' + time + '</span> ' + assignments[key].description + '</div>'
+		console.log(assignments[key])
+		col.innerHTML += '<div class="due-date-entry calendar_calendar1"><span class="due-date-time">' + time + '</span> ' + assignments[key].name + '</div>'
 	}
 
 	const pattern = /GradableItem-_(\d+)/;
