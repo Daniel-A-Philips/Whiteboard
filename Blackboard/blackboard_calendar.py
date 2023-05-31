@@ -14,7 +14,6 @@ class Blackboard_Calendar:
     def __init__(self):
         print('** created Blackboard_Calendar instance **')
         self.wanted_as_table = False
-        self.wanted_as_csv = False
         self.uids = []
 
     # function to parse the events into a table format
@@ -63,8 +62,7 @@ class Blackboard_Calendar:
 
     # A function that given a .ics url downloads all events within the character
     # 'as_table' refers to whether the data should be returned raw or parsed into a table
-    def download_calendar(self, url, as_table, as_csv=False, wants_uid=False):
-        self.wanted_as_csv = as_csv
+    def download_calendar(self, url, as_table=False, wants_uid=False):
         self.wanted_as_table = as_table
         # Download the calendar from the URL
         print(url)
@@ -77,16 +75,7 @@ class Blackboard_Calendar:
             if event.uid not in self.uids:
                 self.uids.append(event.uid)
         parsed = self.parse_to_table(events, wants_uid)
-        self.__save_as_csv(parsed)
         return parsed
-
-    def __save_as_csv(self, parsed):
-        with open('assignments.csv', 'w+') as fp:
-            writer = csv.writer(fp, delimiter=',')
-            if not self.wanted_as_table:
-                writer.writerow(['Assignment Name', 'Due Date', 'Summary'])
-            for row in parsed:
-                writer.writerow(row)
 
     def test(self):
         event_info = self.download_calendar(

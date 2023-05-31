@@ -56,7 +56,7 @@ def get_blackboard_calendar():
     global calendar_link
     global assignment_info
     global calendar_info
-    calendar_info = BBLearn.download_calendar(calendar_link, False, wants_uid=True)
+    calendar_info = BBLearn.download_calendar(calendar_link, wants_uid=True)
     classes = [
         f'{data["School"]}-{data["Class Number"]}-{data["Section Number"]} - {data["Quarter Name"]} {data["Year"]}' for
         data in in_parser.classes]
@@ -97,7 +97,7 @@ def check_persistence():
     has_assignment = False
     calendar = []
     if link and has_classes:
-        calendar = BBLearn.download_calendar(in_parser2.link, False, False, True)
+        calendar = BBLearn.download_calendar(in_parser2.link, wants_uid=True)
         f = open(f'{__working_directory}/Information/class_info.txt')
         contents = f.read()
         classes = in_parser2.class_information(contents)
