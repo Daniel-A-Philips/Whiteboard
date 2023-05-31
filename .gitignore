@@ -9,3 +9,5 @@ $GIT_DIR/.DS_Store
 $GIT_DIR/.idea/
 
 __pycache__/
+
+.idea/
