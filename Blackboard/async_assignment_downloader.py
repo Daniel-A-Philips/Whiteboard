@@ -1,4 +1,3 @@
-import requests
 from Blackboard.assignment import Assignment
 import aiohttp
 import asyncio
@@ -47,7 +46,7 @@ class Downloader:
                     data = str(data).split('\\n')
                     self.url_match_assignment[url].get_ids(data)
                     self.url_match_assignment[url].get_class_name(self.class_list)
-                    print(self.url_match_assignment[url].class_name)
+                    print(f'{url} : {self.url_match_assignment[url].class_name}')
 
         print(f'Asynchronous Time: {time.time() - start}')
 

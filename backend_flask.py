@@ -8,7 +8,6 @@ from Blackboard.async_assignment_downloader import Downloader
 from TermMaster.tms import tms
 from Parser.parse import input_parser, output_parser
 from flask import Flask, request, render_template_string, render_template
-from icecream import ic
 import json
 import time
 
@@ -22,7 +21,7 @@ app = Flask(__name__,
 out_parser = output_parser()
 in_parser = input_parser()
 termmaster = tms()
-bblearn = blackboard_calendar()
+BBLearn = blackboard_calendar()
 assignment_info = {}
 calendar_info = {}
 
@@ -60,11 +59,11 @@ def get_blackboard_calendar():
     global calendar_link
     global assignment_info
     global calendar_info
-    calendar_info = bblearn.download_calendar(calendar_link, False, wants_uid=True)
+    calendar_info = BBLearn.download_calendar(calendar_link, False, wants_uid=True)
     classes = [
         f'{data["School"]}-{data["Class Number"]}-{data["Section Number"]} - {data["Quarter Name"]} {data["Year"]}' for
         data in in_parser.classes]
-    assignments = [Assignment(uid, classes) for uid in bblearn.uids]
+    assignments = [Assignment(uid, classes) for uid in BBLearn.uids]
     async_assignment = Downloader(assignments).url_match_assignment
     for uid in async_assignment.keys():
         temp_assignment = async_assignment[uid]
@@ -73,7 +72,7 @@ def get_blackboard_calendar():
                                                             'Complex Name': temp_assignment.complex_name,
                                                             'Standard Name': temp_assignment.class_name,
                                                             'Discussion': temp_assignment.is_discussion_board}
-    ic(assignment_info)
+
     with open(f'{__working_directory}/Information/assignment.json', "w") as outfile:
         json.dump(assignment_info, outfile)
     return render_template_string(json.dumps(calendar_info))
@@ -101,7 +100,7 @@ def check_persistence():
     hasAssignment = False
     calendar = []
     if link and hasClasses:
-        calendar = bblearn.download_calendar(in_parser2.link, False, False, True)
+        calendar = BBLearn.download_calendar(in_parser2.link, False, False, True)
         f = open(f'{__working_directory}/Information/class_info.txt')
         contents = f.read()
         classes = in_parser2.class_information(contents)

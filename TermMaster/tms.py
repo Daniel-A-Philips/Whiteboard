@@ -5,7 +5,6 @@ monkey.patch_all = stub
 import grequests
 import json
 import requests
-from icecream import ic
 
 class tms:
     class_urls = []

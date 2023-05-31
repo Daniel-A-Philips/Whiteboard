@@ -1,9 +1,7 @@
-from tabulate import tabulate
 import requests
 import datetime
 import csv
 from ics import Calendar
-from icecream import ic
 
 class blackboard_calendar:
 
@@ -51,7 +49,6 @@ class blackboard_calendar:
         if wants_uid:
             to_return = {}
             for event_array in event_info:
-                ic(event_array[0])
                 to_return[event_array[0]] = {
                             'type' : '',
                             'name' : event_array[1],
@@ -88,9 +85,6 @@ class blackboard_calendar:
                  writer.writerow(['Assignment Name','Due Date','Summary'])
             for row in parsed:
                 writer.writerow(row)
-
-    def pretty_print(self, data):
-        return tabulate(data,headers='firstrow',tablefmt='fancy_grid')
 
     def test(self):
         event_info = self.download_calendar('https://learn.dcollege.net/webapps/calendar/calendarFeed/c2d84bf6673c402cb557f2a84ddabd87/learn.ics',False, True)

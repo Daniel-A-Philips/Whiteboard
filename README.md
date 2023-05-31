@@ -13,10 +13,9 @@ Whiteboard is a web app allowing for better organization and planning of homewor
 - express
 
 #### Python
-- icecream
 - flask
-- tabulate
 - ics
+- aiohttp
 
 ## Contributing
 If you would like to make changes, please make a pull request, or create an issue and discuss within this repository
