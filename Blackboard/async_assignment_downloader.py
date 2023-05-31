@@ -33,28 +33,41 @@ class Downloader:
         with open(self.__course_id_file, 'r+') as file:
             self.class_list = json.load(file)
 
-
-    async def download_link(self, session : aiohttp.ClientSession, url: str):
+    async def download_link(self, session: aiohttp.ClientSession, url: str):
         async with session.get(url) as response:
+            print(url)
             resp = await response.content.read()
-            print(f'Completed async task for {self.urls.index(url)}/{len(self.urls)}')
             return resp
-    async def download_data(self):
+
+    async def download_data(self, failed_try=0):
         start = time.time()
-        print(self.urls)
         print('starting data from async_assignment_downloader')
+        self.urls = list(set(self.urls))
+        failed_urls = []
         async with aiohttp.ClientSession(headers=self.headers) as session:
             tasks = []
             for url in self.urls:
-                print(f'Created async task for {self.urls.index(url)}/{len(self.urls)}')
                 tasks.append(asyncio.ensure_future(self.download_link(session, url)))
             downloaded = await asyncio.gather(*tasks)
             for data in downloaded:
+                if 'Too Many Requests' in str(data) and failed_try < 4:
+                    failed_urls.append(self.urls[downloaded.index(data)])
+                    continue
                 url = self.urls[downloaded.index(data)]
-                data = str(data).split('\\n')
-                self.url_match_assignment[url].get_ids(data)
+                split_data = str(data).split('\\n')
+                self.url_match_assignment[url].get_ids(split_data)
                 self.url_match_assignment[url].get_class_name(self.class_list)
+                if self.url_match_assignment[url].class_name == 'No Name Found':
+                    print(data)
                 print(f'{self.urls.index(url)+1}/{len(self.urls)} : {self.url_match_assignment[url].class_name}')
+            # Retry the failed urls
+            if len(failed_urls) != 0 and failed_try < 4:
+                print('Failed URLS:', failed_urls)
+                prev_urls = self.urls
+                self.urls = failed_urls
+                await self.download_data(failed_try=failed_try + 1)
+                self.urls = prev_urls
+                print(self.url_match_assignment)
         print(f'Asynchronous Time: {time.time() - start}')
 
 

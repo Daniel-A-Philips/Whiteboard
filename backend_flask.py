@@ -1,6 +1,5 @@
 import os
 import json
-import time
 from Blackboard.blackboard_calendar import Blackboard_Calendar
 from Blackboard.assignment import Assignment
 from Blackboard.async_assignment_downloader import Downloader
@@ -30,7 +29,7 @@ def main_page():
 
 @app.route('/put-classes', methods=['PUT'])
 def put_classes():
-    start = time.perf_counter()
+    global in_parser
     global class_info
     global calendar_link
     global in_parser
@@ -40,13 +39,13 @@ def put_classes():
     class_info = termmaster.get_all_class_info(user_copied)
     print('Created new Input Parser for passed through information')
     in_parser = in_parser1
-    time_taken = time.perf_counter() - start
     return calendar_link
 
 
 @app.route('/get-classes')
 def get_classes():
     global class_info
+    global out_parser
     parsed = out_parser.class_info_parser(class_info)
     return render_template_string(json.dumps(parsed))
 
@@ -56,6 +55,7 @@ def get_blackboard_calendar():
     global calendar_link
     global assignment_info
     global calendar_info
+    global in_parser
     calendar_info = BBLearn.download_calendar(calendar_link, wants_uid=True)
     classes = [
         f'{data["School"]}-{data["Class Number"]}-{data["Section Number"]} - {data["Quarter Name"]} {data["Year"]}' for

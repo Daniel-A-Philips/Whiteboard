@@ -14,18 +14,18 @@ class Input_Parser:
         self.hasAssignments = False
         self.hasCalendar = False
 
-    def __write_link(self, unparsed_link):
+    def __write_link(self, unparsed_link, force_write=True):
         f = open(f'{self.__working_directory}/Information/link.txt', 'r+')
         link = f.read()
-        if link == '':
+        if link == '' or force_write:
             f.write(unparsed_link)
         f.close()
         self.hasLink = True
 
-    def __write_class_information(self, unparsed_class_info):
+    def __write_class_information(self, unparsed_class_info, force_write=True):
         f = open(f'{self.__working_directory}/Information/class_info.txt', 'r+')
         information = f.read()
-        if information == '':
+        if information == '' or force_write:
             f.write(unparsed_class_info)
         f.close()
         self.hasClass = True
@@ -142,14 +142,12 @@ class Output_Parser:
         returnable = {}
         for individual_class in class_info:
             try:
-                class_data = {}
-                class_data['days'] = parse_days(individual_class)
-                class_data['time'] = parse_times(individual_class['Times'])
-                class_data['instructor'] = individual_class['Instructor']
-                class_data['crn'] = individual_class['CRN']
-                full_class_name = individual_class['Subject Code'] + '-' + individual_class['Course No.'] + '-' + \
-                                  individual_class['Sec']
-                returnable[full_class_name] = class_data
+                class_data = {'days': parse_days(individual_class), 'time': parse_times(individual_class['Times']),
+                              'instructor': individual_class['Instructor'], 'crn': individual_class['CRN']}
+                class_name = '-'.join([individual_class['Subject Code'],
+                                       individual_class['Course No.'],
+                                       individual_class['Sec']])
+                returnable[class_name] = class_data
             except KeyError:
                 continue
         if write:

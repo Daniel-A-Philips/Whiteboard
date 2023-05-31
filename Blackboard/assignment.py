@@ -45,12 +45,9 @@ class Assignment:
         else:
             return False
 
-    def get_ids(self, lines=None):
+    def get_ids(self, lines):
         if not self.cookie_validation():
             raise Exception(f'Please renew your cookies held within {self.__cookie_file}')
-        if lines is None:
-            req = requests.get(self.url, headers=self.headers)
-            lines = req.text.split('\n')
         for line in lines:
             self.is_discussion_board = 'discussion_board_entry' in line
             if 'breadcrumbs.rightMostParentURL' in line:
@@ -63,6 +60,9 @@ class Assignment:
                 break
 
     def get_class_name(self, all_classes=None):
+        if self.class_name != '':
+            self.complex_name = self.class_name
+            return
         if all_classes is None:
             with open(self.__course_id_file, 'r+') as file:
                 all_classes = json.load(file)
