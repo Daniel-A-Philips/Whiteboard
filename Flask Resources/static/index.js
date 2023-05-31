@@ -158,7 +158,7 @@ function applyDataToCalendar() {
   
 	for (let className in classes) {
 		const classInfo = classes[className];
-		const checkbox = document.getElementById('box=${className}')
+		const checkbox = document.getElementById('box-${className}')
 		if (checkbox && !checkbox.checked) {
 		    continue; // skip this class if checkbox is unchecked
 		}
@@ -390,28 +390,33 @@ function applyDataToAssignments() {
 			// Look for a matching key in assignment_matching
 			let matchingObject = null;
 			for (const matchingKey in assignment_matching) {
-			if (parseInt(matchingKey, 10) === number) {
-				matchingObject = assignment_matching[matchingKey];
-				break;
-			}
-			}
-
-			if (matchingObject && matchingObject["Standard Name"]) {
-			const standardName = matchingObject["Standard Name"];
-			const color = classColorMap[standardName];
-			assignment.color = color;  // Get color from classColorMap
-			
-			const dueDateEntries = document.getElementsByClassName('due-date-entry');
-			for (let i = 0; i < dueDateEntries.length; i++) {
-				if (dueDateEntries[i].innerHTML.includes(summary)) {
-					// Set the background color of the due-date-entry element
-					dueDateEntries[i].style.backgroundColor = color;
+				if (parseInt(matchingKey, 10) === number) {
+					matchingObject = assignment_matching[matchingKey];
 					break;
 				}
 			}
 
+			if (matchingObject && matchingObject["Standard Name"]) {
+				const standardName = matchingObject["Standard Name"];
+				const color = classColorMap[standardName];
+				assignment.color = color;  // Get color from classColorMap
+				
+				const dueDateEntries = document.getElementsByClassName('due-date-entry');
+				for (let i = 0; i < dueDateEntries.length; i++) {
+					if (dueDateEntries[i].innerHTML.includes(summary)) {
+						// Set the background color of the due-date-entry element
+						dueDateEntries[i].style.backgroundColor = color;
+						// delete if filtered
+						const checkbox = document.getElementById('box-${standardName}')
+						if (checkbox && !checkbox.checked) {
+							dueDateEntries[i].remove()
+						}
+						break;
+					}
+				}
+
+			}
 		}
-	}
 	}
 }
 
