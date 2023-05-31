@@ -59,11 +59,14 @@ class input_parser:
     def check_assignments_exist(self):
         self.hasAssignments = True
         f = open(f'{self.__working_directory}/Information/assignment.json')
-        data = json.load(f)
-        if not bool(data):
+        try:
+            data = json.load(f)
+            if not bool(data):
+                return False, {}
+            else:
+                return True, data
+        except:
             return False, {}
-        else:
-            return True, data
 
     def blackboard_link(self, unparsed):
         self.__write_link(unparsed)
