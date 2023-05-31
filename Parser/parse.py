@@ -14,19 +14,19 @@ class Input_Parser:
         self.hasAssignments = False
         self.hasCalendar = False
 
-    def __write_link(self, unparsed):
+    def __write_link(self, unparsed_link):
         f = open(f'{self.__working_directory}/Information/link.txt', 'r+')
         link = f.read()
         if link == '':
-            f.write(unparsed)
+            f.write(unparsed_link)
         f.close()
         self.hasLink = True
 
-    def __write_class_information(self, unparsed):
+    def __write_class_information(self, unparsed_class_info):
         f = open(f'{self.__working_directory}/Information/class_info.txt', 'r+')
         information = f.read()
         if information == '':
-            f.write(unparsed)
+            f.write(unparsed_class_info)
         f.close()
         self.hasClass = True
 
@@ -57,13 +57,13 @@ class Input_Parser:
         return self.hasClass
 
     def check_assignments_exist(self):
-        self.hasAssignments = True
         f = open(f'{self.__working_directory}/Information/assignment.json')
         try:
             data = json.load(f)
             if not bool(data):
                 return False, {}
             else:
+                self.hasAssignments = True
                 return True, data
         except:
             return False, {}

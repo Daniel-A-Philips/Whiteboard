@@ -38,12 +38,13 @@ class Downloader:
         print('starting data from async_assignment_downloader')
         async with aiohttp.ClientSession(headers=self.headers) as session:
             for url in self.urls:
+                print(f'Started {self.urls.index(url)+1}/{len(self.urls)}')
                 async with session.get(url) as resp:
                     data = await resp.content.read()
                     data = str(data).split('\\n')
                     self.url_match_assignment[url].get_ids(data)
                     self.url_match_assignment[url].get_class_name(self.class_list)
-                    print(f'{url} : {self.url_match_assignment[url].class_name}')
+                    print(f'{self.urls.index(url)+1}/{len(self.urls)} : {self.url_match_assignment[url].class_name}')
 
         print(f'Asynchronous Time: {time.time() - start}')
 
