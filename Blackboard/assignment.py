@@ -1,6 +1,5 @@
 import os
 import json
-import requests
 import time
 from difflib import get_close_matches
 

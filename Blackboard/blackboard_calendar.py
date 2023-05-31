@@ -1,5 +1,4 @@
 import requests
-import datetime
 from ics import Calendar
 
 
@@ -31,21 +30,8 @@ class Blackboard_Calendar:
                 'uid': event.uid,
                 'description': description,
                 'name': event.name
-
             }
         return to_return
-        # if wants_uid:
-        #     to_return = {}
-        #     for event_array in event_info:
-        #         to_return[event_array[0]] = {
-        #             'type': '',
-        #             'name': event_array[1],
-        #             'due date': event_array[2],
-        #             'description': event_array[3]
-        #         }
-        # if self.wanted_as_table:
-        #     event_info.insert(0, ['Assignment Name', 'Due Date', 'Summary'])
-        # return to_return
 
     # A function that given a .ics url downloads all events within the character
     # 'as_table' refers to whether the data should be returned raw or parsed into a table

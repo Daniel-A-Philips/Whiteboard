@@ -2,13 +2,11 @@
 import grequests
 import json
 
-course_id = {}
 responses = []
 num_per_test = 100
 max = 500000
 d = open('course_ids.json')
-course_id = json.load(d)
-course_id = {int(k):v for k,v in course_id.items()}
+course_id = {int(k):v for k,v in json.load(d).items()}
 keys = list(course_id.keys())
 try:
     start = keys[len(keys) - 1]

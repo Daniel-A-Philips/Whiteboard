@@ -36,7 +36,7 @@ class TMS:
 
     def download_homepage(self):
         self.terms = []
-        url = 'http://termmasterschedule.drexel.edu'
+        url = 'https:///termmasterschedule.drexel.edu'
         unparsed_body = requests.get(url).content.decode('utf-8')
         body = unparsed_body.split('\n')
         terms_raw = get_terms_from_body(body)
