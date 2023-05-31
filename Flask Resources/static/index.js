@@ -375,7 +375,7 @@ function applyDataToAssignments() {
 			time = (dueDate.getHours() % 12) + (dueDate.getHours() > 12 ? "pm" : "am")
 		}
 		console.log(assignments[key])
-		col.innerHTML += '<div class="due-date-entry calendar_calendar1"><span class="due-date-time">' + time + '</span> ' + assignments[key].name + '</div>'
+		col.innerHTML += '<div class="due-date-entry calendar_calendar1"><span class="due-date-time">' + time + '</span> ' + assignments[key].name + '\n' + assignments[key].description + '</div>'
 	}
 
 	const pattern = /GradableItem-_(\d+)/;
