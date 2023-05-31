@@ -3,20 +3,22 @@ import datetime
 import csv
 from ics import Calendar
 
-class blackboard_calendar:
+
+# function to sort the event list by due date
+def sort(event_list):
+    return sorted(event_list, key=lambda x: x[1], reverse=False)
+
+
+class Blackboard_Calendar:
 
     def __init__(self):
-        print('** created blackboard_calendar instance **')
+        print('** created Blackboard_Calendar instance **')
         self.wanted_as_table = False
         self.wanted_as_csv = False
         self.uids = []
 
-    # function to sort the event list by due date
-    def sort(self, event_list):
-        return sorted(event_list, key=lambda x: x[1], reverse=False)
-
     # function to parse the events into a table format
-    def parse_to_table(self, events, wants_uid = False):
+    def parse_to_table(self, events, wants_uid=False):
         event_info = []
         to_return = {}
         for event in events:
@@ -38,30 +40,30 @@ class blackboard_calendar:
             event_info.append(event_array)
             to_return[event.uid] = {
                 'type': 'VEVENT',
-                'start' : str(event.begin),
-                'end' : str(event.begin),
-                'uid' : event.uid,
-                'description' : description
-                
+                'start': str(event.begin),
+                'end': str(event.begin),
+                'uid': event.uid,
+                'description': description
+
             }
-        event_info = self.sort(event_info)
+        event_info = sort(event_info)
         return to_return
         if wants_uid:
             to_return = {}
             for event_array in event_info:
                 to_return[event_array[0]] = {
-                            'type' : '',
-                            'name' : event_array[1],
-                            'due date' : event_array[2],
-                            'description' : event_array[3]
+                    'type': '',
+                    'name': event_array[1],
+                    'due date': event_array[2],
+                    'description': event_array[3]
                 }
         if self.wanted_as_table:
-            event_info.insert(0,['Assignment Name','Due Date','Summary'])
+            event_info.insert(0, ['Assignment Name', 'Due Date', 'Summary'])
         return to_return
 
     # A function that given a .ics url downloads all events within the character
     # 'as_table' refers to whether the data should be returned raw or parsed into a table
-    def download_calendar(self, url, as_table, as_csv=False, wants_uid = False):
+    def download_calendar(self, url, as_table, as_csv=False, wants_uid=False):
         self.wanted_as_csv = as_csv
         self.wanted_as_table = as_table
         # Download the calendar from the URL
@@ -82,9 +84,11 @@ class blackboard_calendar:
         with open('assignments.csv', 'w+') as fp:
             writer = csv.writer(fp, delimiter=',')
             if not self.wanted_as_table:
-                 writer.writerow(['Assignment Name','Due Date','Summary'])
+                writer.writerow(['Assignment Name', 'Due Date', 'Summary'])
             for row in parsed:
                 writer.writerow(row)
 
     def test(self):
-        event_info = self.download_calendar('https://learn.dcollege.net/webapps/calendar/calendarFeed/c2d84bf6673c402cb557f2a84ddabd87/learn.ics',False, True)
+        event_info = self.download_calendar(
+            'https://learn.dcollege.net/webapps/calendar/calendarFeed/c2d84bf6673c402cb557f2a84ddabd87/learn.ics',
+            False, True)

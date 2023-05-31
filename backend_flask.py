@@ -1,27 +1,24 @@
 import os
-
-__working_directory = os.getcwd()
-
-from Blackboard.blackboard_calendar import blackboard_calendar
-from Blackboard.assignment import Assignment
-from Blackboard.async_assignment_downloader import Downloader
-from TermMaster.tms import tms
-from Parser.parse import input_parser, output_parser
-from flask import Flask, request, render_template_string, render_template
 import json
 import time
+from Blackboard.blackboard_calendar import Blackboard_Calendar
+from Blackboard.assignment import Assignment
+from Blackboard.async_assignment_downloader import Downloader
+from TermMaster.tms import TMS
+from Parser.parse import Input_Parser, Output_Parser
+from flask import Flask, request, render_template_string, render_template
 
+__working_directory = os.getcwd()
 class_info = []
 calendar_link = ''
-persistent_info = {}
 info = ''
 app = Flask(__name__,
             template_folder=__working_directory + '/Flask Resources/template',
             static_folder=__working_directory + '/Flask Resources/static')
-out_parser = output_parser()
-in_parser = input_parser()
-termmaster = tms()
-BBLearn = blackboard_calendar()
+out_parser = Output_Parser()
+in_parser = Input_Parser()
+termmaster = TMS()
+BBLearn = Blackboard_Calendar()
 assignment_info = {}
 calendar_info = {}
 
@@ -37,7 +34,7 @@ def put_classes():
     global class_info
     global calendar_link
     global in_parser
-    in_parser1 = input_parser()
+    in_parser1 = Input_Parser()
     calendar_link = in_parser1.blackboard_link(request.headers.get('user-blackboard-calendar-link'))
     user_copied = in_parser1.class_information(request.headers.get('user-blackboard-copied'))
     class_info = termmaster.get_all_class_info(user_copied)
@@ -93,23 +90,24 @@ def check_persistence():
     global in_parser
     global class_info
     global assignment_info
-    in_parser2 = input_parser()
+    in_parser2 = Input_Parser()
     link = in_parser2.check_link_exist()
-    hasClasses = in_parser2.check_classes_exist()
-    hasCalendar = in_parser2.check_calendar_exist()
-    hasAssignment = False
+    has_classes = in_parser2.check_classes_exist()
+    has_calendar = in_parser2.check_calendar_exist()
+    has_assignment = False
     calendar = []
-    if link and hasClasses:
+    if link and has_classes:
         calendar = BBLearn.download_calendar(in_parser2.link, False, False, True)
         f = open(f'{__working_directory}/Information/class_info.txt')
         contents = f.read()
         classes = in_parser2.class_information(contents)
         class_info = termmaster.get_all_class_info(classes)
-        hasAssignment, assignment_info = in_parser2.check_assignments_exist()
+        has_assignment, assignment_info = in_parser2.check_assignments_exist()
 
     output = {'has_link': link,
-              'has_classes': hasClasses,
-              'has_assignments': hasAssignment,
+              'has_classes': has_classes,
+              'has_assignments': has_assignment,
+              'has_calendar': has_calendar,
               'classes': class_info,
               'assignments': assignment_info,
               "calendar": calendar
