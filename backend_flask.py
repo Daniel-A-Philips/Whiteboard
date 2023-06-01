@@ -56,6 +56,7 @@ def get_blackboard_calendar():
     global assignment_info
     global calendar_info
     global in_parser
+    assignment_info.clear()
     calendar_info = BBLearn.download_calendar(calendar_link, wants_uid=True)
     classes = [
         f'{data["School"]}-{data["Class Number"]}-{data["Section Number"]} - {data["Quarter Name"]} {data["Year"]}' for
@@ -64,7 +65,8 @@ def get_blackboard_calendar():
     async_assignment = Downloader(assignments).url_match_assignment
     for uid in async_assignment.keys():
         temp_assignment = async_assignment[uid]
-        assignment_info[uid.split('/')[7].split('_')[2]] = {'Course ID': temp_assignment.course_id,
+        #uid = uid.split('/')[7].split('_')[2]
+        assignment_info[uid.split('/')[7]] = {'Course ID': temp_assignment.course_id,
                                                             'Content ID': temp_assignment.content_id,
                                                             'Complex Name': temp_assignment.complex_name,
                                                             'Standard Name': temp_assignment.class_name,
