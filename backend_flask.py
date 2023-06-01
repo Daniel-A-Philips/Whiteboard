@@ -56,20 +56,24 @@ def get_blackboard_calendar():
     global assignment_info
     global calendar_info
     global in_parser
-    assignment_info.clear()
     calendar_info = BBLearn.download_calendar(calendar_link, wants_uid=True)
     classes = [
         f'{data["School"]}-{data["Class Number"]}-{data["Section Number"]} - {data["Quarter Name"]} {data["Year"]}' for
         data in in_parser.classes]
     assignments = [Assignment(uid, classes) for uid in BBLearn.uids]
     async_assignment = Downloader(assignments).url_match_assignment
+    assignment_info.clear()
     for uid in async_assignment.keys():
         temp_assignment = async_assignment[uid]
-        #uid = uid.split('/')[7].split('_')[2]
-        assignment_info[uid.split('/')[7]] = {'Course ID': temp_assignment.course_id,
+        uid = uid.split('/')[7].split('_')[2]
+        try:
+            standard_name = temp_assignment.class_name.split(' ')[0]
+        except:
+            standard_name = ''
+        assignment_info[uid] = {'Course ID': temp_assignment.course_id,
                                                             'Content ID': temp_assignment.content_id,
                                                             'Complex Name': temp_assignment.complex_name,
-                                                            'Standard Name': temp_assignment.class_name,
+                                                            'Standard Name': standard_name,
                                                             'Discussion': temp_assignment.is_discussion_board}
 
     with open(f'{__working_directory}/Information/assignment.json', "w") as outfile:

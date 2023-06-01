@@ -172,8 +172,6 @@ function applyDataToCalendar() {
   
 		const [startTime, endTime] = classInfo.time.split('-');
 		const [startHour, startMinute] = startTime.split(':');
-		console.log('endTime')
-		console.log(endTime)
 		const [endHour, endMinute] = endTime.split(':');
   
 	  	classInfo.days.forEach(day => {
@@ -268,7 +266,6 @@ function applyDataToSidebar() {
 	let dateCounts = {};
 	console.log(assignments)
 	for (key of Object.keys(assignments)) {
-		console.log(key)
 		if (key.startsWith("_blackboard.platform.gradebook2.GradableItem")) {
 			let dateString = dateFromBBString(assignments[key].end).toDateString();
 			//console.log('assignments[key]',assignments[key])
@@ -337,10 +334,8 @@ function applyDataToSidebar() {
 				if (input.checked) {
 					label.classList.remove("unchecked");
 					label.style.backgroundColor = classColors[index % classColors.length];
-					console.log('on',label)
 				} else {
 					label.classList.add("unchecked");
-					console.log('off',label)
 					label.style.backgroundColor = "white";
 				}
 				applyDataToCalendar(assignments, classes);
@@ -381,7 +376,6 @@ function applyDataToAssignments() {
 		} else {
 			time = (dueDate.getHours() % 12) + (dueDate.getHours() > 12 ? "pm" : "am")
 		}
-		console.log(assignments[key])
 		col.innerHTML += '<div class="due-date-entry calendar_calendar1"><span class="due-date-time">' + time + '</span> ' + assignments[key].name + '\n' + assignments[key].description + '</div>'
 	}
 
@@ -398,13 +392,16 @@ function applyDataToAssignments() {
 			let matchingObject = null;
 			for (const matchingKey in assignment_matching) {
 				if (parseInt(matchingKey, 10) === number) {
-					matchingObject = assignment_matching[matchingKey];
+					matchingObject = assignment_matching[matchingKey]
+					assignments[key].className = matchingObject['Standard Name']
+					console.log(matchingKey,':',matchingObject,':',assignments[key])
 					break;
 				}
 			}
 
-			if (matchingObject && matchingObject["Standard Name"]) {
+			if (!!matchingObject && matchingObject["Standard Name"] !== "") {
 				const standardName = matchingObject["Standard Name"];
+				console.log('standardName:',standardName)
 				const color = classColorMap[standardName];
 				assignment.color = color;  // Get color from classColorMap
 				

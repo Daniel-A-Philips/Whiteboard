@@ -34,8 +34,8 @@ class Downloader:
             self.class_list = json.load(file)
 
     async def download_link(self, session: aiohttp.ClientSession, url: str):
+        print(url)
         async with session.get(url) as response:
-            print(url)
             resp = await response.content.read()
             return resp
 
