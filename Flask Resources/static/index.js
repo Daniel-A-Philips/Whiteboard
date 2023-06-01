@@ -36,7 +36,7 @@ document.getElementById("ctrl-a-input-submit").onclick = () => {
 	req.send(document.getElementById("ctrl-a-input-textarea").value)
 
 	prepMainPage();
-	setTimeout(getRemoteData, 1000); // wait 1 second to make sure data is properly handled by server
+	setTimeout(getRemoteData, 2500); // wait 1 second to make sure data is properly handled by server
 }
 
 function dateFromBBString(str) {

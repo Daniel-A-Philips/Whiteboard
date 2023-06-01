@@ -90,6 +90,7 @@ def check_persistence():
     global in_parser
     global class_info
     global assignment_info
+    global calendar_link
     in_parser2 = Input_Parser()
     link = in_parser2.check_link_exist()
     has_classes = in_parser2.check_classes_exist()

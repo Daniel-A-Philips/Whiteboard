@@ -35,12 +35,11 @@ class Input_Parser:
         self.hasClass = True
 
     def check_link_exist(self):
-        self.hasLink = True
         f = open(f'{self.__working_directory}/Information/link.txt', 'r+')
         link = f.read()
         f.close()
-        if link == '':
-            self.hasLink = False
+        if link != '':
+            self.hasLink = True
         self.link = self.blackboard_link(link)
         return self.hasLink
 
