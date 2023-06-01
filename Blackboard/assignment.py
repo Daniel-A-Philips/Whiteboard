@@ -18,12 +18,14 @@ class Assignment:
         self.content_id = ''
         self.class_name = ''
         self.complex_name = ''
+        self.__data = None
         self.is_discussion_board = False
 
     def make_url(self):
         with open(self.__cookie_file, 'r+') as file:
             self.headers = json.load(file)['headers']
-        self.url = f'https://learn.dcollege.net/webapps/calendar/launch/attempt/_blackboard.platform.gradebook2.GradableItem-_{self.item_id}_1'
+        self.url = f'https://learn.dcollege.net/webapps/calendar/launch/attempt/_blackboard.platform.gradebook2' \
+                   f'.GradableItem-_{self.item_id}_1'
         return self.url
 
     def check_cookies_last_edited(self):
@@ -45,6 +47,7 @@ class Assignment:
             return False
 
     def get_ids(self, lines):
+        self.__data = lines
         if not self.cookie_validation():
             raise Exception(f'Please renew your cookies held within {self.__cookie_file}')
         for line in lines:
@@ -76,8 +79,15 @@ class Assignment:
             self.complex_name = all_classes.get(self.course_id, 'No Name Found')
             self.class_name = self.complex_name
             if self.complex_name == 'No Name Found':
+                self.complex_name = self.no_name_check()
+                self.class_name = self.complex_name
                 return
             if 'XLIST' in self.complex_name:
                 matches = get_close_matches(self.complex_name, self.classes, cutoff=0.3)
                 self.class_name = matches[0]
         self.class_name = ''.join(self.class_name)
+
+    def no_name_check(self):
+        for line in self.__data:
+            if '&ndash;' in line:
+                return line.split('&ndash; ')[1].split('<')[0]

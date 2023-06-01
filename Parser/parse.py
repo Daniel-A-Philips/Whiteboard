@@ -15,9 +15,11 @@ class Input_Parser:
         self.hasCalendar = False
 
     def __write_link(self, unparsed_link, force_write=True):
-        f = open(f'{self.__working_directory}/Information/link.txt', 'r+')
+        f = open(f'{self.__working_directory}/Information/link.txt', 'r')
         link = f.read()
         if link == '' or force_write:
+            f = open(f'{self.__working_directory}/Information/link.txt', 'w').close()
+            f = open(f'{self.__working_directory}/Information/link.txt', 'r+')
             f.write(unparsed_link)
         f.close()
         self.hasLink = True
@@ -26,6 +28,8 @@ class Input_Parser:
         f = open(f'{self.__working_directory}/Information/class_info.txt', 'r+')
         information = f.read()
         if information == '' or force_write:
+            f = open(f'{self.__working_directory}/Information/class_info.txt', 'w').close()
+            f = open(f'{self.__working_directory}/Information/class_info.txt', 'r+')
             f.write(unparsed_class_info)
         f.close()
         self.hasClass = True
