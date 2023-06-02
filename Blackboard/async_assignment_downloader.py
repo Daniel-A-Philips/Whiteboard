@@ -44,7 +44,7 @@ class Downloader:
         print('starting data from async_assignment_downloader')
         self.urls = list(set(self.urls))
         failed_urls = []
-        async with aiohttp.ClientSession(headers=self.headers) as session:
+        async with aiohttp.ClientSession(headers=self.headers, connector=aiohttp.TCPConnector(ssl=False)) as session:
             tasks = []
             for url in self.urls:
                 tasks.append(asyncio.ensure_future(self.download_link(session, url)))
@@ -73,6 +73,6 @@ class Downloader:
 
 def tester():
     classes = ['CI-103-F', 'CS-172-B', 'CIVIC-101-20', 'ENGL-20-F']
-    assingments = [Assignment('_blackboard.platform.gradebook2.GradableItem-_2982534_1', classes),
-                   Assignment('_blackboard.platform.gradebook2.GradableItem-_2981454_1', classes)]
+    assingments = [Assignment('_blackboard.platform.gradebook2.GradableItem-_2946159_1', classes),
+                   Assignment('_blackboard.platform.gradebook2.GradableItem-_2946162_1', classes)]
     d = Downloader(assingments)

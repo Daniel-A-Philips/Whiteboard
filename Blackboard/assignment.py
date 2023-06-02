@@ -54,6 +54,9 @@ class Assignment:
             self.is_discussion_board = 'discussion_board_entry' in line
             if 'breadcrumbs.rightMostParentURL' in line:
                 data = line.split('\'')[1].split('?')[1].split('&')
+                if len(data) == 1:
+                    self.course_id = data[0].split('=')[1].split('_')[1]
+                    break
                 if not self.is_discussion_board:
                     self.course_id = data[0].split('=')[1].split('_')[1]
                     self.content_id = data[1].split('=')[1]

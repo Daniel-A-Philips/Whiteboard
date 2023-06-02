@@ -34,6 +34,7 @@ def put_classes():
     global calendar_link
     global in_parser
     in_parser1 = Input_Parser()
+    print(request.headers)
     calendar_link = in_parser1.blackboard_link(request.headers.get('user-blackboard-calendar-link'))
     user_copied = in_parser1.class_information(request.headers.get('user-blackboard-copied'))
     class_info = termmaster.get_all_class_info(user_copied)
