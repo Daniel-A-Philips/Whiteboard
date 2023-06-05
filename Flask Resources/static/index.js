@@ -96,7 +96,6 @@ function applyDataToPage() {
 classColorMap = {};
 
 function applyDataToCalendar() {
-
 	const col0 = document.querySelector('.calendar_col[style="grid-column:3"]');
 	const col1 = document.querySelector('.calendar_col[style="grid-column:4"]');
 	const col2 = document.querySelector('.calendar_col[style="grid-column:5"]');
@@ -118,7 +117,7 @@ function applyDataToCalendar() {
   
 	for (let className in classes) {
 		const classInfo = classes[className];
-		const checkbox = document.getElementById('box-${className}')
+		const checkbox = document.getElementById(`box-${className}`)
 		if (checkbox && !checkbox.checked) {
 		    continue; // skip this class if checkbox is unchecked
 		}
@@ -217,11 +216,9 @@ function calendartime() {
 
 function applyDataToSidebar() {
 	let dateCounts = {};
-	console.log(assignments)
 	for (key of Object.keys(assignments)) {
 		if (key.startsWith("_blackboard.platform.gradebook2.GradableItem")) {
 			let dateString = dateFromBBString(assignments[key].end).toDateString();
-			//console.log('assignments[key]',assignments[key])
 			if (dateString in dateCounts) {
 				dateCounts[dateString] += 1;
 			} else {
@@ -347,14 +344,12 @@ function applyDataToAssignments() {
 				if (parseInt(matchingKey, 10) === number) {
 					matchingObject = assignment_matching[matchingKey]
 					assignments[key].className = matchingObject['Standard Name']
-					console.log(matchingKey,':',matchingObject,':',assignments[key])
 					break;
 				}
 			}
 
 			if (!!matchingObject && matchingObject["Standard Name"] !== "") {
 				const standardName = matchingObject["Standard Name"];
-				console.log('standardName:',standardName)
 				const color = classColorMap[standardName];
 				assignment.color = color;  // Get color from classColorMap
 				
