@@ -270,6 +270,7 @@ function applyDataToSidebar() {
 			input.type = "checkbox";
 			input.checked = true; // Set the initial state to checked
 			input.id = `box-${courseKey}`;
+			console.log(input.id)
 			input.classList.add("box"); // Add the class name to the input element
 			label.textContent = courseKey;
 		
@@ -289,6 +290,7 @@ function applyDataToSidebar() {
 					label.style.backgroundColor = "white";
 				}
 				applyDataToCalendar(assignments, classes);
+				applyDataToAssignments()
 			});
 		});
 		window.hasRunOnce = true; // Set the flag variable to true
@@ -359,9 +361,11 @@ function applyDataToAssignments() {
 						// Set the background color of the due-date-entry element
 						dueDateEntries[i].style.backgroundColor = color;
 						// delete if filtered
-						const checkbox = document.getElementById('box-${standardName}')
+						const checkbox = document.getElementById(`box-${standardName}`)
 						if (checkbox && !checkbox.checked) {
+							console.log('removing',dueDateEntries[i])
 							dueDateEntries[i].remove()
+							continue
 						}
 						break;
 					}
