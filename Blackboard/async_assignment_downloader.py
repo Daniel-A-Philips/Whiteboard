@@ -6,6 +6,16 @@ import json
 import os
 
 
+async def download_link(session: aiohttp.ClientSession, url: str, url_num : int = -1):
+    if url_num != -1:
+        print(f'{url_num} : {url}')
+    else:
+        print(url)
+    async with session.get(url) as response:
+        resp = await response.content.read()
+        return resp
+
+
 class Downloader:
     def __init__(self, assignment_instances: list):
         self.__working_directory = os.getcwd()
@@ -31,12 +41,6 @@ class Downloader:
         with open(self.__course_id_file, 'r+') as file:
             self.class_list = json.load(file)
 
-    async def download_link(self, session: aiohttp.ClientSession, url: str):
-        print(url)
-        async with session.get(url) as response:
-            resp = await response.content.read()
-            return resp
-
     async def download_data(self, failed_try=0):
         start = time.time()
         print('starting data from async_assignment_downloader')
@@ -45,7 +49,7 @@ class Downloader:
         async with aiohttp.ClientSession(headers=self.headers, connector=aiohttp.TCPConnector(ssl=False)) as session:
             tasks = []
             for url in self.urls:
-                tasks.append(asyncio.ensure_future(self.download_link(session, url)))
+                tasks.append(asyncio.ensure_future(download_link(session, url, url_num=self.urls.index(url)+1)))
             downloaded = await asyncio.gather(*tasks)
             for data in downloaded:
                 if 'Too Many Requests' in str(data) and failed_try < 4:
@@ -73,6 +77,6 @@ class Downloader:
 
 def tester():
     classes = ['CI-103-F', 'CS-172-B', 'CIVIC-101-20', 'ENGL-20-F']
-    assingments = [Assignment('_blackboard.platform.gradebook2.GradableItem-_2946159_1', classes),
+    assignments = [Assignment('_blackboard.platform.gradebook2.GradableItem-_2946159_1', classes),
                    Assignment('_blackboard.platform.gradebook2.GradableItem-_2946162_1', classes)]
-    d = Downloader(assingments)
+    d = Downloader(assignments)

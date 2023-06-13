@@ -24,7 +24,6 @@ class Assignment:
     def make_url(self):
         self.url = f'https://learn.dcollege.net/webapps/calendar/launch/attempt/_blackboard.platform.gradebook2' \
                    f'.GradableItem-_{self.item_id}_1'
-        self.url
 
     def check_cookies_last_edited(self):
         if os.path.exists(self.__cookie_file):
