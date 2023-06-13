@@ -7,9 +7,9 @@ from difflib import get_close_matches
 class Assignment:
 
     def __init__(self, item_id, classes):
-        self.__working_directory = os.getcwd()
-        self.__cookie_file = f'{self.__working_directory}/Blackboard/assignment_headers.json'
-        self.__course_id_file = f'{self.__working_directory}/Blackboard/course_ids.json'
+        working_directory = os.path.join(os.getcwd(), 'Blackboard')
+        self.__cookie_file = os.path.join(working_directory, 'assignment_headers.json')
+        self.__course_id_file = os.path.join(working_directory, 'course_ids.json')
         self.headers = []
         self.url = ''
         self.item_id = item_id.split('_')[2]
@@ -22,7 +22,7 @@ class Assignment:
         self.is_discussion_board = False
 
     def make_url(self):
-        with open(self.__cookie_file, 'r+') as file:
+        with open(self.__cookie_file, 'r') as file:
             self.headers = json.load(file)['headers']
         self.url = f'https://learn.dcollege.net/webapps/calendar/launch/attempt/_blackboard.platform.gradebook2' \
                    f'.GradableItem-_{self.item_id}_1'
@@ -38,11 +38,7 @@ class Assignment:
     def cookie_validation(self):
         last_edit_time = self.check_cookies_last_edited()
         if last_edit_time is not None:
-            four_hours = 4 * 60 * 60  # 4 hours in seconds
-            if last_edit_time > four_hours:
-                return False
-            else:
-                return True
+            return last_edit_time <= 4 * 60 * 60
         else:
             return False
 
@@ -75,9 +71,6 @@ class Assignment:
                 self.class_name = self.complex_name
                 if self.complex_name == 'No Name Found':
                     return
-            if 'XLIST' in self.complex_name:
-                matches = get_close_matches(self.complex_name, self.classes, cutoff=0.3)
-                self.class_name = matches[0]
         else:
             self.complex_name = all_classes.get(self.course_id, 'No Name Found')
             self.class_name = self.complex_name
@@ -85,9 +78,9 @@ class Assignment:
                 self.complex_name = self.no_name_check()
                 self.class_name = self.complex_name
                 return
-            if 'XLIST' in self.complex_name:
-                matches = get_close_matches(self.complex_name, self.classes, cutoff=0.3)
-                self.class_name = matches[0]
+        if 'XLIST' in self.complex_name:
+            matches = get_close_matches(self.complex_name, self.classes, cutoff=0.3)
+            self.class_name = matches[0]
         self.class_name = ''.join(self.class_name)
 
     def no_name_check(self):
