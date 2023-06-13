@@ -6,7 +6,9 @@ import os
 class Input_Parser:
     def __init__(self):
         print('Input_Parser created')
-        self.__working_directory = os.getcwd()
+        self.__working_directory = os.path.join(os.getcwd(), 'Information')
+        self.link_file = os.path.join(self.__working_directory, 'link.txt')
+        self.class_info_file = os.path.join(self.__working_directory, 'class_info.txt')
         self.classes = []
         self.link = []
         self.hasLink = False
@@ -14,28 +16,24 @@ class Input_Parser:
         self.hasAssignments = False
         self.hasCalendar = False
 
-    def __write_link(self, unparsed_link, force_write=True):
-        f = open(f'{self.__working_directory}/Information/link.txt', 'r')
-        link = f.read()
-        if link == '' or force_write:
-            f = open(f'{self.__working_directory}/Information/link.txt', 'w').close()
-            f = open(f'{self.__working_directory}/Information/link.txt', 'r+')
-            f.write(unparsed_link)
+    def __write_data(self, unparsed_link=None, unparsed_class_info=None, force_write=True):
+        is_link = unparsed_link is not None
+        data_to_write = unparsed_link if is_link else unparsed_class_info
+        file_to_use = self.link_file if is_link else self.class_info_file
+        reader = open(file_to_use, 'r')
+        info = reader.read()
+        if info == '' or force_write:
+            f = open(file_to_use, 'w').close()
+            f = open(file_to_use, 'r+')
+            f.write(data_to_write)
         f.close()
-        self.hasLink = True
-
-    def __write_class_information(self, unparsed_class_info, force_write=True):
-        f = open(f'{self.__working_directory}/Information/class_info.txt', 'r+')
-        information = f.read()
-        if information == '' or force_write:
-            f = open(f'{self.__working_directory}/Information/class_info.txt', 'w').close()
-            f = open(f'{self.__working_directory}/Information/class_info.txt', 'r+')
-            f.write(unparsed_class_info)
-        f.close()
-        self.hasClass = True
+        if is_link:
+            self.hasLink = True
+        else:
+            self.hasClass = True
 
     def check_link_exist(self):
-        f = open(f'{self.__working_directory}/Information/link.txt', 'r+')
+        f = open(self.link_file, 'r+')
         link = f.read()
         f.close()
         if link != '':
@@ -44,7 +42,7 @@ class Input_Parser:
         return self.hasLink
 
     def check_calendar_exist(self):
-        f = open(f'{self.__working_directory}/Information/calendar.json')
+        f = open(os.path.join(self.__working_directory, 'calendar.json'))
         data = json.load(f)
         if bool(data):
             self.hasCalendar = True
@@ -52,7 +50,7 @@ class Input_Parser:
 
     def check_classes_exist(self):
         self.hasClass = True
-        f = open(f'{self.__working_directory}/Information/class_info.txt', 'r+')
+        f = open(self.class_info_file, 'r+')
         classes = f.read()
         f.close()
         if classes == '':
@@ -60,7 +58,7 @@ class Input_Parser:
         return self.hasClass
 
     def check_assignments_exist(self):
-        f = open(f'{self.__working_directory}/Information/assignment.json')
+        f = open(os.path.join(self.__working_directory, 'assignment.json'))
         try:
             data = json.load(f)
             if not bool(data):
@@ -72,12 +70,12 @@ class Input_Parser:
             return False, {}
 
     def blackboard_link(self, unparsed):
-        self.__write_link(unparsed)
+        self.__write_data(unparsed_link=unparsed)
         self.link = urllib.parse.unquote(unparsed.replace('\"', ''))
         return self.link
 
     def class_information(self, unparsed):
-        self.__write_class_information(unparsed)
+        self.__write_data(unparsed_class_info=unparsed)
         all_info = urllib.parse.unquote(unparsed).split('\n')
         for line in all_info:
             if 'Due date:' not in line and '-' in line and '.' in line and ':' in line:
