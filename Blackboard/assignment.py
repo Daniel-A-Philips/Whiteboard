@@ -10,9 +10,9 @@ class Assignment:
         working_directory = os.path.join(os.getcwd(), 'Blackboard')
         self.__cookie_file = os.path.join(working_directory, 'assignment_headers.json')
         self.__course_id_file = os.path.join(working_directory, 'course_ids.json')
-        self.headers = []
         self.url = ''
         self.item_id = item_id.split('_')[2]
+        self.make_url()
         self.classes = classes
         self.course_id = ''
         self.content_id = ''
@@ -22,11 +22,9 @@ class Assignment:
         self.is_discussion_board = False
 
     def make_url(self):
-        with open(self.__cookie_file, 'r') as file:
-            self.headers = json.load(file)['headers']
         self.url = f'https://learn.dcollege.net/webapps/calendar/launch/attempt/_blackboard.platform.gradebook2' \
                    f'.GradableItem-_{self.item_id}_1'
-        return self.url
+        self.url
 
     def check_cookies_last_edited(self):
         if os.path.exists(self.__cookie_file):

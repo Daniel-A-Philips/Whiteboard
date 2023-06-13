@@ -12,8 +12,8 @@ class_info = []
 calendar_link = ''
 info = ''
 app = Flask(__name__,
-            template_folder=__working_directory + '/Flask Resources/template',
-            static_folder=__working_directory + '/Flask Resources/static')
+            template_folder= os.path.join(__working_directory,'Flask Resources','template'),
+            static_folder= os.path.join(__working_directory,'Flask Resources','static'))
 out_parser = Output_Parser()
 in_parser = Input_Parser()
 termmaster = TMS()
@@ -104,7 +104,7 @@ def check_persistence():
     calendar = []
     if link and has_classes:
         calendar = BBLearn.download_calendar(in_parser2.link, wants_uid=True)
-        f = open(f'{__working_directory}/Information/class_info.txt')
+        f = open(os.path.join(__working_directory,'Information','class_info.txt'))
         contents = f.read()
         classes = in_parser2.class_information(contents)
         class_info = termmaster.get_all_class_info(classes)

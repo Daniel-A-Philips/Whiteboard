@@ -25,9 +25,7 @@ class Downloader:
     def make_urls(self):
         with open(self.__cookie_file, 'r+') as file:
             self.headers = json.load(file)['headers']
-        self.urls = [
-            f'https://learn.dcollege.net/webapps/calendar/launch/attempt/_blackboard.platform.gradebook2.GradableItem-_{assignment.item_id}_1'
-            for assignment in self.__assignment_instances]
+        self.urls = [assignment.url for assignment in self.__assignment_instances]
 
     def load_course_ids(self):
         with open(self.__course_id_file, 'r+') as file:
@@ -65,7 +63,9 @@ class Downloader:
                 print('Failed URLS:', failed_urls)
                 prev_urls = self.urls
                 self.urls = failed_urls
-                await self.download_data(failed_try=failed_try + 1)
+                # Recursion: Run download_data again but increment the number of failed tries
+                # while using the failed urls
+                await self.download_data(failed_try + 1)
                 self.urls = prev_urls
                 print(self.url_match_assignment)
         print(f'Asynchronous Time: {time.time() - start}')
