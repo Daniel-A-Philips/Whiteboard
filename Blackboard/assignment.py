@@ -4,31 +4,32 @@ import time
 from difflib import get_close_matches
 
 
+def make_directory():
+    working_directory = os.path.join(os.getcwd(), 'Blackboard')
+    cookie_file = os.path.join(working_directory, 'assignment_headers.json')
+    course_id_file = os.path.join(working_directory, 'course_ids.json')
+    return cookie_file, course_id_file
+
+
+def make_url(item_id):
+    return f'https://learn.dcollege.net/webapps/calendar/launch/attempt/_blackboard.platform.gradebook2' \
+           f'.GradableItem-_{item_id}_1'
+
+
 class Assignment:
 
     def __init__(self, item_id, classes):
-        working_directory = os.path.join(os.getcwd(), 'Blackboard')
-        self.__cookie_file = os.path.join(working_directory, 'assignment_headers.json')
-        self.__course_id_file = os.path.join(working_directory, 'course_ids.json')
-        self.url = ''
-        self.item_id = item_id.split('_')[2]
-        self.make_url()
-        self.classes = classes
-        self.course_id = ''
-        self.content_id = ''
-        self.class_name = ''
-        self.complex_name = ''
-        self.__data = None
-        self.is_discussion_board = False
-
-    def make_url(self):
-        self.url = f'https://learn.dcollege.net/webapps/calendar/launch/attempt/_blackboard.platform.gradebook2' \
-                   f'.GradableItem-_{self.item_id}_1'
+        item_id, self.classes = item_id.split('_')[2], classes
+        self.__cookie_file, self.__course_id_file = make_directory()
+        self.url = make_url(item_id)
+        self.course_id, self.content_id = '', ''
+        self.class_name, self.complex_name = '', ''
+        self.__data, self.is_discussion_board = None, False
 
     def check_cookies_last_edited(self):
         if os.path.exists(self.__cookie_file):
-            file_stat = os.stat(self.__cookie_file)
-            return time.time() - file_stat.st_mtime
+            file_data = os.stat(self.__cookie_file)
+            return time.time() - file_data.st_mtime
         else:
             return None
 
@@ -49,8 +50,7 @@ class Assignment:
                 data = line.split('\'')[1].split('?')[1].split('&')
                 if len(data) == 1:
                     self.course_id = data[0].split('=')[1].split('_')[1]
-                    break
-                if not self.is_discussion_board:
+                elif not self.is_discussion_board:
                     self.course_id = data[0].split('=')[1].split('_')[1]
                     self.content_id = data[1].split('=')[1]
                 else:
