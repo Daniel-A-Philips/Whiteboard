@@ -136,7 +136,6 @@ class Output_Parser:
 
     def __init__(self):
         self.__working_directory = os.getcwd()
-        print('Output_Parser created')
 
     def class_info_parser(self, class_info, write=True):
         print('Running class_info_parser')

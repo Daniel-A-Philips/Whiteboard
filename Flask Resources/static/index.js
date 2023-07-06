@@ -389,7 +389,7 @@ function updateCalendar() {
 		const dayOfMonth = date.getDate();
 		const elementId = "day" + (i + 1);
 		const element = document.getElementById(elementId);
-		element.textContent = `${dayOfWeek}, ${dayOfMonth}`;
+		element.textContent = `${dayOfWeek}\n${dayOfMonth}`;
 		// helps find current date for bold
 		if (date.getMonth() == today.getMonth() && date.getDate() == today.getDate()) {
 			element.classList.add("current-date");

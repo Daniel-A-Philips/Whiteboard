@@ -57,10 +57,12 @@ body, html {
 	width: 17vw;
 	height: 100vh;
 	border-right: 3px solid #dadce0;
+	background: black;
 }
 
 #logo {
 	width: 100%;
+	background: black;
 }
 
 body {
@@ -79,6 +81,7 @@ body {
 #long-term-calendar {
 	margin: 0 auto;
 	width: max-content;
+	color: lightgrey;
 }
 #long-term-calendar > h4 {
 	text-align: center;
@@ -149,7 +152,7 @@ body {
 	background: #f3f2f1;
 	display: grid;
 	place-content: center;
-	text-align: center;
+	text-align: left;
 	grid-template-columns: 3em 10px repeat(7, 1fr);
 	position: sticky;
 	z-index: 10;
@@ -159,10 +162,17 @@ body {
 
 .calendar_day {
 	border-left: 1px solid #dadce0;
+	font-weight: 600;
 }
 
 .calendar_day > p {
-	margin: 10px 0;
+	margin-top: 20px;
+	margin-left: 10px;
+}
+.calendar_day::first-line{
+	font-weight: 200;
+	font-size: small;
+	color: #70757a;
 }
 
 .calendar_content {

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Homework Management</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+<body>
+<div class="container">
+    <div class="sidebar">
+        <div class="mini-calendar">
+            <h2 id="current-month-year"></h2>
+            <table>
+                <thead>
+                <tr>
+                    <th>Sun</th>
+                    <th>Mon</th>
+                    <th>Tue</th>
+                    <th>Wed</th>
+                    <th>Thu</th>
+                    <th>Fri</th>
+                    <th>Sat</th>
+                </tr>
+                </thead>
+                <tbody>
+                <!-- Calendar days will be added dynamically -->
+                </tbody>
+            </table>
+        </div>
+        <div class="assignments">
+            <h2>Assignments Due</h2>
+            <ul>
+                <!-- More assignments -->
+            </ul>
+        </div>
+    </div>
+    <div class="main-content">
+        <div class="toggle">
+            <button id="week-btn" onclick="toggleCalendar('week')">Week</button>
+            <button id="schedule-btn" onclick="toggleCalendar('schedule')">Schedule</button>
+        </div>
+        <div class="calendar">
+            <h2>Calendar</h2>
+            <div class="calendar-grid">
+                <div class="calendar-column">
+                    <h3>Day 1</h3>
+                    <div id="day1" class="assignments"></div>
+                </div>
+                <div class="calendar-column">
+                    <h3>Day 2</h3>
+                    <div id="day2" class="assignments"></div>
+                </div>
+                <div class="calendar-column">
+                    <h3>Day 3</h3>
+                    <div id="day3" class="assignments"></div>
+                </div>
+                <div class="calendar-column">
+                    <h3>Day 4</h3>
+                    <div id="day4" class="assignments"></div>
+                </div>
+                <div class="calendar-column">
+                    <h3>Day 5</h3>
+                    <div id="day5" class="assignments"></div>
+                </div>
+                <div class="calendar-column">
+                    <h3>Day 6</h3>
+                    <div id="day6" class="assignments"></div>
+                </div>
+                <div class="calendar-column">
+                    <h3>Day 7</h3>
+                    <div id="day7" class="assignments"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="test.js"></script>
+</body>
+</html>
