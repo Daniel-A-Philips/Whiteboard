@@ -18,6 +18,12 @@ body {
     color: #ffffff;
     border: 1px solid #2c2c2e;
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: var(--mini-calendar-radius)
+}
+
+.mini-calendar table {
+    width: 100%;
+    border-collapse: collapse;
 }
 
 .mini-calendar th {
@@ -42,6 +48,7 @@ body {
     background-color: #2c2c2e;
     border: 1px solid #2c2c2e;
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: var(--assignments-radius)
 }
 
 .assignments h2 {
@@ -123,7 +130,7 @@ h2 {
 }
 
 .calendar-column {
-    border-radius: var(--calendar-grid-radius);
+    border-radius: var(--calendar-radius);
 }
 
 .calendar-grid .calendar-column {

@@ -15,6 +15,7 @@ body {
     background-color: #ffffff;
     border: 1px solid #e2e2e2;
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: var(--mini-calendar-radius)
 }
 
 .mini-calendar table {
@@ -24,7 +25,7 @@ body {
 
 .mini-calendar th {
     font-weight: bold;
-    padding: 8px;
+    padding: 10px;
     text-align: center;
     color: #888;
 }
@@ -44,6 +45,7 @@ body {
     background-color: #ffffff;
     border: 1px solid #e2e2e2;
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: var(--assignments-radius)
 }
 
 .assignments h2 {
@@ -71,7 +73,7 @@ body {
     border: 1px solid #e2e2e2;
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
     flex-basis: calc(100% / 7);
-    padding: 10px
+    padding: 10px;
 }
 
 .calendar-column h3 {
@@ -103,7 +105,7 @@ h2 {
 .toggle button {
     font-size: 14px;
     font-weight: bold;
-    color: #fff;
+    color: #ffffff;
     background-color: #007bff;
     border: none;
     border-radius: 4px;
@@ -124,8 +126,8 @@ h2 {
 
 }
 
-.calendar-column{
-    border-radius: var(--calendar-grid-radius);
+.calendar-column {
+    border-radius: var(--calendar-radius);
 }
 
 .calendar-grid .calendar-column {

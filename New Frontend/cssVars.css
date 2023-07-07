@@ -1,3 +1,6 @@
 :root {
     --calendar-grid-radius: 8px;
+    --mini-calendar-radius: 8px;
+    --assignments-radius: 8px;
+    --calendar-radius: 8px
 }
